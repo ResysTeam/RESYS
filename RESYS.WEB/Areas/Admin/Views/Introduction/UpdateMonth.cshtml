@@ -1,0 +1,153 @@
+﻿@model DevelopMonth
+@{
+    if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+    {
+        ViewBag.Title = "Sửa Tháng quá trình phát triển";
+    }else
+    {
+        ViewBag.Title = "Thêm mới Tháng quá trình phát triển";
+    }
+        
+}
+
+<div class="main-content-inner">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="@Url.Action("index", "home")">Home</a>
+            </li>
+            <li><a href="@Url.Action("SearchYear", "Introduction")">Danh sách Năm quá trình phát triển</a></li>
+            <li><a href="@Url.Action("SearchMonth", "Introduction",new { DevelopYearId = Model.DevelopYearId })">Danh sách Tháng</a></li>
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+                <li class="active">Sửa Tháng @Model.DevelopMonthName</li>
+            }
+            else
+            {
+                <li class="active">Tạo mới Tháng </li>
+            }
+        </ul>
+        <!-- /.breadcrumb -->
+
+        
+    </div>
+
+    <div class="page-content">
+
+
+        <div class="page-header">
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+            <h1>Sửa Tháng @Model.DevelopMonthName
+
+            </h1>
+            }
+            else
+            {
+                <h1>Tạo mới Tháng
+
+            </h1>
+            }
+        </div>
+        <!-- /.page-header -->
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "manageForm", @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+                            {
+                            @Html.HiddenFor(mbox => mbox.DevelopMonthId)
+                            }
+                            @Html.HiddenFor(mbox => mbox.DevelopYearId)
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="DevelopMonthName">Tháng:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="DevelopMonthName" id="DevelopMonthName" class="col-xs-12 col-sm-6" value="@Model.DevelopMonthName" required/>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="DevelopMonthTitle">Tiêu đề:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="DevelopMonthTitle" id="DevelopMonthTitle" class="col-xs-12 col-sm-6" value="@Model.DevelopMonthTitle" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="DevelopMonthDescription">Nội dung:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                    <textarea type="text" name="DevelopMonthDescription" id="DevelopMonthDescription" class="col-xs-12 col-sm-6 limited" rows="5" maxlength="250">@Model.DevelopMonthDescription</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                             <div class="form-group">
+                                 @{var check = Model.IsActive ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsActive">Trạng thái:</label>
+
+                               <div class="checkbox">
+													<label>
+														<input name="IsActive" type="checkbox" class="ace" value="true" @check>
+                                                        
+														<span class="lbl"> Ẩn/Hiện Tháng</span>
+                                                        <input name="IsActive" type="hidden" value="false" />
+													</label>
+												</div>
+                            </div>
+                            <input type="submit" id="submitContact" class="btn btn-success" value="Lưu" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>
+<script type="text/javascript">
+    $('textarea[class*=autosize]').autosize({ append: "\n" });
+    $('textarea.limited').inputlimiter({
+        remText: '%n character%s remaining...',
+        limitText: 'max allowed : %n.'
+    });
+</script>
+
+<script type="text/javascript">
+    setAdminCurrentUrl('@Url.Action("SearchYear", "Introduction")');
+</script>
+<script>
+   
+    $("#submitContact").click(function () {
+
+        var month = $("#DevelopMonthName").val();
+        var reg = /^[0-9]+$/;
+        
+        if (reg.test(month) == false) {
+            alert("Số tháng là kiểu số");
+            return false;
+        } else {
+            if (month > 12) {
+                alert("Số tháng bé hơn 12");
+                return false;
+            }
+        }
+        return true;
+    });
+</script>
+
+@section Scripts {
+	<script src="~/scripts/tinymce/tiny_mce.js"></script>
+
+}

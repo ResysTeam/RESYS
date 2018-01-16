@@ -1,0 +1,762 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+<div class="topsearch-bg image-pixelated">
+    <div class="topsearch-bgloop">
+        <div class="box-search">
+            <div class="fix-width770">
+                <h1>Tìm kiếm ngôi nhà bạn yêu thích</h1>
+                <p>Mua, Bán, Thuê hơn hàng nghìn ngôi nhà, căn hộ, biệt thự, đất nền và phòng tại Việt Nam</p>
+                <form id="suggest-form">
+                    <div class="tab-choose">
+                        <ul>
+                            <li><a id="tab-sale" class="current" style="cursor: pointer;">Mua Nhà</a></li>
+                            <li><a id="tab-rent" style="cursor: pointer;">Thuê Nhà</a></li>
+                        </ul>
+                    </div>
+                    <div class="search-home">
+                        <div class="btn-on-off-filter">
+                            <a href="https://rever.vn/#"></a>
+                        </div>
+                        <i class="font-icon searchicon icon-s-h"></i>
+                        <input id="input-search" type="text" name="smart_selector" class="" value="" placeholder="Nhập địa điểm, khu dân cư, tòa nhà" autocomplete="off" spellcheck="false" dir="auto">
+                        <ul id="suggest-result" class="suggest-result top-67 hide"></ul>
+                    </div>
+                    <div class="but-search-home">
+                        <button id="btn-find" type="submit">Tìm kiếm</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<section class=" width1140">
+    <div class="common-info">
+        <h2>Dự án nổi bật</h2>
+        <p>Rever mang đến cho bạn đầy đủ thông tin các dự án bất động sản nổi bật nhất hiện nay</p>
+    </div>
+    <section class="exclusive main-content">
+        <article class="featured kdc-new">
+            <a href="https://rever.vn/du-an/one-verandah" title="One Verandah">
+                <div class="cover">
+                    <img class="image-pixelated" src="content/images/phoi-canh-du-an-one-verandah-quan-2-2.jpg" alt="One Verandah" title="One Verandah" draggable="false">
+                </div>
+                <header class="overlay">
+                    <h3 class="heading">One Verandah</h3>
+                    <p>
+                    </p><h4>Quận 2</h4>,
+                    <h4>TP. Hồ Chí Minh</h4>
+                    <p></p>
+                    <h4>Khởi công: 06/2017</h4>
+                </header>
+            </a>
+        </article>
+        <article class="featured kdc-new">
+            <a href="https://rever.vn/du-an/palm-city-1" title="Palm City">
+                <div class="cover">
+                    <img class="image-pixelated" src="content/images/mbtt.jpg" alt="Palm City" title="Palm City" draggable="false">
+                </div>
+                <header class="overlay">
+                    <h3 class="heading">Palm City</h3>
+                    <p>
+                    </p><h4>Quận 2</h4>,
+                    <h4>TP. Hồ Chí Minh</h4>
+                    <p></p>
+                    <h4>Khởi công: 01/2016</h4>
+                </header>
+            </a>
+        </article>
+        <article class="featured kdc-new">
+            <a href="https://rever.vn/du-an/estella-heights" title="Estella Heights">
+                <div class="cover">
+                    <img class="image-pixelated" src="content/images/banner-home-2.png" alt="Estella Heights" title="Estella Heights" draggable="false">
+                </div>
+                <header class="overlay">
+                    <h3 class="heading">Estella Heights</h3>
+                    <p>
+                    </p><h4>Quận 2</h4>,
+                    <h4>TP. Hồ Chí Minh</h4>
+                    <p></p>
+                    <h4>Khởi công: 02/2015</h4>
+                </header>
+            </a>
+        </article>
+        <article class="featured kdc-new">
+            <a href="https://rever.vn/du-an/masteri-an-phu" title="Masteri An Phú">
+                <div class="cover">
+                    <img class="image-pixelated" src="content/images/masteri-an-phu-7.jpg" alt="Masteri An Phú" title="Masteri An Phú" draggable="false">
+                </div>
+                <header class="overlay">
+                    <h3 class="heading">Masteri An Phú</h3>
+                    <p>
+                    </p><h4>Quận 2</h4>,
+                    <h4>TP. Hồ Chí Minh</h4>
+                    <p></p>
+                    <h4>Khởi công: 12/2016</h4>
+                </header>
+            </a>
+        </article>
+        <article class="featured kdc-new">
+            <a href="https://rever.vn/du-an/the-new-city-thu-thiem" title="The New City Thủ Thiêm">
+                <div class="cover">
+                    <img class="image-pixelated" src="content/images/can-ho-new-city-thu-thiem-quan-2-rever.vn.jpg" alt="The New City Thủ Thiêm" title="The New City Thủ Thiêm" draggable="false">
+                </div>
+                <header class="overlay">
+                    <h3 class="heading">The New City Thủ Thiêm</h3>
+                    <p>
+                    </p><h4>Quận 2</h4>,
+                    <h4>TP. Hồ Chí Minh</h4>
+                    <p></p>
+                    <h4>Khởi công: 01/2013</h4>
+                </header>
+            </a>
+        </article>
+        <article class="featured kdc-new">
+            <a href="https://rever.vn/du-an/vinhomes-central-park-1" title="Vinhomes Central Park">
+                <div class="cover">
+                    <img class="image-pixelated" src="content/images/toan-canh-vinhomes-central-park.jpeg" alt="Vinhomes Central Park" title="Vinhomes Central Park" draggable="false">
+                </div>
+                <header class="overlay">
+                    <h3 class="heading">Vinhomes Central Park</h3>
+                    <p>
+                    </p><h4>Bình Thạnh</h4>,
+                    <h4>TP. Hồ Chí Minh</h4>
+                    <p></p>
+                    <h4>Khởi công: 07/2014</h4>
+                </header>
+            </a>
+        </article>
+        <div class="more-button-box"><a class="black-button" href="https://rever.vn/du-an">Xem tất cả</a></div>
+    </section>
+</section>
+<section class="background-gray">
+    <div class="width1140">
+        <div class="common-info">
+            <h2>Nhà đất bán nổi bật</h2>
+            <p>
+                Rever đồng hành với bạn từ quá trình tìm kiếm cho đến khi giao dịch thành công ngôi nhà yêu
+                thích
+                của bạn.
+            </p>
+        </div>
+        <section class="exclusive for-sale main-content">
+            <article class="featured">
+                <a href="https://rever.vn/mua/shophouse-masteri-thao-dien-toa-t5-dien-tich-635m2-giao-tho">
+                    <div class="cover">
+                        <img src="content/images/kt9981.jpg" alt="Shophouse Masteri Thảo Điền tòa T5 diện tích 635m2, giao thô" title="Shophouse Masteri Thảo Điền tòa T5 diện tích 635m2, giao thô">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/mua/shophouse-masteri-thao-dien-toa-t5-dien-tich-635m2-giao-tho">
+                        <h3 class="heading">Shophouse Masteri Thảo Điền tòa T5 diện tích 635m2, giao thô</h3>
+                    </a>
+                    <h4>A02380 • </h4>
+                    <h4><a href="https://rever.vn/tim-kiem/mua?ward=Th%E1%BA%A3o+%C4%90i%E1%BB%81n&amp;district=Qu%E1%BA%ADn+2">Thảo Điền,</a></h4>
+                    <h4><a href="https://rever.vn/tim-kiem/mua?district=Qu%E1%BA%ADn+2">Quận 2</a></h4>
+                    <ul>
+                        <li title="Diện tích">
+                            <span class="font-icon area"></span> 635 m²
+                        </li>
+                    </ul>
+                    <div class="price">35 tỷ</div>
+                </header>
+            </article>
+            <article class="featured">
+                <a href="https://rever.vn/mua/can-ho-lexington-residence-2-phong-ngu-tang-thap-lc-noi-that-day-du">
+                    <div class="cover">
+                        <img src="content/images/mg9210-hdr-1.jpg" alt="Căn hộ Lexington Residence 2 phòng ngủ, tầng thấp LC, nội thất đầy đủ" title="Căn hộ Lexington Residence 2 phòng ngủ, tầng thấp LC, nội thất đầy đủ">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/mua/can-ho-lexington-residence-2-phong-ngu-tang-thap-lc-noi-that-day-du">
+                        <h3 class="heading">Căn hộ Lexington Residence 2 phòng ngủ, tầng thấp LC, nội thất đầy đủ</h3>
+                    </a>
+                    <h4>A0214043 • </h4>
+                    <h4><a href="https://rever.vn/tim-kiem/mua?ward=An+Ph%C3%BA&amp;district=Qu%E1%BA%ADn+2">An Phú,</a></h4>
+                    <h4><a href="https://rever.vn/tim-kiem/mua?district=Qu%E1%BA%ADn+2">Quận 2</a></h4>
+                    <ul>
+                        <li title="Phòng ngủ">
+                            <span class="font-icon bedroom"></span> 2
+                        </li>
+                        <li title="Diện tích">
+                            <span class="font-icon area"></span> 73 m²
+                        </li>
+                    </ul>
+                    <div class="price">2.95 tỷ</div>
+                </header>
+            </article>
+            <article class="featured">
+                <a href="https://rever.vn/mua/can-ho-masteri-thao-dien-tang-cao-t5-2-phong-ngu-day-du-noi-that">
+                    <div class="cover">
+                        <img src="content/images/kt0725.jpg" alt="Căn hộ Masteri Thảo Điền tầng cao T5, 2 phòng ngủ, đầy đủ nội thất" title="Căn hộ Masteri Thảo Điền tầng cao T5, 2 phòng ngủ, đầy đủ nội thất">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/mua/can-ho-masteri-thao-dien-tang-cao-t5-2-phong-ngu-day-du-noi-that">
+                        <h3 class="heading">Căn hộ Masteri Thảo Điền tầng cao T5, 2 phòng ngủ, đầy đủ nội thất</h3>
+                    </a>
+                    <h4>A0214050 • </h4>
+                    <h4><a href="https://rever.vn/tim-kiem/mua?ward=Th%E1%BA%A3o+%C4%90i%E1%BB%81n&amp;district=Qu%E1%BA%ADn+2">Thảo Điền,</a></h4>
+                    <h4><a href="https://rever.vn/tim-kiem/mua?district=Qu%E1%BA%ADn+2">Quận 2</a></h4>
+                    <ul>
+                        <li title="Phòng ngủ">
+                            <span class="font-icon bedroom"></span> 2
+                        </li>
+                        <li title="Diện tích">
+                            <span class="font-icon area"></span> 68.04 m²
+                        </li>
+                    </ul>
+                    <div class="price">3.6 tỷ</div>
+                </header>
+            </article>
+            <article class="featured">
+                <a href="https://rever.vn/mua/can-ho-lexington-2-phong-ngu-tang-thap-la-view-thoang-yen-tinh">
+                    <div class="cover">
+                        <img src="content/images/kt9884.jpg" alt="Căn hộ Lexington 2 phòng ngủ tầng thấp LA view thoáng, yên tĩnh" title="Căn hộ Lexington 2 phòng ngủ tầng thấp LA view thoáng, yên tĩnh">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/mua/can-ho-lexington-2-phong-ngu-tang-thap-la-view-thoang-yen-tinh">
+                        <h3 class="heading">Căn hộ Lexington 2 phòng ngủ tầng thấp LA view thoáng, yên tĩnh</h3>
+                    </a>
+                    <h4>A0212691 • </h4>
+                    <h4><a href="https://rever.vn/tim-kiem/mua?ward=An+Ph%C3%BA&amp;district=Qu%E1%BA%ADn+2">An Phú,</a></h4>
+                    <h4><a href="https://rever.vn/tim-kiem/mua?district=Qu%E1%BA%ADn+2">Quận 2</a></h4>
+                    <ul>
+                        <li title="Phòng ngủ">
+                            <span class="font-icon bedroom"></span> 2
+                        </li>
+                        <li title="Diện tích">
+                            <span class="font-icon area"></span> 76 m²
+                        </li>
+                    </ul>
+                    <div class="price">3.5 tỷ</div>
+                </header>
+            </article>
+            <article class="featured">
+                <a href="https://rever.vn/mua/can-ho-vinhomes-central-park-tang-cao-central-3-day-du-tien-nghi-1">
+                    <div class="cover">
+                        <img src="content/images/mg0770-pano.jpg" alt="Căn hộ Vinhomes Central Park tầng cao Central 3 đầy đủ tiện nghi" title="Căn hộ Vinhomes Central Park tầng cao Central 3 đầy đủ tiện nghi">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/mua/can-ho-vinhomes-central-park-tang-cao-central-3-day-du-tien-nghi-1">
+                        <h3 class="heading">Căn hộ Vinhomes Central Park tầng cao Central 3 đầy đủ tiện nghi</h3>
+                    </a>
+                    <h4>ABT6593 • </h4>
+                    <h4><a href="https://rever.vn/tim-kiem/mua?ward=Ph%C6%B0%E1%BB%9Dng+22&amp;district=B%C3%ACnh+Th%E1%BA%A1nh">Phường 22,</a></h4>
+                    <h4><a href="https://rever.vn/tim-kiem/mua?district=B%C3%ACnh+Th%E1%BA%A1nh">Bình Thạnh</a></h4>
+                    <ul>
+                        <li title="Phòng ngủ">
+                            <span class="font-icon bedroom"></span> 1
+                        </li>
+                        <li title="Diện tích">
+                            <span class="font-icon area"></span> 46 m²
+                        </li>
+                    </ul>
+                    <div class="price">2.48 tỷ</div>
+                </header>
+            </article>
+            <article class="featured">
+                <a href="https://rever.vn/mua/can-goc-lexington-residence-tang-cao-lb-day-du-noi-that-tien-nghi">
+                    <div class="cover">
+                        <img src="content/images/mg5380-hdr.jpg" alt="Căn góc Lexington Residence tầng cao LB đầy đủ nội thất, tiện nghi" title="Căn góc Lexington Residence tầng cao LB đầy đủ nội thất, tiện nghi">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/mua/can-goc-lexington-residence-tang-cao-lb-day-du-noi-that-tien-nghi">
+                        <h3 class="heading">Căn góc Lexington Residence tầng cao LB đầy đủ nội thất, tiện nghi</h3>
+                    </a>
+                    <h4>A022997 • </h4>
+                    <h4><a href="https://rever.vn/tim-kiem/mua?ward=An+Ph%C3%BA&amp;district=Qu%E1%BA%ADn+2">An Phú,</a></h4>
+                    <h4><a href="https://rever.vn/tim-kiem/mua?district=Qu%E1%BA%ADn+2">Quận 2</a></h4>
+                    <ul>
+                        <li title="Phòng ngủ">
+                            <span class="font-icon bedroom"></span> 3
+                        </li>
+                        <li title="Diện tích">
+                            <span class="font-icon area"></span> 97 m²
+                        </li>
+                    </ul>
+                    <div class="price">3.78 tỷ</div>
+                </header>
+            </article>
+            <div class="more-button-box">
+                <a class="black-button" href="https://rever.vn/tim-kiem/mua">
+                    Xem tất
+                    cả
+                </a>
+            </div>
+        </section>
+    </div>
+</section>
+<section class="bg-gray-e6">
+    <div class="width1140">
+        <div class="common-info">
+            <h2>Nhà đất thuê nổi bật</h2>
+            <p>
+                Rever đồng hành với bạn từ quá trình tìm kiếm cho đến khi giao dịch thành công ngôi nhà yêu
+                thích của bạn.
+            </p>
+        </div>
+        <section class="exclusive for-rent main-content">
+            <article class="featured">
+                <a href="https://rever.vn/can-goc-vinhomes-central-park-3-phong-ngu-tang-trung-park-5">
+                    <div class="cover">
+                        <img src="content/images/p5-12.07-vinhomes.jpg" alt="Căn góc Vinhomes Central Park 3 phòng ngủ tầng trung Park 5" title="Căn góc Vinhomes Central Park 3 phòng ngủ tầng trung Park 5">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/can-goc-vinhomes-central-park-3-phong-ngu-tang-trung-park-5">
+                        <h3 class="heading">Căn góc Vinhomes Central Park 3 phòng ngủ tầng trung Park 5</h3>
+                    </a>
+                    <h4>ABT15223 • </h4>
+                    <h4><a href="https://rever.vn/tim-kiem/thue?ward=Ph%C6%B0%E1%BB%9Dng+22&amp;district=B%C3%ACnh+Th%E1%BA%A1nh">Phường 22,</a></h4>
+                    <h4><a href="https://rever.vn/tim-kiem/thue?district=B%C3%ACnh+Th%E1%BA%A1nh">Bình Thạnh</a></h4>
+                    <ul>
+                        <li title="Phòng ngủ">
+                            <span class="font-icon bedroom"></span> 3
+                        </li>
+                        <li title="Diện tích">
+                            <span class="font-icon area"></span> 100 m²
+                        </li>
+                    </ul>
+                    <div class="price">20 triệu / tháng</div>
+                </header>
+            </article>
+            <article class="featured">
+                <a href="https://rever.vn/nha-pho-duong-so-39-khu-glory-village-quan-2-an-ninh-yen-tinh">
+                    <div class="cover">
+                        <img src="content/images/kt2561.jpg" alt="Nhà phố đường Số 39 khu Glory Village Quận 2 an ninh, yên tĩnh" title="Nhà phố đường Số 39 khu Glory Village Quận 2 an ninh, yên tĩnh">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/nha-pho-duong-so-39-khu-glory-village-quan-2-an-ninh-yen-tinh">
+                        <h3 class="heading">Nhà phố đường Số 39 khu Glory Village Quận 2 an ninh, yên tĩnh</h3>
+                    </a>
+                    <h4>T0215772 • </h4>
+                    <h4><a href="https://rever.vn/tim-kiem/thue?ward=B%C3%ACnh+An&amp;district=Qu%E1%BA%ADn+2">Bình An,</a></h4>
+                    <h4><a href="https://rever.vn/tim-kiem/thue?district=Qu%E1%BA%ADn+2">Quận 2</a></h4>
+                    <ul>
+                        <li title="Phòng ngủ">
+                            <span class="font-icon bedroom"></span> 1
+                        </li>
+                        <li title="Diện tích">
+                            <span class="font-icon area"></span> 31 m²
+                        </li>
+                    </ul>
+                    <div class="price">10.79 triệu / tháng</div>
+                </header>
+            </article>
+            <article class="featured">
+                <a href="https://rever.vn/can-goc-masteri-thao-dien-3-phong-ngu-tang-trung-toa-t5">
+                    <div class="cover">
+                        <img src="content/images/kt1050.jpg" alt="Căn góc Masteri Thảo Điền 3 phòng ngủ tầng trung tòa T5" title="Căn góc Masteri Thảo Điền 3 phòng ngủ tầng trung tòa T5">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/can-goc-masteri-thao-dien-3-phong-ngu-tang-trung-toa-t5">
+                        <h3 class="heading">Căn góc Masteri Thảo Điền 3 phòng ngủ tầng trung tòa T5</h3>
+                    </a>
+                    <h4>A0215104 • </h4>
+                    <h4><a href="https://rever.vn/tim-kiem/thue?ward=Th%E1%BA%A3o+%C4%90i%E1%BB%81n&amp;district=Qu%E1%BA%ADn+2">Thảo Điền,</a></h4>
+                    <h4><a href="https://rever.vn/tim-kiem/thue?district=Qu%E1%BA%ADn+2">Quận 2</a></h4>
+                    <ul>
+                        <li title="Phòng ngủ">
+                            <span class="font-icon bedroom"></span> 3
+                        </li>
+                        <li title="Diện tích">
+                            <span class="font-icon area"></span> 91 m²
+                        </li>
+                    </ul>
+                    <div class="price">29.72 triệu / tháng</div>
+                </header>
+            </article>
+            <article class="featured">
+                <a href="https://rever.vn/can-goc-lexington-residence-tang-cao-ld-thiet-ke-dep-sang-trong">
+                    <div class="cover">
+                        <img src="content/images/kt1037.jpg" alt="Căn góc Lexington Residence tầng cao LD thiết kế đẹp, sang trọng" title="Căn góc Lexington Residence tầng cao LD thiết kế đẹp, sang trọng">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/can-goc-lexington-residence-tang-cao-ld-thiet-ke-dep-sang-trong">
+                        <h3 class="heading">Căn góc Lexington Residence tầng cao LD thiết kế đẹp, sang trọng</h3>
+                    </a>
+                    <h4>A0210059 • </h4>
+                    <h4><a href="https://rever.vn/tim-kiem/thue?ward=An+Ph%C3%BA&amp;district=Qu%E1%BA%ADn+2">An Phú,</a></h4>
+                    <h4><a href="https://rever.vn/tim-kiem/thue?district=Qu%E1%BA%ADn+2">Quận 2</a></h4>
+                    <ul>
+                        <li title="Phòng ngủ">
+                            <span class="font-icon bedroom"></span> 3
+                        </li>
+                        <li title="Diện tích">
+                            <span class="font-icon area"></span> 97 m²
+                        </li>
+                    </ul>
+                    <div class="price">21.72 triệu / tháng</div>
+                </header>
+            </article>
+            <article class="featured">
+                <a href="https://rever.vn/can-ho-vinhomes-central-park-tang-cao-l2-thiet-ke-dep-nhieu-tien-ich">
+                    <div class="cover">
+                        <img src="content/images/mg8343-2.jpg" alt="Căn hộ Vinhomes Central Park tầng cao L2 thiết kế đẹp, nhiều tiện ích" title="Căn hộ Vinhomes Central Park tầng cao L2 thiết kế đẹp, nhiều tiện ích">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/can-ho-vinhomes-central-park-tang-cao-l2-thiet-ke-dep-nhieu-tien-ich">
+                        <h3 class="heading">Căn hộ Vinhomes Central Park tầng cao L2 thiết kế đẹp, nhiều tiện ích</h3>
+                    </a>
+                    <h4>ABT8032 • </h4>
+                    <h4><a href="https://rever.vn/tim-kiem/thue?ward=Ph%C6%B0%E1%BB%9Dng+22&amp;district=B%C3%ACnh+Th%E1%BA%A1nh">Phường 22,</a></h4>
+                    <h4><a href="https://rever.vn/tim-kiem/thue?district=B%C3%ACnh+Th%E1%BA%A1nh">Bình Thạnh</a></h4>
+                    <ul>
+                        <li title="Phòng ngủ">
+                            <span class="font-icon bedroom"></span> 3
+                        </li>
+                        <li title="Diện tích">
+                            <span class="font-icon area"></span> 87.2 m²
+                        </li>
+                    </ul>
+                    <div class="price">29.72 triệu / tháng</div>
+                </header>
+            </article>
+            <article class="featured">
+                <a href="https://rever.vn/can-ho-masteri-thao-dien-tang-cao-t4b-huong-dong-dong-bac">
+                    <div class="cover">
+                        <img src="content/images/j4a72071.jpg" alt="Căn hộ Masteri Thảo Điền tầng cao T4B hướng Đông - Đông Bắc" title="Căn hộ Masteri Thảo Điền tầng cao T4B hướng Đông - Đông Bắc">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/can-ho-masteri-thao-dien-tang-cao-t4b-huong-dong-dong-bac">
+                        <h3 class="heading">Căn hộ Masteri Thảo Điền tầng cao T4B hướng Đông - Đông Bắc</h3>
+                    </a>
+                    <h4>A023056 • </h4>
+                    <h4><a href="https://rever.vn/tim-kiem/thue?ward=Th%E1%BA%A3o+%C4%90i%E1%BB%81n&amp;district=Qu%E1%BA%ADn+2">Thảo Điền,</a></h4>
+                    <h4><a href="https://rever.vn/tim-kiem/thue?district=Qu%E1%BA%ADn+2">Quận 2</a></h4>
+                    <ul>
+                        <li title="Phòng ngủ">
+                            <span class="font-icon bedroom"></span> 2
+                        </li>
+                        <li title="Diện tích">
+                            <span class="font-icon area"></span> 68 m²
+                        </li>
+                    </ul>
+                    <div class="price">17.5 triệu / tháng</div>
+                </header>
+            </article>
+            <div class="more-button-box">
+                <a class="black-button" href="https://rever.vn/tim-kiem/thue">
+                    Xem tất cả
+                </a>
+            </div>
+        </section>
+    </div>
+</section>
+<section class="background-gray ">
+    <div class="width1140">
+        <div class="col-ms-6 center">
+            <picture>
+                <source media="(max-width: 375px)" srcset="https://static.reverland.com/images/mobile_app_rever_small.jpg, https://static.reverland.com/images/mobile_app_rever_medium.jpg 2x">
+                <source media="(min-width: 376px)" srcset="https://static.reverland.com/images/mobile_app_rever_medium.jpg, https://static.reverland.com/images/mobile_app_rever_large.jpg 2x">
+                <img class="width-70-ber" src="content/images/mobile_app_rever.jpg" alt="mobile app rever">
+            </picture>
+        </div>
+        <div class="smarter-from">
+            <div class="title-30">Thị trường bất động sản ngay trong tầm tay</div>
+            <div class="pd-tb-30">
+                Cài đặt ứng dụng Rever để tìm kiếm nhanh chóng nhà đất bán và cho thuê phù hợp, xem thông tin
+                mới nhất các dự án nổi bật, theo dõi xu hướng thị trường bất động sản.
+            </div>
+            <div class="pdb-10"><strong>TẢI ỨNG DỤNG VÀ TRẢI NGHIỆM NGAY</strong></div>
+            <div>
+                <p>
+                    <a class="rever-app-ios" target="_blank" href="https://itunes.apple.com/vn/app/rever/id1101768201">
+                        <img class="big-size" src="content/images/rever_app_store.svg" alt="rever app store">
+                    </a>
+                    <a class="rever-app-ios" target="_blank" href="https://play.google.com/store/apps/details?id=com.rever.android">
+                        <img class="big-size" src="content/images/rever_app_android.svg" alt="rever google store">
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bg-white">
+    <div class="news-box">
+        <div class="common-info">
+            <h2>Thông tin thị trường</h2>
+            <p>Góc nhìn thị trường, thông tin dự án và kiến thức giao dịch cần biết</p>
+        </div>
+        <section class="news-content main-content">
+            <div class="bordertop-news01">
+                <article class="featured">
+                    <a href="https://blog.rever.vn/10-can-ho-vinhomes-central-park-gia-ban-tot-nhat-tren-rever">
+                        <div class="cover">
+                            <img class="image-normalized" src="content/images/canhovcp7a.jpg" alt="10 căn hộ Vinhomes Central Park giá bán tốt nhất trên Rever" title="10 căn hộ Vinhomes Central Park giá bán tốt nhất trên Rever">
+                        </div>
+                    </a>
+                    <header>
+                        <div class="news"><a href="https://blog.rever.vn/10-can-ho-vinhomes-central-park-gia-ban-tot-nhat-tren-rever">10 căn hộ Vinhomes Central Park giá bán tốt nhất trên Rever</a></div>
+                        <p class="by">
+                            28/11/2017
+                        </p>
+                        <p class="description"> Rever gửi đến bạn danh sách 10 căn hộ Vinhomes Central Park có giá bán tốt nhất.</p>
+                    </header>
+                </article>
+            </div>
+            <div class="bordertop-news02">
+                <article class="featured">
+                    <a href="https://blog.rever.vn/15-diem-can-kiem-tra-truoc-khi-ban-nha">
+                        <div class="cover">
+                            <img class="image-normalized" src="content/images/cuaso.jpg" alt="15 điểm cần kiểm tra trước khi bán nhà" title="15 điểm cần kiểm tra trước khi bán nhà">
+                        </div>
+                    </a>
+                    <header>
+                        <div class="news"><a href="https://blog.rever.vn/15-diem-can-kiem-tra-truoc-khi-ban-nha">15 điểm cần kiểm tra trước khi bán nhà</a></div>
+                        <p class="by">28/11/2017</p>
+                    </header>
+                </article>
+                <article class="featured">
+                    <a href="https://blog.rever.vn/huong-dan-cach-tinh-ty-suat-loi-nuan-dau-tu-can-ho-cho-thue">
+                        <div class="cover">
+                            <img class="image-normalized" src="content/images/canhochothue.jpg" alt="Hướng dẫn cách tính tỷ suất lợi nhuận đầu tư căn hộ cho thuê" title="Hướng dẫn cách tính tỷ suất lợi nhuận đầu tư căn hộ cho thuê">
+                        </div>
+                    </a>
+                    <header>
+                        <div class="news"><a href="https://blog.rever.vn/huong-dan-cach-tinh-ty-suat-loi-nuan-dau-tu-can-ho-cho-thue">Hướng dẫn cách tính tỷ suất lợi nhuận đầu tư căn hộ cho thuê</a></div>
+                        <p class="by">27/11/2017</p>
+                    </header>
+                </article>
+                <article class="featured">
+                    <a href="https://blog.rever.vn/cap-nhat-tien-do-cac-du-an-can-ho-tai-ben-van-don-quan-4">
+                        <div class="cover">
+                            <img class="image-normalized" src="content/images/the-20gold-20view.jpg" alt="Cập nhật tiến độ các dự án căn hộ tại Bến Vân Đồn Quận 4" title="Cập nhật tiến độ các dự án căn hộ tại Bến Vân Đồn Quận 4">
+                        </div>
+                    </a>
+                    <header>
+                        <div class="news"><a href="https://blog.rever.vn/cap-nhat-tien-do-cac-du-an-can-ho-tai-ben-van-don-quan-4">Cập nhật tiến độ các dự án căn hộ tại Bến Vân Đồn Quận 4</a></div>
+                        <p class="by">26/11/2017</p>
+                    </header>
+                </article>
+                <article class="featured">
+                    <a href="https://blog.rever.vn/chinh-thuc-cat-noc-du-an-masteri-millennium-sau-17-thang-thi-cong">
+                        <div class="cover">
+                            <img class="image-normalized" src="content/images/masteri-20millennium-20-6.jpg" alt="Chính thức cất nóc dự án Masteri Millennium sau 17 tháng thi công" title="Chính thức cất nóc dự án Masteri Millennium sau 17 tháng thi công">
+                        </div>
+                    </a>
+                    <header>
+                        <div class="news"><a href="https://blog.rever.vn/chinh-thuc-cat-noc-du-an-masteri-millennium-sau-17-thang-thi-cong">Chính thức cất nóc dự án Masteri Millennium sau 17 tháng thi công</a></div>
+                        <p class="by">24/11/2017</p>
+                    </header>
+                </article>
+            </div>
+            <div class="more-button-box mgt-0">
+                <a class="black-button" href="https://blog.rever.vn/">Xem tất cả</a>
+            </div>
+        </section>
+    </div>
+</section>
+<section class="background-gray">
+    <div class="width1140 ">
+        <div class="common-info">
+            <h2>Toà nhà nổi bật</h2>
+            <p>Rever mang đến cho bạn đầy đủ thông tin các toà nhà bất động sản nổi bật nhất hiện nay</p>
+        </div>
+        <section class="exclusive main-content">
+            <article class="featured kdc-new">
+                <a href="https://rever.vn/toa-nha/vinhomes-central-park-5" title="Vinhomes Central Park">
+                    <div class="cover">
+                        <img class="image-pixelated" src="content/images/blog-3.jpg" alt="Vinhomes Central Park" title="Vinhomes Central Park" draggable="false">
+                    </div>
+                    <header class="overlay">
+                        <h3 class="heading">Căn hộ Vinhomes Central Park</h3>
+                        <p>
+                        </p><h4>Bình Thạnh</h4>,
+                        <h4>TP. Hồ Chí Minh</h4>
+                        <p></p>
+                        <h4>Số block: 18</h4>
+                        <h4> &nbsp;&nbsp;• &nbsp;&nbsp;Số căn: 13,000</h4>
+                    </header>
+                </a>
+            </article>
+            <article class="featured kdc-new">
+                <a href="https://rever.vn/toa-nha/la-astoria" title="La Astoria">
+                    <div class="cover">
+                        <img class="image-pixelated" src="content/images/khoi-la21a.jpg" alt="La Astoria" title="La Astoria" draggable="false">
+                    </div>
+                    <header class="overlay">
+                        <h3 class="heading">Căn hộ La Astoria</h3>
+                        <p>
+                        </p><h4>Quận 2</h4>,
+                        <h4>TP. Hồ Chí Minh</h4>
+                        <p></p>
+                        <h4>Số block: 2</h4>
+                        <h4> &nbsp;&nbsp;• &nbsp;&nbsp;Số căn: 622</h4>
+                    </header>
+                </a>
+            </article>
+            <article class="featured kdc-new">
+                <a href="https://rever.vn/toa-nha/lexington-residence" title="Lexington Residence">
+                    <div class="cover">
+                        <img class="image-pixelated" src="content/images/lexington-an-phu-1.jpg" alt="Lexington Residence" title="Lexington Residence" draggable="false">
+                    </div>
+                    <header class="overlay">
+                        <h3 class="heading">Căn hộ Lexington Residence</h3>
+                        <p>
+                        </p><h4>Quận 2</h4>,
+                        <h4>TP. Hồ Chí Minh</h4>
+                        <p></p>
+                        <h4>Số block: 5</h4>
+                        <h4> &nbsp;&nbsp;• &nbsp;&nbsp;Số căn: 1,312</h4>
+                    </header>
+                </a>
+            </article>
+            <article class="featured kdc-new">
+                <a href="https://rever.vn/toa-nha/masteri-thao-dien" title="Masteri Thảo Điền">
+                    <div class="cover">
+                        <img class="image-pixelated" src="content/images/ban-can-ho-1-phong-ngu-masteri-thao-dien-thap-t1-t2-t3-t4-t51.jpg" alt="Masteri Thảo Điền" title="Masteri Thảo Điền" draggable="false">
+                    </div>
+                    <header class="overlay">
+                        <h3 class="heading">Căn hộ Masteri Thảo Điền</h3>
+                        <p>
+                        </p><h4>Quận 2</h4>,
+                        <h4>TP. Hồ Chí Minh</h4>
+                        <p></p>
+                        <h4>Số block: 5</h4>
+                        <h4> &nbsp;&nbsp;• &nbsp;&nbsp;Số căn: 3,000</h4>
+                    </header>
+                </a>
+            </article>
+            <article class="featured kdc-new">
+                <a href="https://rever.vn/toa-nha/thao-dien-pearl" title="Thảo Điền Pearl">
+                    <div class="cover">
+                        <img class="image-pixelated" src="content/images/thao-dien-pearl-phoi-canh-1.jpg" alt="Thảo Điền Pearl" title="Thảo Điền Pearl" draggable="false">
+                    </div>
+                    <header class="overlay">
+                        <h3 class="heading"> Thảo Điền Pearl</h3>
+                        <p>
+                        </p><h4>Quận 2</h4>,
+                        <h4>TP. Hồ Chí Minh</h4>
+                        <p></p>
+                        <h4>Số block: 2</h4>
+                        <h4> &nbsp;&nbsp;• &nbsp;&nbsp;Số căn: 466</h4>
+                    </header>
+                </a>
+            </article>
+            <article class="featured kdc-new">
+                <a href="https://rever.vn/toa-nha/the-estella-an-phu" title="The Estella An Phú">
+                    <div class="cover">
+                        <img class="image-pixelated" src="content/images/estella-4.jpg" alt="The Estella An Phú" title="The Estella An Phú" draggable="false">
+                    </div>
+                    <header class="overlay">
+                        <h3 class="heading">Căn hộ The Estella An Phú</h3>
+                        <p>
+                        </p><h4>Quận 2</h4>,
+                        <h4>TP. Hồ Chí Minh</h4>
+                        <p></p>
+                        <h4>Số block: 8</h4>
+                        <h4> &nbsp;&nbsp;• &nbsp;&nbsp;Số căn: 719</h4>
+                    </header>
+                </a>
+            </article>
+            <div class="more-button-box">
+                <a class="black-button" href="https://rever.vn/toa-nha">Xem tất cả</a>
+            </div>
+        </section>
+    </div>
+</section>
+<section class="bg-white">
+    <div class="width1140">
+        <div class="common-info">
+            <h2>Khu dân cư</h2>
+            <p>
+                Thông tin cơ bản, đánh giá những đặc điểm nổi bật và tình hình thị trường nhà đất của các khu
+                dân cư tại TP. Hồ Chí Minh
+            </p>
+        </div>
+        <section class="exclusive main-content">
+            <article class="featured kdc-new">
+                <a href="https://rever.vn/khu-dan-cu/an-phu-an-khanh-2">
+                    <div class="cover">
+                        <img class=" image-pixelated" src="content/images/chung-cu-an-phuc.jpg" alt="An Phú - An Khánh" title="An Phú - An Khánh">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/khu-dan-cu/an-phu-an-khanh-2">
+                        <h3 class="heading">An Phú - An Khánh</h3>
+                    </a>
+                    <p> Quận 2, TP. Hồ Chí Minh</p>
+                </header>
+            </article>
+            <article class="featured kdc-new">
+                <a href="https://rever.vn/khu-dan-cu/khu-do-thi-moi-thu-thiem-2">
+                    <div class="cover">
+                        <img class=" image-pixelated" src="content/images/khu-do-thi-thu-thiem.jpg" alt="Khu đô thị mới Thủ Thiêm" title="Khu đô thị mới Thủ Thiêm">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/khu-dan-cu/khu-do-thi-moi-thu-thiem-2">
+                        <h3 class="heading">Khu đô thị mới Thủ Thiêm</h3>
+                    </a>
+                    <p> Quận 2, TP. Hồ Chí Minh</p>
+                </header>
+            </article>
+            <article class="featured kdc-new">
+                <a href="https://rever.vn/khu-dan-cu/diamond-island-dao-kim-cuong">
+                    <div class="cover">
+                        <img class=" image-pixelated" src="content/images/image.png" alt="Diamond Island - Đảo Kim Cương" title="Diamond Island - Đảo Kim Cương">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/khu-dan-cu/diamond-island-dao-kim-cuong">
+                        <h3 class="heading">Diamond Island - Đảo Kim Cương</h3>
+                    </a>
+                    <p> Quận 2, TP. Hồ Chí Minh</p>
+                </header>
+            </article>
+            <article class="featured kdc-new">
+                <a href="https://rever.vn/khu-dan-cu/cat-lai">
+                    <div class="cover">
+                        <img class=" image-pixelated" src="content/images/nha-pho-ventuna.jpg" alt="Cát Lái" title="Cát Lái">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/khu-dan-cu/cat-lai">
+                        <h3 class="heading">Cát Lái</h3>
+                    </a>
+                    <p> Quận 2, TP. Hồ Chí Minh</p>
+                </header>
+            </article>
+            <article class="featured kdc-new">
+                <a href="https://rever.vn/khu-dan-cu/thao-dien">
+                    <div class="cover">
+                        <img class=" image-pixelated" src="content/images/holmagenthandbookv12003.jpg" alt="Thảo Điền" title="Thảo Điền">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/khu-dan-cu/thao-dien">
+                        <h3 class="heading">Thảo Điền</h3>
+                    </a>
+                    <p> Quận 2, TP. Hồ Chí Minh</p>
+                </header>
+            </article>
+            <article class="featured kdc-new">
+                <a href="https://rever.vn/khu-dan-cu/khu-villa-hoa-hong-tran-nao">
+                    <div class="cover">
+                        <img class=" image-pixelated" src="content/images/villahoahong.png" alt="Khu villa Hoa Hồng Trần Não" title="Khu villa Hoa Hồng Trần Não">
+                    </div>
+                </a>
+                <header>
+                    <a href="https://rever.vn/khu-dan-cu/khu-villa-hoa-hong-tran-nao">
+                        <h3 class="heading">Khu villa Hoa Hồng Trần Não</h3>
+                    </a>
+                    <p> Quận 2, TP. Hồ Chí Minh</p>
+                </header>
+            </article>
+            <div class="more-button-box">
+                <a class="black-button" href="https://rever.vn/khu-dan-cu">Xem tất cả</a>
+            </div>
+        </section>
+    </div>
+</section>

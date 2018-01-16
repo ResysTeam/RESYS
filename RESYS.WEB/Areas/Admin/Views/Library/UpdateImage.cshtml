@@ -1,0 +1,218 @@
+﻿@model Library
+@{
+    if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+    {
+        ViewBag.Title = "Sửa Image";
+    }
+    else
+    {
+        ViewBag.Title = "Thêm mới Image";
+    }
+        
+}
+
+<div class="main-content-inner">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="@Url.Action("index", "home")">Home</a>
+            </li>
+            <li><a href="@Url.Action("SearchImage", "Library")">Danh sách hình ảnh</a></li>
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+                <li class="active">Edit @Model.LibraryId</li>
+            }
+            else
+            {
+                <li class="active">Tạo mới hình ảnh</li>
+            }
+        </ul>
+        <!-- /.breadcrumb -->
+
+        
+    </div>
+
+    <div class="page-content">
+
+
+        <div class="page-header">
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+            <h1>Sửa hình ảnh id @Model.LibraryId
+
+            </h1>
+            }
+            else
+            {
+                <h1>Tạo mới hình ảnh
+
+            </h1>
+            }
+        </div>
+        <!-- /.page-header -->
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "manageForm", @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+                            {
+                            @Html.HiddenFor(mbox => mbox.LibraryId)
+                            }                        
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="LibraryTitle">Tiêu đề ảnh:</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                    @*    <input type="text" name="ImageTitle" id="ImageTitle" class="col-xs-12 col-sm-6" value="@Model.ImageTitle" />*@
+                                        <textarea class="form-control limited autosize-transition" required id="LibraryTitle" name="LibraryTitle" maxlength="250">@Model.LibraryTitle</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="NewsTag">Đơn vị thành viên</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        @if(Culture=="vi-VN")
+                                        {
+                                            @Html.DropDownListDefault("CompanyId", ViewData.Get<SelectList>("ListCompany"), "24", "Tập Đoàn Thành Công")
+                                        }
+                                        else
+                                        {
+                                             @Html.DropDownListDefault("CompanyId", ViewData.Get<SelectList>("ListCompany"), "2", "Thanh Cong Group")
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="LibraryDescription">Mô tả:</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                  @*      <input type="text" name="ImageDescription" id="ImageDescription" class="col-xs-12 col-sm-6" value="@Model.ImageDescription" />*@
+                                          <textarea class="form-control limited autosize-transition" required id="LibraryDescription" name="LibraryDescription" maxlength="250">@Model.LibraryDescription</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="LibraryKeyword">Keyword:</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                    @*    <input type="text" name="ImageKeyword" id="ImageKeyword" class="col-xs-12 col-sm-6" value="@Model.ImageKeyword" />*@
+                                          <textarea class="form-control limited autosize-transition" required id="LibraryKeyword" name="LibraryKeyword" maxlength="250">@Model.LibraryKeyword</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                 <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="LibraryUrl">Hình ảnh:</label>
+                                 <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        @Html.TextBoxFor(model => model.LibraryUrl)
+                                        @Html.Partial("FileManagerButton", "LibraryUrl") 
+                                    </div>
+                                </div>
+                               
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="LibraryUrl"></label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        @if (Model.LibraryUrl != null)
+                                        {
+                                            <img  src="@Model.LibraryUrl" width="300" height="200" alt="" />
+                                        }
+                                        else
+                                        {
+                                            <img  src="~/Areas/Admin/Views/Introduction/noimage.jpg" width="300" height="200" alt="" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="OrderNo">Thứ tự:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="number" name="OrderNo" id="OrderNo" class="col-xs-12 col-sm-1" value="@Model.OrderNo" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @{
+                                    var checkall = "";
+                                    if (Model.CompanyId == 999999999)
+                                    {
+                                        checkall = "checked";
+
+                                    }
+
+                                }
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsAll">Hình Ảnh cho tất cả:</label>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="IsAll" type="checkbox" class="ace" value="true" @checkall>
+                                                        
+                                        <span class="lbl"> </span>
+                                        <input name="IsAll" type="hidden" value="false" />
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                @{var checkhot = Model.IsHotLibrary ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsHotLibrary">Hình ảnh nổi bật:</label>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="IsHotLibrary" type="checkbox" class="ace" value="true" @checkhot>
+                                                        
+                                        <span class="lbl"> </span>
+                                        <input name="IsHotLibrary" type="hidden" value="false" />
+                                    </label>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                @{var check = Model.IsActive ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsActive">Trạng thái:</label>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="IsActive" type="checkbox" class="ace" value="true" @check>
+                                                        
+                                        <span class="lbl"> Ẩn/Hiện</span>
+                                        <input name="IsActive" type="hidden" value="false" />
+                                    </label>
+                                </div>
+                            </div>                            
+                            <input type="submit" class="btn btn-success" value="Lưu" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>
+<script type="text/javascript">
+    $('textarea[class*=autosize]').autosize({ append: "\n" });
+    $('textarea.limited').inputlimiter({
+        remText: '%n character%s remaining...',
+        limitText: 'max allowed : %n.'
+    });
+</script>
+
+<script type="text/javascript">
+    setAdminCurrentUrl('@Url.Action("SearchImage", "Library")');
+</script>
+@section Scripts {
+	<script src="~/scripts/tinymce/tiny_mce.js"></script>
+
+}

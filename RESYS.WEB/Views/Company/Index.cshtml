@@ -1,0 +1,224 @@
+﻿@{
+    ViewBag.Title = "Danh sách thành viên";
+    var listcompanycate = ViewData["ListCompanyCate"] as List<CompanyCate>;
+}
+
+<div class="companycate">
+    <div class="container companycate-content"  @("companycate".EditHtmlItem())>
+        <div class="title" >
+            <h1> @("Đơn vị thành viên".HtmlItemString("companycate", "title"))</h1>
+        </div>  
+              
+        <ul class="nav nav-tabs" style="border-bottom: none; margin-left: 0px;">
+            @if (listcompanycate != null)
+            {
+                
+                if(listcompanycate.Count()==1)
+                {
+                    var count = 1;
+                    foreach (CompanyCate itemcompanycate in listcompanycate)
+
+                    {
+                        <li class="col-sm-12 active" style="padding-right: 0; padding-left: 0">
+                            <a data-toggle="tab" href="#@count" style="">
+                                <img src="@itemcompanycate.CompanyCateIcon"class="img-icon"  />
+                               @* <img src="/Images/icon1-active.png" class="img-icon-active"  />*@
+                                @itemcompanycate.CompanyCateName
+                            </a>
+                        </li>
+                    }
+                    count++;
+
+                }
+                else if (listcompanycate.Count() == 2)
+                {
+                    var count = 1;
+                    foreach (CompanyCate itemcompanycate in listcompanycate)
+                    {
+                        if (count == 1)
+                        {
+                            <li class="col-sm-6 active" style="padding-right: 0; padding-left: 0">
+                                <a data-toggle="tab" href="#@count" style="">
+                                    <img src="@itemcompanycate.CompanyCateIcon"class="img-icon"  />
+                                    @*<img src="/Images/icon1-active.png" class="img-icon-active"  />*@
+                                    @itemcompanycate.CompanyCateName
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="col-sm-6" style="padding-left: 0; padding-right: 0">
+                                <a data-toggle="tab" href="#@count" style="">
+                                    <img src="@itemcompanycate.CompanyCateIcon" class="img-icon" />
+                                    @*<img src="/Images/icon2-active.png" class="img-icon-active"  />*@
+                                    @itemcompanycate.CompanyCateName
+                                </a>
+                            </li>
+                        }
+                        count++;
+                    }        
+                }
+                else if (listcompanycate.Count() == 3)
+                {
+                    var count = 1;
+                    foreach (CompanyCate itemcompanycate in listcompanycate)
+                    {
+                        if (count == 1)
+                        {
+                            <li class="col-sm-4 active" style="padding-right: 0; padding-left: 0">
+                                <a data-toggle="tab" href="#@count" style="">
+                                    <img src="@itemcompanycate.CompanyCateIcon"class="img-icon"  />
+                                    @*<img src="/Images/icon1-active.png" class="img-icon-active"  />*@
+                                    @itemcompanycate.CompanyCateName
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="col-sm-4" style="padding-left: 0; padding-right: 0">
+                                <a data-toggle="tab" href="#@count" style="">
+                                    <img src="@itemcompanycate.CompanyCateIcon" class="img-icon" />
+                                    @*<img src="/Images/icon2-active.png" class="img-icon-active"  />*@
+                                    @itemcompanycate.CompanyCateName
+                                </a>
+                            </li>
+                        }
+                        count++;
+                    }        
+                }
+                else if (listcompanycate.Count() == 4)
+                {
+                    var count = 1;
+                    foreach (CompanyCate itemcompanycate in listcompanycate)
+                    {
+                        if (count == 1)
+                        {
+                            <li class="col-sm-3 active" style="padding-right: 0; padding-left: 0">
+                                <a data-toggle="tab" href="#@count" style="">
+                                    <img src="@itemcompanycate.CompanyCateIcon"class="img-icon"  />
+                                    @*<img src="/Images/icon1-active.png" class="img-icon-active"  />*@
+                                    @itemcompanycate.CompanyCateName
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="col-sm-3" style="padding-left: 0; padding-right: 0">
+                                <a data-toggle="tab" href="#@count" style="">
+                                    <img src="@itemcompanycate.CompanyCateIcon" class="img-icon" />
+                                    @*<img src="/Images/icon2-active.png" class="img-icon-active"  />*@
+                                    @itemcompanycate.CompanyCateName
+                                </a>
+                            </li>
+                        }
+                        count++;
+                    }        
+                }
+                else
+                {
+                    var count = 1;
+                    foreach (CompanyCate itemcompanycate in listcompanycate)
+                    {
+                        if (count == 1)
+                        {
+                            <li class="col-sm-2 active" style="padding-right: 0; padding-left: 0">
+                                <a data-toggle="tab" href="#@count" style="">
+                                    <img src="@itemcompanycate.CompanyCateIcon"class="img-icon"  />
+                                    @*<img src="/Images/icon1-active.png" class="img-icon-active"  />*@
+                                    @itemcompanycate.CompanyCateName
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="col-sm-2" style="padding-left: 0; padding-right: 0">
+                                <a data-toggle="tab" href="#@count" style="">
+                                    <img src="@itemcompanycate.CompanyCateIcon" class="img-icon" />
+                                    @*<img src="/Images/icon2-active.png" class="img-icon-active"  />*@
+                                    @itemcompanycate.CompanyCateName
+                                </a>
+                            </li>
+                        }
+                        count++;
+                    }        
+  
+                }
+
+            }
+        </ul>
+
+        <div class="tab-content" >
+            @if (listcompanycate != null)
+            {
+                var count = 1;
+                foreach (CompanyCate itemcompanycate in listcompanycate)
+                {
+                    if (count == 1)
+                    {
+                        var company = RESYS.BIZ.Services.ServiceFactory.CompanyManager.GetByCateId(itemcompanycate.CompanyCateId, Culture);
+                        <div id="@count" class="tab-pane fade in active" >
+                            <div class="col-sm-12 col-xs-6 item-company-cate " style="padding:0">
+                                <img src="@itemcompanycate.CompanyCateImage"  /> 
+                                @if (company != null)
+                                {
+                                    <div class="title-company-cate ">
+                                        @foreach (Company itemcompany in company)
+                                        {
+                                            <div class="col-sm-3 col-xs-6 title">                                                                     
+                                                <a href="@Url.Action("Company", "Company", new { shortname = itemcompany.CompanyShortName,id=itemcompany.CompanyId })">
+                                                    <h2>@itemcompany.CompanyName</h2>
+                                                </a>                            
+                                            </div>
+                                        }
+                                    </div>                                
+                                }   
+                            </div>                       
+                        </div>
+                    }
+                    else
+                    {
+                        var company = RESYS.BIZ.Services.ServiceFactory.CompanyManager.GetByCateId(itemcompanycate.CompanyCateId, Culture);
+                        <div id="@count" class="tab-pane fade in " >
+                            <div class="col-sm-12 col-xs-6 item-company-cate " style="padding:0">
+                                <img src="@itemcompanycate.CompanyCateImage"  />   
+                                @if (company != null)
+                                {
+                                    <div class="title-company-cate ">
+                                        @foreach (Company itemcompany in company)
+                                        {
+                                            <div class="col-sm-3 col-xs-6 title" >                                                                     
+                                                 <a href="@Url.Action("Company", "Company", new { shortname = itemcompany.CompanyShortName,id=itemcompany.CompanyId })">
+                                                    <h2>@itemcompany.CompanyName</h2>
+                                                </a>
+                                                                        
+                                            </div>
+                                        }   
+                                    </div>                               
+                                } 
+                            </div>
+
+                           
+                        </div>
+                    }
+                    count++;
+                }
+            }                                          
+        </div>
+        
+ 
+        <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        
+                        <a href="@Url.Action("index", "home")">
+                            <i class="ace-icon fa fa-home fa-lg home-icon"></i>
+                        </a>
+                    </li>
+                    <li class="active">@("Đơn vị thành viên".HtmlItemString("navbar", "companycate"))</li>
+
+                </ul>
+        
+            </div>
+
+    </div>
+</div>

@@ -1,0 +1,135 @@
+﻿@model SysUser
+@{
+
+	
+	ViewBag.Title = "Thêm người dùng";
+
+		
+}
+
+<div class="main-content-inner">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<ul class="breadcrumb">
+			<li>
+				<i class="ace-icon fa fa-home home-icon"></i>
+				<a href="#">Home</a>
+			</li>
+			<li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
+
+			<li class="active">@ViewBag.Title</li>
+
+		</ul>
+		<!-- /.breadcrumb -->
+
+
+	</div>
+
+	<div class="page-content">
+
+
+		<div class="page-header">
+
+			<h1>@ViewBag.Title
+
+			</h1>
+
+		</div>
+		<!-- /.page-header -->
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+				<div class="row">
+					<div class="col-xs-12">
+						@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "manageForm", @class = "form-horizontal" }))
+	  {
+							@Html.AntiForgeryToken()
+
+							@Html.ValidationSummary(true)
+		  
+							<div class="form-group">
+								<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Username">Tên đăng nhập:</label>
+
+								<div class="col-xs-12 col-sm-10">
+									<div class="clearfix">
+										@Html.EditorFor(mbox => mbox.Username)
+									</div>
+								</div>
+							</div>
+							
+							
+							<div class="form-group">
+								<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Fullname">Họ tên:</label>
+
+								<div class="col-xs-12 col-sm-10">
+									<div class="clearfix">
+										@Html.EditorFor(mbox => mbox.Fullname)
+									</div>
+								</div>
+							</div>
+		  
+		  
+		  	<div class="form-group">
+								<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Username">Mật khẩu:</label>
+
+								<div class="col-xs-12 col-sm-10">
+									<div class="clearfix">
+										@Html.EditorFor(mbox => mbox.Password)
+									</div>
+								</div>
+							</div>
+							
+		  
+		  
+		  
+							<div class="form-group">
+								<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="SysAdmin">Quản trị hệ thống:</label>
+
+								<div class="col-xs-12 col-sm-10">
+									<div class="clearfix">
+
+										@Html.EditorFor(mbox => mbox.SysAdmin)
+
+									</div>
+								</div>
+							</div>
+		  
+							<div class="form-group">
+								<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="Active">Kích hoạt:</label>
+
+								<div class="col-xs-12 col-sm-10">
+									<div class="clearfix">
+
+										@Html.EditorFor(mbox => mbox.Active)
+									</div>
+								</div>
+							</div>
+		  
+							<div class="form-group">
+								<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="UserGroups">Nhóm:</label>
+
+								<div class="col-xs-12 col-sm-10">
+									<div class="clearfix">
+
+
+										@Html.Partial("UserGroups")
+									</div>
+								</div>
+							</div>
+		  
+							<input type="submit" class="btn btn-success" value="Lưu" />
+	  }
+					</div>
+				</div>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.page-content -->
+</div>
+
+
+
+<script type="text/javascript">
+	setAdminCurrentUrl('@Url.Action("Index", "User")');
+</script>

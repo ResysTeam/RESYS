@@ -1,0 +1,12 @@
+﻿@using idocNet.Client.Core.Extensions
+
+@model String
+
+@{
+    var pagesize = 20;
+    int pageSizeNew = ViewBag.PageSize ?? pagesize;
+}
+@if (Model.Equals("newstype"))
+{
+@Html.PagerBootstrap(pageSizeNew, (int)ViewData["Page"], (int)ViewData["TotalItems"], new { shortname = ViewBag.shortname as string,id=ViewBag.Id ?? "" }, "Trang trước", "Trang sau", "Trang đầu", "Trang cuối")	
+}

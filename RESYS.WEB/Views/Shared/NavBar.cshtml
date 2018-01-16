@@ -1,0 +1,204 @@
+﻿@using RESYS.BIZ.Services
+@{
+    var listintroduction = ServiceFactory.IntroductionManager.GetAllActive(Culture);
+    var listnewscate = new List<NewsCategory>();
+    var culture = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+    var cssvi = culture.Equals("vi") ? "active" : "";
+    var cssen = culture.Equals("en") ? "active" : "";
+ }
+<div class="header">
+    <div class="container">
+        <!-- Logo -->
+        <h1  class="logo">
+            <a href="@Url.ActionLocalized("Index", "home")" title="Tập đoàn Thành Công">
+                <img src="/images/logo.png" alt="Thanh Cong Group">
+            </a>
+        </h1>
+        <!-- End Logo -->
+        <div class="topbar">
+            <ul class="loginbar pull-right">
+                <li>
+                    <a class="search fa search-btn fa-search" href="#" data-toggle="modal" data-target="#myModal">
+                              
+                    </a>           
+                </li>
+                    
+                <li class="hoverSelector">
+                    <a href="/vi" class="@cssvi">VIE</a>
+                </li>
+                <li class="hoverSelector">
+                    <a href="/en" style="" class="@cssen">ENG</a>
+                </li>
+            </ul>
+        </div>
+
+
+        <!-- Toggle get grouped for better mobile display -->
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="fa fa-bars"></span>
+        </button>
+        <!-- End Toggle -->
+    </div>
+    <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+        <div class="container"  >
+            <ul class="nav navbar-nav" @("navbar".EditHtmlItem())>
+                <!-- Home -->
+                @* <li>
+			        <a href="@Url.ActionLocalized("Index", "home")" class="icon-home active">
+			            <img src="/images/home.png" alt="trang chủ" width="17" />
+			        </a>
+			    </li>*@
+                <li class="dropdown">
+                    <a href="@Url.Action("", "Introduction")"  >
+                        @("Giới thiệu chung".HtmlItemString("navbar", "introduction"))
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                        @if (listintroduction != null)
+                        {
+                            foreach (Introduction item in listintroduction)
+                            {
+                                
+                                <li>
+                                    @if (item.IntroductionShortName != ("qua-trinh-phat-trien".HtmlItemString("navbar", "shortname-history")))
+                                    {
+                                        <a href="@Url.Action("Introduction", "Introduction", new {shortname = item.IntroductionShortName, id = item.IntroductionId})">
+                                            @item.IntroductionName
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Develop", "Introduction")">
+                                            @item.IntroductionName
+                                        </a>
+                                    }
+                                </li>
+                            }
+                        }
+                    </ul>
+                </li>
+                <li ><a href="@Url.Action("Index", "Company")" >
+                         @("Đơn vị thành viên".HtmlItemString("navbar", "companycate"))
+                     </a>			      
+                </li>
+                <li class="dropdown"><a href="@Url.Action("Index", "Album", new{shortname="all",page=0})" >  @("Thư viện".HtmlItemString("navbar", "library"))</a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li><a href="@Url.Action("IndexImage", "Album",new{shortname="all",page=0})">  @("Hình ảnh".HtmlItemString("navbar", "image"))</a></li>
+                        <li><a href="@Url.Action("IndexVideo", "Album",new{shortname="all",page=0})">  @("Video".HtmlItemString("navbar", "video"))</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown"><a href="@Url.Action("Index", "News")" >  @("Tin tức".HtmlItemString("navbar", "news"))</a>
+                    <ul class="dropdown-menu" role="menu">
+                        @if (listnewscate != null)
+                        {
+                            foreach (NewsCategory item in listnewscate)
+                            {
+                                if (item.NewsCategoryShortName != ("tuyen-dung".HtmlItemString("navbar", "shortname-careers")))
+                                {
+                                    <li>
+                                        <a  href="@Url.Action("IndexCategory", "News", new {id = item.NewsCategoryId, shortname = item.NewsCategoryShortName, page = 0})">
+                                            @item.NewsCategoryTitle
+                                        </a>
+                                    </li>
+                                }
+                            }
+                        }
+                    </ul>
+                </li>
+                @if (listnewscate != null)
+                {
+                    foreach (NewsCategory item in listnewscate)
+                    {
+                        if (item.NewsCategoryShortName == ("tuyen-dung".HtmlItemString("navbar", "shortname-careers")))
+                        {
+                            <li><a href="@Url.Action("NewsCategory", "News", new { shortname = ("tuyen-dung".HtmlItemString("navbar", "shortname-careers")) })">
+                                    @("Tuyển dụng".HtmlItemString("navbar", "careers"))
+                                </a>
+                            </li>
+                        }
+                    }
+                }			
+            </ul> 
+
+        </div>
+        <!--/end container-->
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog-search ">
+        <!-- Modal content-->
+        <div class=" modal-content-search ">
+            <div class="inner-search">
+                <input class="input-search" id="search_keywords" type="text" placeholder="@("Tìm kiếm ...".HtmlItemString("navbar", "text-search"))">
+                <input id="iconsubmit" type="image" src="/images/btn-search.gif" alt="Search" >                   
+                    
+                <button type="button" class="close search-close" style="" data-dismiss="modal">
+                    <img src="/images/btn-search-close.gif" alt="Close">
+                </button>
+            </div>
+        </div>
+    </div>    
+</div>
+
+ <!-- /Modal -->
+<script type="text/javascript">
+	    
+//function handleSearch() {
+    //    jQuery('.search').click(function () {
+    //        if (jQuery('.search').hasClass('fa-search')) {
+    //            jQuery('.search-open').fadeIn(500);
+    //            jQuery('.search').removeClass('fa-search');
+    //            $(".text-search").focus();
+    //        } else {
+    //            jQuery('.search-open').fadeOut(500);
+    //            jQuery('.search').addClass('fa-search');
+    //        }
+    //    });
+    //}
+	    
+    //$("input.text-search").blur(function () {
+    //    jQuery('.search-open').fadeOut(500);
+    //    jQuery('.search').addClass('fa-search');
+	           
+    //});
+	    
+    //handleSearch();
+	</script>
+
+@{
+	var chara = "@";
+}
+
+<script type="text/javascript">
+    var searchVal = "";
+    $("#search_keywords").val(searchVal)
+    .blur(function() { if ($(this).val() == '') $(this).val(searchVal); })
+    .focus(function() { if ($(this).val() == searchVal) $(this).val(''); });
+    //
+    $('#iconsubmit').click(function() {
+        var key = $('#search_keywords').val();
+        var value = "Tìm kiếm...";
+        
+        if (key.length == 0 || key == value) {
+            alert("Vui lòng nhập điều kiện tìm kiếm");
+        } else {
+            key = $.trim(key);
+            key = key.toLowerCase();
+            key = key.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+            key = key.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+            key = key.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+            key = key.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+            key = key.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+            key = key.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+            key = key.replace(/đ/g, "d");
+            key = key.replace(/!|@chara|%|\^|\*|\(|\)|\+|\=|\&lt;|\&gt;|\?|\/|,|\.|\:|\;|\'| |\"|\&amp;|\#|\[|\]|~|\$|_/g, "-");
+            key = key.replace(/-+-/g, "-");
+            key = key.replace(/^\-+|\-+$/g, "");
+            var urlsearch = "@Url.Action("HomeSearch", "Home")" + "?key=" + key;
+            //window.location.href = '@Url.Action("", "Home", new{})/search.aspx?key=' + key;
+            window.location.href = urlsearch;
+        }
+        return false;
+    });
+</script>

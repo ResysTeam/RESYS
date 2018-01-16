@@ -1,0 +1,295 @@
+﻿@model News
+@{
+    ViewBag.PageTitle = Model.NewsTitle.SubstringSummary(60) + " - Thành Công Group";
+    var listother = ViewBag.ListOther as List<News>;
+    var othernews = ViewBag.OtherNews as List<News>;
+    var cate = ViewBag.Category as NewsCategory;
+    
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        $('.focuspoint').focusPoint();
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('.newsdetail img').addClass('img-responsive');
+    });
+</script>
+<div class="news">
+ @*   <div class="col-xs-6 col-sm-3">
+                    <div id="fb-root"></div>
+
+<div class="fb-like" data-href="@Html.ViewContext.RequestContext.HttpContext.Request.Url" data-layout="button_count" data-action="like" data-show-faces="false" data-share="true"></div>
+
+                </div>*@
+    <div class="container new-content" @("news_detail".EditHtmlItem()) >
+        <div class="col-xs-12 no-padding">
+            <div class="" style="">
+                <h1>@Model.NewsCategoryTitle</h1>
+            </div>
+        </div>
+
+        <div class="news-body">
+            <div class="newstitle">
+                @Model.NewsTitle.SubstringSummary(100)
+            </div>
+            <div class="datecount">@Model.CreateDate.ToString("dd/MM/yyy")</div>
+            <div class="news-description">
+                <div style="" class="news-description1">
+                    <a href="@Url.Action("NewsTag", "News", new { id=0,shortname = Model.CompanyShortName, page = 0 })">
+                        <div class="tag">@Model.NewsCategoryTitle &nbsp; | &nbsp; @Model.CompanyName.SubstringSummary(37)</div>
+                    </a>
+                    
+                </div>
+                <div >
+                    @* <div class="news-description2">
+                        <a class="icon fontSizePlus" title="Facebook" href="#">
+                            A +
+                        </a>
+                    </div>
+
+                    <div class="news-description2" >
+                        <a class="icon fontSizeMinus" title="Facebook" href="#">
+                            A -
+                        </a>
+                    </div>*@
+
+                    <div class="news-description3">
+                        <a class="icon" href="https://www.facebook.com/sharer/sharer.php?u=@(Html.ViewContext.RequestContext.HttpContext.Request.Url)&t=@Model.NewsTitle"
+                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+                           target="_blank" title="Share on Facebook">
+                            <div class="col-sm-4 face" >
+                            
+                            </div>
+                            @*<img src="/images/icon-face-news.png" />*@
+                        </a>
+                        <a class="icon" href="https://plus.google.com/share?url=@(Html.ViewContext.RequestContext.HttpContext.Request.Url)"
+                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=350,width=480');return false;"
+                           target="_blank" title="Share on Google+">
+                            <div class="col-sm-4 google">
+                            
+                            </div>
+                            @*   <img src="/images/icon-google-news.png" />*@
+                        </a>
+                        <a class="icon" href="https://twitter.com/share?url=@(Html.ViewContext.RequestContext.HttpContext.Request.Url)&via=TWITTER_HANDLE&text=TEXT"
+                           onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+                           target="_blank" title="Share on Twitter">
+                            <div class="col-sm-4 twitter" >
+                            
+                            </div>
+                            @* <img src="/images/icon-twitter-news.png" />*@
+                        </a>
+                    </div>     
+                </div>                   
+            </div>
+
+            <div>
+                @if (Model.ListNewsImage.Count > 0 && Model.ListNewsImage != null)
+                {
+                    if (Model.ListNewsImage.Count == 1)
+                    {
+                        foreach (var image in Model.ListNewsImage)
+                        {
+                            <img class="img-slide" src="@image.NewsImageUrl" alt=""/>
+                        }
+                    }
+                    else
+                    {
+                        <ul class="bxslider">
+                        
+                            @foreach (var image in Model.ListNewsImage)
+                            {
+                                <li><img src="@image.NewsImageUrl" alt=""/></li>
+                            }
+                        
+                        </ul>
+
+                        <div class="bx-pager" id="bx-pager" style="">
+                            @{
+                                var count = 0;
+                                foreach (var image in Model.ListNewsImage)
+                                {
+                                    <a data-slide-index="@count" href="" onclick=" activeimg() ">
+                                        <img class="img-thumbnail" src="@image.NewsImageUrl" alt=""/>
+                                    </a>
+                                    count++;
+                                }
+                            }
+                        </div>                  
+                    }
+                }
+            </div>
+            <div class="btn-wrap row">
+                <div class="news-description2">
+                    <a class="icon fontSizePlus" title="Facebook" href="#">
+                        A +
+                    </a>
+                </div>
+
+                <div class="news-description2">
+                    <a class="icon fontSizeMinus" title="Facebook" href="#">
+                        A -
+                    </a>
+                </div>
+            </div>
+
+            <div class="newsdetail intro">
+                
+                @MvcHtmlString.Create(Model.NewsBody)
+            </div>
+            @if (othernews != null && othernews.Count > 0)
+            {
+                var count = 1;
+                foreach (var item in othernews)
+                {
+                    if (count == 1)
+                    {
+                            <div class="col-sm-12 news-pre">
+                                <div class="col-sm-3 pre">
+                                    @("Tin trước".HtmlItemString("news_detail", "pre"))
+                                </div>
+                                <div class="col-sm-9 pre-title">
+                                    <a href="@Url.Action("Detail", "News", new { category = cate.NewsCategoryShortName, shortname = item.NewsShortName, newsid = item.NewsId })">
+                                    @item.NewsTitle.SubstringSummary(65)
+                                        </a>
+                                </div>
+                            </div>
+                    }
+                    else if (count == 2)
+                    {
+                            <div class="col-sm-12 news-next">
+                                <div class="col-sm-3 next">
+                                     @("Tin tiếp".HtmlItemString("news_detail", "next"))
+                                </div>
+                                <div class="col-sm-9 next-title">
+                                     <a href="@Url.Action("Detail", "News", new { category = cate.NewsCategoryShortName, shortname = item.NewsShortName, newsid = item.NewsId })">
+                                    @item.NewsTitle.SubstringSummary(65)
+                                         </a>
+                                </div>
+                            </div>
+                    }
+                    count++;
+                }
+            }
+        </div>
+        
+        <div class="news-other">
+            <div class="title">
+                 @("Tin cùng thư mục".HtmlItemString("news_detail", "other"))
+            </div>
+            @if (listother != null)
+            {
+                foreach (var newsother in listother)
+                {
+                    <div class="other col-sm-12">
+                        <a href="@Url.Action("Detail", "News", new { category = cate.NewsCategoryShortName, shortname = newsother.NewsShortName, newsid = newsother.NewsId })">
+                            @*<img src="@newsother.NewsImage"  /> *@
+                            <div class="focuspoint img-news-other"
+                                 data-focus-x="0"
+                                 data-focus-y="0"
+                                 data-image-w=""
+                                 data-image-h="">
+                                <img src="@newsother.NewsImage" alt="@newsother.NewsTitle.SubstringSummary(90)" />
+                            </div>
+
+                        </a>
+                        <div class="newstitle">
+                            <a href="@Url.Action("Detail", "News", new { category = cate.NewsCategoryShortName, shortname = newsother.NewsShortName, newsid = newsother.NewsId })">
+                                @newsother.NewsTitle.SubstringSummary(60)
+                                 
+                            </a>
+                            <div class="tag">@newsother.CompanyName | @newsother.CreateDate.ToString("dd/MM/yyy")</div>                        
+                        </div>
+                    </div>
+  
+                }
+            }
+        </div>
+        <div class="col-sm-6 col-md-12" style="padding: 0">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        
+                        <a href="@Url.Action("index", "home")">
+                            <i class="ace-icon fa fa-home fa-lg home-icon"></i>
+                        </a>
+                    </li>
+                    <li ><a href="@Url.Action("Index", "News")"  >@("Tin tức".HtmlItemString("navbar", "news"))</a></li>
+                    <li ><a  href="@Url.Action("IndexCategory", "News", new { id = Model.NewsCategoryId, shortname = Model.NewsCategoryShortName, page = 0 })">@Model.NewsCategoryTitle</a></li>
+                    <li class="active" >@Model.NewsTitle.SubstringSummary(50)</li>
+                </ul>      
+            </div>
+        </div>
+    </div> 
+</div>
+ 
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-55cd55d21c8387b6" async="async"></script>
+
+             
+<script type='text/javascript' src='jquery-1.4.min.js'></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //min font size
+        var min = 12;
+        //max font size
+        var max = 26;
+        //grab the default font size
+        var reset = $('.intro').css('fontSize');
+        var elm = $('.intro, .intro');
+        var size = str_replace(reset, 'px', '');
+        //Tăng kích thước chữ
+        $('a.fontSizePlus').click(function () {
+            if (size <= max) {
+                size++;
+                elm.css({ 'fontSize': size });
+            }
+            return false;
+        });
+        //Giảm kích thước chữ
+        $('a.fontSizeMinus').click(function () {
+            if (size >= min) {
+                size--;
+                elm.css({ 'fontSize': size });
+            }
+            return false;
+        });
+        //Cỡ chữ mặc định
+        $('a.fontReset').click(function () {
+            elm.css({ 'fontSize': reset });
+        });
+    });
+    //A string replace function
+    function str_replace(haystack, needle, replacement) {
+        var temp = haystack.split(needle);
+        return temp.join(replacement);
+    }
+</script>
+@if (Model.ListNewsImage.Count > 0 && Model.ListNewsImage != null)
+{
+    <script>
+        $('.bxslider').bxSlider({
+            pagerCustom: '#bx-pager'
+        });
+    </script>
+}
+@if (Model.ListNewsImage.Count > 4)
+{
+    <script>
+        $(document).ready(function() {
+            //cbpAnimatedHeader();
+            $('.bx-pager').bxSlider({
+                auto: false,
+                slideWidth: 130,
+                minSlides: 4,
+                maxSlides: 4,
+                slideMargin: 7,
+                infiniteLoop: false,
+            });
+        });
+    </script>
+}
+
+

@@ -1,0 +1,190 @@
+﻿@model CompanyCate
+@{
+    if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+    {
+        ViewBag.Title = "Sửa Lĩnh vực hoạt động";
+    }
+    else
+    {
+        ViewBag.Title = "Thêm mới Lĩnh vực hoạt động";
+    }
+        
+}
+
+<div class="main-content-inner">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="@Url.Action("index", "home")">Home</a>
+            </li>
+            <li><a href="@Url.Action("SearchCate", "Company")">Danh sách lĩnh vực hoạt động</a></li>
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+                <li class="active">Edit @Model.CompanyCateId</li>
+            }
+            else
+            {
+                <li class="active">Tạo mới Lĩnh vực hoạt động</li>
+            }
+        </ul>
+        <!-- /.breadcrumb -->
+
+        
+    </div>
+
+    <div class="page-content">
+
+
+        <div class="page-header">
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+                <h1>Sửa Lĩnh vực hoạt động id @Model.CompanyCateId
+
+                </h1>
+            }
+            else
+            {
+                <h1>Tạo mới Lĩnh vực hoạt động
+
+                </h1>
+            }
+        </div>
+        <!-- /.page-header -->
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "manageForm", @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+                            {
+                                @Html.HiddenFor(mbox => mbox.CompanyCateId)
+                            }
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyCateName">Tên lĩnh vực:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="CompanyCateName" id="CompanyCateName" class="col-xs-12 col-sm-6" value="@Model.CompanyCateName" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyCateImage">Ảnh (985x300):</label>
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        @Html.TextBoxFor(model => model.CompanyCateImage)
+                                        @Html.Partial("FileManagerButton", "CompanyCateImage") 
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyCateImage"></label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        @if (Model.CompanyCateImage != null)
+                                        {
+                                            <img  src="@Model.CompanyCateImage" width="493" height="150" alt="" />
+                                        }
+                                        else
+                                        {
+                                            <img  src="~/Images/noimage.png" width="90" height="90" alt="" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyCateIcon">Ảnh icon:</label>
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        @Html.TextBoxFor(model => model.CompanyCateIcon)
+                                        @Html.Partial("FileManagerButton", "CompanyCateIcon") 
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyCateIcon"></label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        @if (Model.CompanyCateIcon != null)
+                                        {
+                                            <img  src="@Model.CompanyCateIcon" width="50" height="50" alt="" />
+                                        }
+                                        else
+                                        {
+                                            <img  src="~/Images/noimage.png" width="50" height="50" alt="" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="OrderNo">Thứ tự:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="number" name="OrderNo" id="OrderNo" class="col-xs-12 col-sm-1" value="@Model.OrderNo" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @{var checkhot = Model.IsHotCompanyCate ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsHotCompanyCate">Trạng thái:</label>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="IsHotCompanyCate" type="checkbox" class="ace" value="true" @checkhot>
+                                                        
+                                        <span class="lbl"> Lĩnh vực nổi bật</span>
+                                        <input name="IsHotCompanyCate" type="hidden" value="false" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @{var check = Model.IsActive ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsActive">Trạng thái:</label>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="IsActive" type="checkbox" class="ace" value="true" @check>
+                                                        
+                                        <span class="lbl"> Ẩn/Hiện lĩnh vực</span>
+                                        <input name="IsActive" type="hidden" value="false" />
+                                    </label>
+                                </div>
+                            </div>
+                            <input type="submit" class="btn btn-success" value="Lưu" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>
+
+<script type="text/javascript">
+    $('textarea[class*=autosize]').autosize({ append: "\n" });
+    $('textarea.limited').inputlimiter({
+        remText: '%n character%s remaining...',
+        limitText: 'max allowed : %n.'
+    });
+</script>
+
+<script type="text/javascript">
+    setAdminCurrentUrl('@Url.Action("SearchCate", "Company")');
+</script>
+@section Scripts {
+	<script src="~/scripts/tinymce/tiny_mce.js"></script>
+
+}

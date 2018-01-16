@@ -1,0 +1,199 @@
+﻿@model Library
+@{
+    if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+    {
+        ViewBag.Title = "Sửa Video";
+    }
+    else
+    {
+        ViewBag.Title = "Thêm mới Video";
+    }
+        
+}
+
+<div class="main-content-inner">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="@Url.Action("index", "home")">Home</a>
+            </li>
+            <li><a href="@Url.Action("SearchVideo", "Library")">Danh sách Video</a></li>
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+                <li class="active">Edit @Model.LibraryId</li>
+            }
+            else
+            {
+                <li class="active">Tạo mới Video</li>
+            }
+        </ul>
+        <!-- /.breadcrumb -->
+
+        
+    </div>
+
+    <div class="page-content">
+
+
+        <div class="page-header">
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+            <h1>Sửa mục Video id @Model.LibraryId
+
+            </h1>
+            }
+            else
+            {
+                <h1>Tạo mới Video
+
+            </h1>
+            }
+        </div>
+        <!-- /.page-header -->
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "manageForm", @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+                            {
+                            @Html.HiddenFor(mbox => mbox.LibraryId)
+                            }                        
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="LibraryTitle">Tên Video:</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                    @*    <input type="text" name="VideoTitle" id="VideoTitle" class="col-xs-12 col-sm-6" value="@Model.VideoTitle" />*@
+                                        <textarea class="form-control limited autosize-transition" required id="LibraryTitle" name="LibraryTitle" maxlength="250">@Model.LibraryTitle</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="NewsTag">Đơn vị thành viên</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        @if(Culture=="vi-VN")
+                                        {
+                                            @Html.DropDownListDefault("CompanyId", ViewData.Get<SelectList>("ListCompany"), "24", "Tập Đoàn Thành Công")
+                                        }
+                                        else
+                                        {
+                                             @Html.DropDownListDefault("CompanyId", ViewData.Get<SelectList>("ListCompany"), "2", "Thanh Cong Group")
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="LibraryDescription">Mô tả:</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                  @*      <input type="text" name="VideoDescription" id="VideoDescription" class="col-xs-12 col-sm-6" value="@Model.VideoDescription" />*@
+                                          <textarea class="form-control limited autosize-transition" required id="LibraryDescription" name="LibraryDescription" maxlength="250">@Model.LibraryDescription</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="LibraryKeyword">Keyword:</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                    @*    <input type="text" name="VideoKeyword" id="VideoKeyword" class="col-xs-12 col-sm-6" value="@Model.VideoKeyword" />*@
+                                          <textarea class="form-control limited autosize-transition" required id="LibraryKeyword" name="LibraryKeyword" maxlength="250">@Model.LibraryKeyword</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="LibraryUrl">Đường dẫn:</label>
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="LibraryUrl" id="LibraryUrl" class="col-xs-12 col-sm-6" value="@Model.LibraryUrl" required />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="OrderNo">Thứ tự:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="number" name="OrderNo" id="OrderNo" class="col-xs-12 col-sm-1" value="@Model.OrderNo" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                 @{
+                                     var checkall = "";
+                                     if (Model.CompanyId == 999999999)
+                                   {
+                                       checkall = "checked";
+
+                                   }
+
+                                 }
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsAll">Video cho tất cả:</label>
+
+                                 <div class="checkbox">
+                                     <label>
+                                         <input name="IsAll" type="checkbox" class="ace" value="true" @checkall>
+                                                        
+                                         <span class="lbl"> </span>
+                                         <input name="IsAll" type="hidden" value="false" />
+                                     </label>
+                                 </div>
+                            </div>
+                             <div class="form-group">
+                                 @{var checkhot = Model.IsHotLibrary ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsHotLibrary">Video nổi bật:</label>
+
+                               <div class="checkbox">
+													<label>
+														<input name="IsHotLibrary" type="checkbox" class="ace" value="true" @checkhot>
+                                                        
+														<span class="lbl"> </span>
+                                                        <input name="IsHotLibrary" type="hidden" value="false" />
+													</label>
+												</div>
+                            </div>
+                             <div class="form-group">
+                                 @{var check = Model.IsActive ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsActive">Trạng thái:</label>
+
+                               <div class="checkbox">
+													<label>
+														<input name="IsActive" type="checkbox" class="ace" value="true" @check>
+                                                        
+														<span class="lbl"> Ẩn/Hiện</span>
+                                                        <input name="IsActive" type="hidden" value="false" />
+													</label>
+												</div>
+                            </div>
+                            <input type="submit" class="btn btn-success" value="Lưu" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>
+<script type="text/javascript">
+    $('textarea[class*=autosize]').autosize({ append: "\n" });
+    $('textarea.limited').inputlimiter({
+        remText: '%n character%s remaining...',
+        limitText: 'max allowed : %n.'
+    });
+</script>
+
+<script type="text/javascript">
+    setAdminCurrentUrl('@Url.Action("SearchVideo", "Library")');
+</script>
+@section Scripts {
+	<script src="~/scripts/tinymce/tiny_mce.js"></script>
+
+}

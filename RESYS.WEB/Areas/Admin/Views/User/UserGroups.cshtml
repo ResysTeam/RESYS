@@ -1,0 +1,15 @@
+﻿@model SysUser
+
+@{
+	var alist = ViewBag.AllGroups as List<SysGroup>;
+
+	var list = (Model != null && Model.Groups != null) ? Model.Groups : new List<SysGroup>();
+	
+}
+<div style="padding:10px; border:solid 1px #efefef;">
+@foreach(var p in alist)
+{
+	bool ok = list.Exists(o=>o.Code==p.Code);	
+	<input @(ok?" checked":"") type="checkbox" id= "group_@p.Code" name="group_@p.Code" value="true"/> <label  for="group_@p.Code">@p.Name &nbsp;&nbsp;<font style="color:#ccc;">[@p.Code]</font></label> <br />
+}
+	</div>

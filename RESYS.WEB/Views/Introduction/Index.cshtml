@@ -1,0 +1,144 @@
+﻿
+@{
+    var listintroduction = ViewBag.ListIntroduction as List<Introduction>;
+}
+<div class="introdution" @("introduction".EditHtmlItem()) >
+     <div class="title"  >
+          @("Giới thiệu chung".HtmlItemString("introduction", "title"))
+     </div>  
+    <div class="container introdution-content">
+        <div class="body">
+            @if(listintroduction !=null)
+            {
+                var count = 1;
+                foreach (var item in listintroduction)
+                {
+                    if (count == 1)
+                    {
+                        <div class="col-sm-12 introduction1">
+                            @if (item.IntroductionShortName == "qua-trinh-phat-trien")
+                            {
+                                <a href="@Url.Action("Develop", "Introduction")">
+                                    <div class="title">
+                                        @item.IntroductionName
+                                    </div>
+                                    <img class=""src="@item.IntroductionImage"/>
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Introduction", "Introduction", new {shortname = item.IntroductionShortName, id = item.IntroductionId})">
+                                    <div class="title">
+                                        @item.IntroductionName
+                                    </div>
+                                    <img class=""src="@item.IntroductionImage"/>
+                                </a>
+                            }
+                            <div class=" description">
+                                <h1>@item.IntroductionTitle</h1>
+                                <h2>@item.IntroductionDescription</h2>
+                            </div>
+                        </div>
+                    }
+                    else if (count == listintroduction.Count)
+                    {
+                        <div class="col-sm-12 introduction1" style="margin-bottom: 0">
+                            
+                            @if (item.IntroductionShortName == "qua-trinh-phat-trien")
+                            {
+                                <a href="@Url.Action("Develop", "Introduction")">
+                                    <div class="title" style="text-align: left;border-top: 1px solid #E0E0E0;">
+                                        @item.IntroductionName
+                                    </div>
+                                    <img class=""src="@item.IntroductionImage" style="float:right" />
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Introduction", "Introduction", new {shortname = item.IntroductionShortName, id = item.IntroductionId})">
+                                    <div class="title" style="text-align: left;border-top: 1px solid #E0E0E0;">
+                                        @item.IntroductionName
+                                    </div>
+                                    <img class=""src="@item.IntroductionImage" style="float:right"/>
+                                </a>
+                            }
+                            <div class=" description" style="float: left;padding: 40px;border-bottom: none;">
+                                <h1>@item.IntroductionTitle</h1>
+                                <h2>@item.IntroductionDescription</h2>
+                            </div>                            
+                        </div>
+                    }
+                    else
+                    {
+                        if ((count%2) == 0)
+                        {
+                            <div class="col-sm-6 introduction2" style="padding-right: 7px;">
+                                @if (item.IntroductionShortName == "qua-trinh-phat-trien")
+                                {
+                                    <a href="@Url.Action("Develop", "Introduction")">
+                                        <img class=""src="@item.IntroductionImage"/>
+                                        <div class="title">
+                                            @item.IntroductionName
+                                        </div>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Introduction", "Introduction", new {shortname = item.IntroductionShortName, id = item.IntroductionId})">
+                                        <img class=""src="@item.IntroductionImage"/>
+                                        <div class="title">
+                                            @item.IntroductionName
+                                        </div>
+                                    </a>
+                                }
+                                <div class=" description">
+                                    <h2>@item.IntroductionDescription</h2>
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="col-sm-6 introduction2" style="padding-left: 7px;">
+                                @if (item.IntroductionShortName == "qua-trinh-phat-trien")
+                                {
+                                    <a href="@Url.Action("Develop", "Introduction")">
+                                        <img class=""src="@item.IntroductionImage"/>
+                                        <div class="title">
+                                            @item.IntroductionName
+                                        </div>
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Introduction", "Introduction", new {shortname = item.IntroductionShortName, id = item.IntroductionId})">
+                                        <img class=""src="@item.IntroductionImage"/>
+                                        <div class="title">
+                                            @item.IntroductionName
+                                        </div>
+                                    </a>
+                                }
+                                <div class=" description">
+                                    <h2>@item.IntroductionDescription</h2>
+                                </div>
+                            </div>
+                        }
+                    }
+                    count++;
+                }
+            }
+        </div>
+        <div class="col-sm-6 col-md-12" style="padding: 0">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        
+                        <a href="@Url.Action("index", "home")">
+                            <i class="ace-icon fa fa-home fa-lg home-icon"></i>
+                        </a>
+                    </li>
+                    <li class="active">@("Giới thiệu chung".HtmlItemString("navbar", "introduction"))</li>
+                </ul>      
+            </div>
+        </div>
+    </div>
+</div>

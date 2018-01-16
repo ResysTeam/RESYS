@@ -1,0 +1,29 @@
+﻿@model Introduction
+@{
+    //var listyear = ViewBag.ListYear as List<DevelopYear>;
+}
+<div class="introdution" style="background:url(@Model.IntroductionBackground)  center top no-repeat;background-size: contain; ">
+    <div class="title" >
+        @MvcHtmlString.Create(Model.IntroductionBanner)
+    </div>  
+    <div class="container introdution-content" >
+        <div class="body" style="padding-bottom:20px">
+           @MvcHtmlString.Create(Model.IntroductionBody)  
+        </div>
+           
+        <div class="col-sm-6 col-md-12" style="padding: 0">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        
+                        <a href="@Url.Action("index", "home")">
+                            <i class="ace-icon fa fa-home fa-lg home-icon"></i>
+                        </a>
+                    </li>
+                    <li><a href="@Url.Action("Index","Introduction")">@("Giới thiệu chung".HtmlItemString("navbar", "introduction"))</a></li>
+                    <li class="active">@Model.IntroductionName.SubstringSummary(40)</li>
+                </ul>      
+            </div>
+        </div>
+    </div>
+</div>

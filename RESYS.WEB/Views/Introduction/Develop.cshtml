@@ -1,0 +1,258 @@
+﻿
+@using RESYS.BIZ.Services
+@model Introduction
+@{
+    var listyear = ViewBag.ListYear as List<DevelopYear>;
+    //int year = DateTime.Today.Year;
+    int n = 0; 
+}
+<div class="introdution" @("history".EditHtmlItem()) style="background:url(@Model.IntroductionBackground) center top no-repeat;background-size: contain ">
+     <div class="title" >
+           @MvcHtmlString.Create(Model.IntroductionBanner)
+     </div>  
+    <div class="container introdution-content" >
+        <div class="body" style="background: transparent">
+            <div class="container slide-list-year">
+                @if (listyear != null && listyear.Count>0)
+                {
+                    @*<div class="col-xs-2 year-sta">
+                        <a data-slide-index="0" href="">
+                            @listyear[0].DevelopYearName
+                        </a>
+                    </div>                  
+                    *@
+                    <div class="col-xs-12 no-padding">
+                        <ul class="bx-pager1" id="bx-pager" style="">
+                            @{
+                                var count = 0;
+                                foreach (var itemyear in listyear)
+                                {
+                                    if (count == 0)
+                                    {
+                                        <li>
+                                            <a data-slide-index="@count" href="" >
+                                                @itemyear.DevelopYearName                                            
+                                            </a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a data-slide-index="@count" href="" >
+                                                @itemyear.DevelopYearName                                            
+                                            </a>
+                                        </li>
+                                    }
+                                    count++;
+                                }
+                                
+                            }
+
+                            @* @{
+                                var count = 1;
+                                for (var i = 1; i < listyear.Count-1;i++ )
+                                {
+                                    if (listyear.Count > 7)
+                                    {
+                                        if (count == 5)
+                                        {
+                                            <li>
+                                                <a data-slide-index="@count" href="">
+                                                    @listyear[i].DevelopYearName                                            
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a >
+                                                    ...                                     
+                                                </a>
+                                            </li>                               
+                                        }
+                                        else
+                                        {
+                                            <li>
+                                                <a data-slide-index="@count" href="">
+                                                    @listyear[i].DevelopYearName                                            
+                                                </a>
+                                            </li>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <li>
+                                            <a data-slide-index="@count" href="">
+                                                @listyear[i].DevelopYearName                                            
+                                            </a>
+                                        </li>                               
+                                    }
+                                    count++;
+                                }
+                            }  *@ 
+                                                 
+                        </ul>
+                    </div>
+                    
+                    @*<div class="col-xs-2 year-fin">
+                        <a data-slide-index="@(listyear.Count - 1)" href="">
+                            @listyear[listyear.Count - 1].DevelopYearName
+                        </a>
+                    </div>*@
+                    
+                }
+            </div>
+            <div class=" slide-item-year">
+                <ul class="bxslider">
+                    @if (listyear != null)
+                    {
+                        foreach (var itemyear in listyear)
+                        {
+                            <li>
+                                <div class="item-year" style="height: 366px">
+                                    @if (!string.IsNullOrEmpty(itemyear.DevelopYearBg))
+                                    {
+                                        <img src="@itemyear.DevelopYearBg" alt="@itemyear.DevelopYearName"/>
+                                    }
+                                    else
+                                    {
+                                        <div style="border-bottom:1px #e5e5e5 solid;line-height: 365px">
+                                            @itemyear.DevelopYearName
+                                        </div>   
+                                    }
+                                </div>
+
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+            
+            <div class=" slide-item-year">
+                <ul class="bxslider">
+                    @if (listyear != null)
+                    {
+                        foreach (var itemyear in listyear)
+                        {
+                            var listmonth = ServiceFactory.DevelopMonthManager.GetByYearActive(itemyear.DevelopYearId, Culture);
+                            <div class="list-month">
+                                @if (listmonth.Count > 0)
+                                {
+                                    foreach (var itemmonth in listmonth)
+                                    {
+                                        <div class="row item-month">
+                                            <div class="col-sm-3 month-name">
+                                                @if (Culture == "en-US")
+                                                {
+
+                                                    if (itemmonth.DevelopMonthName == 1)
+                                                    {
+                                                        <p>January</p>
+                                                    }
+                                                    if (itemmonth.DevelopMonthName == 2)
+                                                    {
+                                                        <p>February</p>
+                                                    }
+                                                    if (itemmonth.DevelopMonthName == 3)
+                                                    {
+                                                        <p>March</p>
+                                                    }
+                                                    if (itemmonth.DevelopMonthName == 4)
+                                                    {
+                                                        <p>April</p>
+                                                    }
+                                                    if (itemmonth.DevelopMonthName == 5)
+                                                    {
+                                                        <p>May</p>
+                                                    }
+                                                    if (itemmonth.DevelopMonthName == 6)
+                                                    {
+                                                        <p>June</p>
+                                                    }
+                                                    if (itemmonth.DevelopMonthName == 7)
+                                                    {
+                                                        <p>July</p>
+                                                    }
+                                                    if (itemmonth.DevelopMonthName == 8)
+                                                    {
+                                                        <p>August</p>
+                                                    }
+                                                    if (itemmonth.DevelopMonthName == 9)
+                                                    {
+                                                        <p>September</p>
+                                                    }
+                                                    if (itemmonth.DevelopMonthName == 10)
+                                                    {
+                                                        <p>October</p>
+                                                    
+                                                    } if (itemmonth.DevelopMonthName == 11)
+                                                    {
+                                                        <p>November</p>
+                                                    }
+                                                    if (itemmonth.DevelopMonthName == 12)
+                                                    {
+                                                        <p>December</p>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    <p>@("Tháng".HtmlItemString("history", "month"))&nbsp;@itemmonth.DevelopMonthName</p>
+                                                }
+                                                                                      
+                                            </div>
+                                            <div class="col-sm-3 month-title">
+                                                @itemmonth.DevelopMonthTitle                                   
+                                            </div>
+                                            <div class="col-sm-6">
+                                                @itemmonth.DevelopMonthDescription                                   
+                                            </div>
+                                        </div>
+                                    }
+
+                                }
+                                else
+                                {
+                                    <div>
+                                     &nbsp;
+                                    </div>
+                                }
+                            </div>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+           
+        <div class="col-sm-6 col-md-12" style="padding: 0" >
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb" >
+                    <li>
+                        
+                        <a href="@Url.Action("index", "home")">
+                            <i class="ace-icon fa fa-home fa-lg home-icon"></i>
+                        </a>
+                    </li>
+                    <li><a href="@Url.Action("Index", "Introduction")">@("Giới thiệu chung".HtmlItemString("navbar", "introduction"))</a></li>
+                    <li class="active">@Model.IntroductionName</li>
+                </ul>      
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $('.bxslider').bxSlider({
+        pagerCustom: '#bx-pager',
+        adaptiveHeight: true
+    });
+    
+    $(document).ready(function () {
+        //cbpAnimatedHeader();
+        $('.bx-pager1').bxSlider({
+            auto: false,
+            slideWidth: 200,
+            minSlides: 7,
+            maxSlides: 7,
+            slideMargin: 10,
+            infiniteLoop: false,
+            
+        });
+    });
+
+</script>

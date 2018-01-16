@@ -1,0 +1,292 @@
+﻿@model Company
+@{
+    var listnews = ViewData["ListNews"] as List<News>;
+    var listlibrary = ViewData["ListLibrary"] as List<Album>;
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        
+        $('.focuspoint').focusPoint();
+    });
+</script>
+<style>
+    .fancybox-opened .fancybox-title {
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+<div class="company" style="background:url(@Model.CompanyBackground)  center top no-repeat; background-size: contain ">
+    <div class="title" >
+        @MvcHtmlString.Create(Model.CompanyBanner)
+    </div>  
+    <div class="container company-content" >
+        <div class="body" style="">
+            <div class="header-company col-sm-12">
+                <div class="col-sm-2 logo-company">
+                    <img src="@Model.CompanyLogo" />
+                </div> 
+                <div class="col-sm-6 address-company">
+                    @MvcHtmlString.Create(Model.CompanyAddress)  
+                </div>
+                <div class="col-sm-4 contact-company">
+                    <div class="col-sm-12 web" ><a href="@Model.CompanyWeb" target="_blank"><h3>@Model.CompanyWeb</h3></a></div>
+                    <div class="col-sm-12 phone">@Model.CompanyContact</div>
+                    <div class="col-sm-12 icon">
+                        <ul >
+                            @if (Model.CompanyTwitter != null)
+                            {
+                                <li>
+                                    <a href="@Model.CompanyTwitter">
+                                        <img src="/Images/icon-company-twitter.png"class=""  />
+                                    </a>
+                                </li>
+                            }
+                            @if (Model.CompanyFace != null)
+                            {
+                                <li><a href="@Model.CompanyFace">
+                                        <img src="/Images/icon-company-face.png" class=""  />
+                                    </a>
+                                </li>
+                            }
+                            @if (Model.CompanyGoogle != null)
+                            {
+                                <li>
+                                    <a href="@Model.CompanyGoogle">
+                                        <img src="/Images/icon-company-google.png" class=""  />     
+                                    </a>
+                                </li>
+                            }
+                            @if (Model.CompanyYoutube != null)
+                            {
+                                <li>
+                                    <a href="@Model.CompanyYoutube">
+                                        <img src="/Images/icon-company-youtube.png" class=""  />   
+                                    </a>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            @MvcHtmlString.Create(Model.CompanyBody)  
+        </div>
+        @if (listnews != null && listnews.Count > 0)
+        {
+                <div class="list-news">
+                    <h2>
+                        <a href="@Url.Action("NewsTag", "News", new { id = 0, shortname = Model.CompanyShortName, page = 0 })" target="_blank">
+                            @("Tin tức".HtmlItemString("navbar", "news"))
+                        </a>
+                    </h2>
+                    <ul>           
+                        @foreach (var itemnews in listnews)
+                        {
+                            <li> <a href="@Url.Action("Detail", "News", new { category = itemnews.NewsCategoryShortName, shortname = itemnews.NewsShortName, newsid = itemnews.NewsId })" target="_blank">
+                                     @*<img src="@itemnews.NewsImage"/>*@
+                                     <div class="focuspoint img-news-company"
+                                          data-focus-x="0"
+                                          data-focus-y="0"
+                                          data-image-w=""
+                                          data-image-h="">
+                                         <img src="@itemnews.NewsImage" alt="@itemnews.NewsTitle.SubstringSummary(75)" />
+                                     </div>
+
+                                     <h4>@itemnews.NewsPublishDate</h4>
+                                     <h3>@itemnews.NewsTitle.SubstringSummary(55)</h3>
+                                 </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+        }
+        @if (listlibrary != null && listlibrary.Count > 0)
+        {
+            var count = 1;
+            var countlist = listlibrary.Count;
+            <div class="list-library">
+                <h2>
+                    <a href="@Url.Action("Index", "Album", new { shortname = Model.CompanyShortName, page = 0 })" target="_blank">
+                        @("Thư viện".HtmlItemString("navbar", "library"))
+                    </a>
+                </h2>
+                <ul>
+                    @if (countlist == 1)
+                    {
+                        <li class="itemvideo col-xs-6 no-padding txt" id="txt-@count">
+                            @if (listlibrary[0].IsVideo)
+                            {
+                                if (!String.IsNullOrEmpty(listlibrary[0].AlbumUrl))
+                                {
+                                    System.Text.RegularExpressions.Regex YoutubeVideoRegex =
+                                        new System.Text.RegularExpressions.Regex(@"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                    System.Text.RegularExpressions.Match youtubeMatch = YoutubeVideoRegex.Match(listlibrary[0].AlbumUrl);
+                                    if (youtubeMatch.Success)
+                                    {
+                                        var id = youtubeMatch.Groups[1].Value;
+                                        <a class="" href="javascript:" onclick=" LoadAlbum('@listlibrary[0].AlbumId', '@count', '', '', '@countlist', '@Model.CompanyId') " title="@listlibrary[0].AlbumDescription">
+                                            <div class="focuspoint img-video" data-focus-x="0" data-focus-y="0" data-image-w="" data-image-h="">
+                                                <img  id="@id" src="https://i.ytimg.com/vi/@id/mqdefault.jpg" />
+                                            </div>
+
+                                            <img class="background-video" src="/Images/background-video.png" />
+                                            <h4>@listlibrary[0].CreateDate</h4>
+                                            <h3>@listlibrary[0].AlbumTitle.SubstringSummary(55)</h3>                                                        
+                                        </a>
+                                    }
+                                }
+                            }
+                            else
+                            {
+                                <a class="" href="javascript:" onclick=" LoadAlbum('@listlibrary[0].AlbumId', '@count', '', '', '@countlist', '@Model.CompanyId') " title="@listlibrary[0].AlbumDescription">
+                                    <img src="@listlibrary[0].AlbumUrl" />
+                                    <h4>@listlibrary[0].CreateDate</h4>
+                                    <h3>@listlibrary[0].AlbumTitle.SubstringSummary(55)</h3>         
+                                </a>
+                            }
+                        </li>
+                        
+                    }
+                    else
+                    {
+                        foreach (var itemlibrary in listlibrary)
+                        {
+                            if (count == 1)
+                            {
+                                <li class="itemvideo col-xs-6 no-padding txt" id="txt-@count">
+                                    @if (itemlibrary.IsVideo)
+                                    {
+                                        if (!String.IsNullOrEmpty(itemlibrary.AlbumUrl))
+                                        {
+                                            System.Text.RegularExpressions.Regex YoutubeVideoRegex =
+                                                new System.Text.RegularExpressions.Regex(@"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                            System.Text.RegularExpressions.Match youtubeMatch = YoutubeVideoRegex.Match(itemlibrary.AlbumUrl);
+                                            if (youtubeMatch.Success)
+                                            {
+                                                var id = youtubeMatch.Groups[1].Value;
+                                                <a class="" href="javascript:" onclick=" LoadAlbum('@listlibrary[0].AlbumId', '@count', '', '@listlibrary[1].AlbumId', '@countlist', '@Model.CompanyId') " title="@itemlibrary.AlbumDescription">
+                                                    <div class="focuspoint img-video" data-focus-x="0" data-focus-y="0" data-image-w="" data-image-h="">
+                                                        <img  id="@id" src="https://i.ytimg.com/vi/@id/mqdefault.jpg" />
+                                                    </div>
+
+                                                    <img class="background-video" src="/Images/background-video.png" />
+                                                    <h4>@itemlibrary.CreateDate</h4>
+                                                    <h3>@itemlibrary.AlbumTitle.SubstringSummary(55)</h3>                                                        
+                                                </a>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a class="" href="javascript:" onclick=" LoadAlbum('@listlibrary[0].AlbumId', '@count', '', '@listlibrary[1].AlbumId', '@countlist', '@Model.CompanyId') " title="@itemlibrary.AlbumDescription">
+                                            <img src="@itemlibrary.AlbumUrl" />
+                                            <h4>@itemlibrary.CreateDate</h4>
+                                            <h3>@itemlibrary.AlbumTitle.SubstringSummary(55)</h3>         
+                                        </a>
+                                    }
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="itemvideo col-xs-6 no-padding txt" id="txt-@count">
+                                    @if (itemlibrary.IsVideo)
+                                    {
+                                        if (!String.IsNullOrEmpty(itemlibrary.AlbumUrl))
+                                        {
+                                            System.Text.RegularExpressions.Regex YoutubeVideoRegex =
+                                                new System.Text.RegularExpressions.Regex(@"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                            System.Text.RegularExpressions.Match youtubeMatch = YoutubeVideoRegex.Match(itemlibrary.AlbumUrl);
+                                            if (youtubeMatch.Success)
+                                            {
+                                                var id = youtubeMatch.Groups[1].Value;
+                                                <a class="" href="javascript:" onclick=" LoadAlbum('@listlibrary[1].AlbumId', '@count', '@listlibrary[0].AlbumId', '', '@countlist', '@Model.CompanyId') " title="@itemlibrary.AlbumDescription">
+                                                    <div class="focuspoint img-video" data-focus-x="0" data-focus-y="0" data-image-w="" data-image-h="">
+                                                        <img  id="@id" src="https://i.ytimg.com/vi/@id/mqdefault.jpg" />
+                                                    </div>
+
+                                                    <img class="background-video" src="/Images/background-video.png" />
+                                                    <h4>@itemlibrary.CreateDate</h4>
+                                                    <h3>@itemlibrary.AlbumTitle.SubstringSummary(55)</h3>                                                        
+                                                </a>
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <a class="" href="javascript:" onclick=" LoadAlbum('@listlibrary[1].AlbumId', '@count', '@listlibrary[0].AlbumId', '', '@countlist', '@Model.CompanyId') " title="@itemlibrary.AlbumDescription">
+                                            <img src="@itemlibrary.AlbumUrl" />
+                                            <h4>@itemlibrary.CreateDate</h4>
+                                            <h3>@itemlibrary.AlbumTitle.SubstringSummary(55)</h3>         
+                                        </a>
+                                    }
+                                </li>                             
+                            }
+                            count++;
+                        }
+                    }
+                </ul>
+            </div>
+            <div class="col-xs-12  row-detail" id="rowdetail" style="    margin-top: 20px;">
+            </div>            
+        }          
+        <div class="col-sm-6 col-md-12" style="padding: 0">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        
+                        <a href="@Url.Action("index", "home")">
+                            <i class="ace-icon fa fa-home fa-lg home-icon"></i>
+                        </a>
+                    </li>
+                    <li><a href="@Url.Action("Index", "Company")">@("Đơn vị thành viên".HtmlItemString("navbar", "companycate"))</a></li>
+                    <li class="active">@Model.CompanyName.SubstringSummary(40)</li>
+                </ul>      
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    function CloseAlbum() {
+        $('#rowdetail').html('');
+        $('.txt').each(function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+            }
+        });
+        var x = $('#rowdetail').position().top;
+        $('html, body').animate({ scrollTop: x - 300 }, 800);
+    }
+</script>
+
+<script type="text/javascript">
+    function LoadAlbum(albumid, count, idpre, idnxt, countlist, comid) {
+        var x = $('#rowdetail').position().top;
+        $('html, body').animate({ scrollTop: x-100 }, 800);
+        $('.txt').each(function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+            }
+        });
+        $('#txt-' + count + '').addClass('active');
+
+        var strUrl = '@Url.Action("Detail", "Company")';
+        jQuery.ajax({
+            url: strUrl,
+            data: {
+                albumid: albumid,
+                count: count,
+                idpre: idpre,
+                idnxt: idnxt,
+                countlist: countlist,
+                comid: comid,
+            },
+            dataType: 'html',
+            type: 'get',
+            traditional: true,
+            success: function (data) {
+                $('#rowdetail').html('');
+                $('#rowdetail').html(data);
+                
+            }
+        });
+    }
+</script>

@@ -1,0 +1,504 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+}
+<div class="parallax-flight parallax-home parallaxBg">
+    <div class="container">
+        <div class="row" style="">
+            <div class="col-md-12 ticket-search">
+                <div class="close-content">
+                    <a href="@Url.Action("Index", "Home")">x</a>
+                </div>
+                <ul class="nav nav-tabs" id="searchForm">
+                    <li class="active">
+                        <a data-toggle="tab" href="#vemaybay" aria-expanded="true">Vé máy bay</a>
+                    </li>
+
+                    <li class="">
+                        <a data-toggle="tab" href="#khachsan" aria-expanded="false">Khách sạn</a>
+                    </li>
+
+
+                </ul>
+                <div class="tab-content flight-result">
+                    <div id="vemaybay" class="tab-pane active">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="col-xs-5 flight-pay">
+                                    <div class="row">
+                                        <label>Mã đơn hàng: </label>
+                                        <span class="value">01589595</span>
+                                    </div>
+                                    <div class="row">
+                                        <label>Trạng thái: </label>
+                                        <span class="value">Chờ xác nhận</span>
+                                    </div>
+                                    <div class="row">
+                                        <label>Tổng chi phí: </label>
+                                        <span class="value">15.000.00 đ</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-7 flight-pay">
+                                    <div class="row">
+                                        <label>Người liên hệ: </label>
+                                        <span class="value">Nguyễn Văn A</span>
+                                    </div>
+                                    <div class="row">
+                                        <label>Số điện thoại: </label>
+                                        <span class="value">0123456789</span>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 no-padding">
+                                    <ul>
+                                        <li>
+                                            <div class="col-xs-10 item-pay pay-money item-pay-active no-padding">
+                                                <div class="title-pay">Thanh toán tiền mặt</div>
+                                            </div>
+                                            <a href="javascript:" class="col-xs-2 pay-choice">Chọn
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="col-xs-10 item-pay pay-bank no-padding">
+                                                <div class="title-pay">Thanh toán qua chuyển khoản</div>
+                                            </div>
+                                            <a href="javascript:" class="col-xs-2 pay-choice">Chọn
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <div class="col-xs-10 item-pay pay-card no-padding">
+                                                <div class="title-pay">Thanh toán bằng thẻ</div>
+                                            </div>
+                                            <a href="javascript:" class="col-xs-2 pay-choice">Chọn
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <div class="flight-filter" style="clear: both;">
+
+                                    <div class="row margintop20" style="margin-left: 0; margin-right: 0">
+                                        <div class="col-xs-2 layout-btn-step">
+                                            <a href="javascript:" class="btn-step visited">Tìm chuyến bay</a>
+                                        </div>
+                                        <div class="col-xs-2 layout-btn-step">
+                                            <a href="javascript:" class="btn-step visited">Lựa chọn chuyến bay</a>
+                                        </div>
+                                        <div class="col-xs-2 layout-btn-step">
+                                            <a href="javascript:" class="btn-step visited ">Thông tin khách hàng</a>
+                                        </div>
+                                        <div class="col-xs-2 layout-btn-step">
+                                            <a href="javascript:" class="btn-step active">Thanh toán</a>
+                                        </div>
+                                        <div class="col-xs-4 layout-btn-step">
+                                            <a href="javascript:" class="btn-continue">Tiếp tục</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="infomation-custom">
+                                    <div class="pay-money-info" style="display:block">
+                                    <div class="title">Thanh toán bằng tiền mặt</div>
+                                   <div class="col-lg-12 description">
+                                       <p>Thanh toán bằng tiền mặt tại phòng vé Royalexpress</p>
+                                       <p>Sau khi đặt hàng thành công, Quý khách vui lòng qua văn phòng RoyalExpress để thanh toán và nhận vé. .Chấp nhận tiền mặt hoặc cà thẻ tại văn phòng</p>
+                                       <p>Trụ sở chính  : Phòng 1901, tầng 19, số 27 Huỳnh Thúc Kháng, Đống Đa, Hà Nội         xem bản đồ</p>
+                                       <p>Giao vé  tại nhà</p><p>Nhân viên RoyalExpress sẽ giao vé & thu tiền tại nhà theo địa chỉ Quý khách cung cấp. Với hình thức này, quý khách sẽ mất phí giao vé là 30,000 vnđ</p>
+                                   </div>
+                                  
+                                        </div>
+                                    <div class="pay-bank-info" style="display:block">
+                                    <div class="title">Thanh toán qua chuyển khoản</div>
+                                    <div class="col-lg-12 description">
+                                        <p>
+                                            Quý khách có thể thanh toán cho chúng tôi bằng cách chuyển khoản trực tiếp tại ngân hàng, chuyển qua thẻ ATM, hoặc qua Internet banking.
+                                        </p>
+                                        <p>Lưu ý khi chuyển khoản:</p>
+                                        <p>Khi chuyển khoản, quý khách vui lòng nhập nội dung chuyển khoản là:</p>
+                                        <p>"MDH 635437, Nguyen Van Abc, Noi dung thanh toan”</p>
+                                        <p>
+                                            CÁC TÀI KHOẢN NGÂN HÀNG
+                                        </p>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="row item-bank">
+                                            <div class="col-xs-3">
+                                                <img src="/images/logo-vietcombank.png" class="img-responsive" />
+                                            </div>
+                                            <div class="col-xs-9 info-bank">
+                                                <p>Ngân hàng thương mại cổ phần Ngoại thương Việt Nam - Vietcombank</p>
+                                                <p>Tên tài khoản :  CÔNG TY CỔ PHẦN QUỐC TẾ LONG QUANG</p>
+                                                <p>Số tài khoản :	    0021000257522</p>
+                                                <p>Chi nhánh:	           Hà Nội</p>
+                                            </div>
+                                        </div>
+                                        <div class="row item-bank">
+                                            <div class="col-xs-3">
+                                                <img src="/images/logo-techcombank.png" class="img-responsive" />
+                                            </div>
+                                            <div class="col-xs-9 info-bank">
+                                                <p>Ngân hàng thương mại cổ phần Ngoại thương Việt Nam - Vietcombank</p>
+                                                <p>Tên tài khoản :   CÔNG TY CỔ PHẦN QUỐC TẾ LONG QUANG</p>
+                                                <p>Số tài khoản :	     0021000257522</p>
+                                                <p>Chi nhánh:	           Hà Nội</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                        </div>
+                                    <div class="pay-card-info" >
+                                        <div class="title">Thanh toán qua chuyển khoản</div>
+                                        <div class="col-lg-12 description">
+                                        <p>
+                                            Quý khách có thể thanh toán ngay (trực tuyến) thông qua cổng thanh toán 123Pay. (Có tính phí giao dịch) 
+                                        </p>
+                                       <p>THANH TOÁN TRONG NƯỚC</p>
+                                            <p><img src="/images/listpaycard.png" class="img-responsive"/></p>
+                                            <p>THANH TOÁN QUỐC TẾ</p>
+                                            <p><img src="/images/listpaycard1.png" class="img-responsive"/></p>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div id="khachsan" class="tab-pane">
+                    </div>
+
+
+                </div>
+            </div>
+            <div id="modal-table" class="modal fade" tabindex="-1">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header no-padding">
+                            <div class="table-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                                    <span class="white">&times;</span>
+                                </button>
+                                Vé bay từ Hà Nội đến TP Hồ Chí Minh
+                            </div>
+                        </div>
+
+                        <div class="modal-body">
+                            <table class="table detailflight">
+                                <tbody>
+                                    <tr>
+                                        <td valign="top" style="text-align: left">
+                                            <p>
+                                                Từ <b>Hà Nội</b>, Việt Nam
+                                            </p>
+                                            <p>
+                                                Sân bay
+            : <b>Nội Bài (HAN)</b><br>
+                                            </p>
+                                            <p>
+                                                <!---->
+                                                Giờ bay: <b>23:40</b>, 13/06/2015
+                                            </p>
+                                        </td>
+                                        <td valign="top" style="text-align: left">
+                                            <p>
+                                                tới <b>Hồ Chí Minh</b>, Việt Nam
+                                            </p>
+                                            <p>
+                                                Sân bay
+            : <b>Tân Sơn Nhất (SGN)</b>
+                                            </p>
+                                            <p>
+                                                Giờ đến: <b>01:45</b>, 13/06/2015
+                                            </p>
+                                        </td>
+                                        <td valign="top" style="text-align: left">
+                                            <p>
+                                                Hãng
+            :
+                                                <img src="/images/fl-vj.png">
+                                            </p>
+
+                                            <p>
+                                                <!---->
+                                                Mã chuyến bay: <b>VJ191</b>
+                                            </p>
+                                            <p>
+                                                <!---->
+                                                Hạng vé: <b>Eco</b>
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="price-break table" style="border-top: 1px solid #ccc; border-bottom: 1px solid #ccc">
+                                <tbody>
+                                    <tr class="title-b">
+                                        <td>Loại Hành Khách
+                                        </td>
+                                        <td>Số Lượng Vé
+                                        </td>
+                                        <td>Giá mỗi vé
+                                        </td>
+                                        <td>Thuế và phụ phí
+                                        </td>
+                                        <td>Tổng Giá
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" class="pax">Người lớn
+                                        </td>
+                                        <td align="center" class="pax">1
+                                        </td>
+                                        <td align="center" class="pax">1.030.000 VNĐ
+                                        </td>
+                                        <td align="center" class="pax">340.000 VNĐ
+                                        </td>
+                                        <td align="center" class="pax">1.370.000 VNĐ
+                                        </td>
+                                    </tr>
+                                    <tr class="total-b">
+                                        <td class="footer">Tổng
+                                        </td>
+                                        <td class="pax">1
+                                        </td>
+                                        <td class="pax">1.030.000 VNĐ
+                                        </td>
+                                        <td class="pax">340.000 VNĐ
+                                        </td>
+                                        <td class="pax">1.370.000 VNĐ
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table class="table condition" style="margin: 0 10px">
+                                <tbody>
+                                    <tr>
+                                        <td class="col-xs-3" style="text-align: left">
+                                            <b>Thay đổi tên</b>
+                                        </td>
+                                        <td class="col-xs-9" style="text-align: left">Thu phí 352.000 VNĐ/chặng
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-xs-3" style="text-align: left">
+                                            <b>Thay đổi hành trình</b>
+                                        </td>
+                                        <td class="col-xs-9" style="text-align: left">Thu phí 352.000 VNĐ + chênh lệch giá vé (nếu có)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-xs-3" style="text-align: left">
+                                            <b>Thay đổi ngày giờ bay</b>
+                                        </td>
+                                        <td class="col-xs-9" style="text-align: left">Thu phí 352.000 VNĐ + chênh lệch giá vé (nếu có)
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-xs-3" style="text-align: left">
+                                            <b>Hoàn vé</b>
+                                        </td>
+                                        <td class="col-xs-9" style="text-align: left">Không được phép
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-xs-3" style="text-align: left">
+                                            <b>Thời hạn thay đổi</b>
+                                        </td>
+                                        <td class="col-xs-9" style="text-align: left">12 tiếng trước giờ khởi hành
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-xs-3" style="text-align: left">
+                                            <b>Hành lý xách tay</b>
+                                        </td>
+                                        <td class="col-xs-9" style="text-align: left">7kg
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-xs-3" style="text-align: left">
+                                            <b>Hành lý ký gửi</b>
+                                        </td>
+                                        <td class="col-xs-9" style="text-align: left">Vui lòng chọn ở bước sau
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container home-content">
+    <div class="row margintop50">
+        <div class="col-sm-6">
+            <div class="title">Vé tốt trong kỳ</div>
+            <p>Thỏa sức lựa chọn những vé máy bay rẻ nhất cùng chúng tôi</p>
+        </div>
+        <div class="col-sm-6" style="text-align: right;">
+            <img src="/images/logo-flight.png" />
+        </div>
+    </div>
+    <div class="row margintop30">
+        <div class="col-md-6">
+            <div class="row marginbot20">
+                <div class="col-xs-4 good-ticket active">
+                    <p class="flight">Hà Nội - HCM</p>
+                    <div class="price">Từ: 980.000 Đ</div>
+                    <div class="date">09/06/2015</div>
+                    <div class="info">Lễ hội hoa quả</div>
+                </div>
+                <div class="col-xs-4 good-ticket">
+                    <p class="flight">Hà Nội - HCM</p>
+                    <div class="price">Từ: 980.000 Đ</div>
+                    <div class="date">09/06/2015</div>
+                    <div class="info">Lễ hội hoa quả</div>
+                </div>
+                <div class="col-xs-4 good-ticket">
+                    <p class="flight">Hà Nội - HCM</p>
+                    <div class="price">Từ: 980.000 Đ</div>
+                    <div class="date">09/06/2015</div>
+                    <div class="info">Lễ hội hoa quả</div>
+                </div>
+            </div>
+            <div class="row marginbot20">
+                <div class="col-xs-4 good-ticket">
+                    <p class="flight">Hà Nội - HCM</p>
+                    <div class="price">Từ: 980.000 Đ</div>
+                    <div class="date">09/06/2015</div>
+                    <div class="info">Lễ hội hoa quả</div>
+                </div>
+                <div class="col-xs-4 good-ticket">
+                    <p class="flight">Hà Nội - HCM</p>
+                    <div class="price">Từ: 980.000 Đ</div>
+                    <div class="date">09/06/2015</div>
+                    <div class="info">Lễ hội hoa quả</div>
+                </div>
+                <div class="col-xs-4 good-ticket">
+                    <p class="flight">Hà Nội - HCM</p>
+                    <div class="price">Từ: 980.000 Đ</div>
+                    <div class="date">09/06/2015</div>
+                    <div class="info">Lễ hội hoa quả</div>
+                </div>
+            </div>
+            <div class="row marginbot20">
+                <div class="col-xs-4 good-ticket">
+                    <p class="flight">Hà Nội - HCM</p>
+                    <div class="price">Từ: 980.000 Đ</div>
+                    <div class="date">09/06/2015</div>
+                    <div class="info">Lễ hội hoa quả</div>
+                </div>
+                <div class="col-xs-4 good-ticket">
+                    <p class="flight">Hà Nội - HCM</p>
+                    <div class="price">Từ: 980.000 Đ</div>
+                    <div class="date">09/06/2015</div>
+                    <div class="info">Lễ hội hoa quả</div>
+                </div>
+                <div class="col-xs-4 good-ticket">
+                    <p class="flight">Hà Nội - HCM</p>
+                    <div class="price">Từ: 980.000 Đ</div>
+                    <div class="date">09/06/2015</div>
+                    <div class="info">Lễ hội hoa quả</div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div id="fb-root"></div>
+            <script>(function (d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=679197728830537";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+            <div class="fb-post" data-href="https://www.facebook.com/RoyalExpress.Vn/posts/837329513000086" data-width="600">
+                <div class="fb-xfbml-parse-ignore">
+                    <blockquote cite="https://www.facebook.com/RoyalExpress.Vn/posts/837329513000086">
+                        <p>&#x110;&#x1eb7;t V&#xe9; Nhanh - Canh V&#xe9; T&#x1ed1;t !</p>
+                        Posted by <a href="https://www.facebook.com/RoyalExpress.Vn">Vé Máy Bay RoyalExpress.Vn</a> on <a href="https://www.facebook.com/RoyalExpress.Vn/posts/837329513000086">Tuesday, 9 June 2015</a></blockquote>
+                </div>
+            </div>
+            <div style="margin-top: 20px; text-align: center">
+                <a href="#" class="btn btn-goodticket">Đặt vé !</a>
+                <a href="#" class="btn btn-goodticket">Ghi nhớ !</a>
+            </div>
+        </div>
+    </div>
+    <div class="row margintop50">
+        <div class="col-sm-12">
+            <div class="title">Khám phá</div>
+            <p>Hãy khám phá những địa điểm du lịch cùng chúng tôi</p>
+        </div>
+
+    </div>
+    <div class="row grid margintop30">
+        <div class="grid-sizer"></div>
+
+        <div class="grid-item">
+            <img src="/images/grid4.png" class="img-responsive" />
+            <div class="caption">
+                <div class="title">
+                    Đà nẵng
+                </div>
+                <div class="desciption">
+                    Đà Nẵng điểm đến lý tưởng hè 2015
+                </div>
+            </div>
+        </div>
+        <div class="grid-item">
+            <img src="/images/grid5.png" class="img-responsive" />
+        </div>
+        <div class="grid-item">
+            <img src="/images/grid4.png" class="img-responsive" />
+        </div>
+        <div class="grid-item grid-item--width2 grid-item--height2">
+            <img src="/images/grid1.png" class="img-responsive" />
+        </div>
+        <div class="grid-item">
+            <img src="/images/grid2.png" class="img-responsive" />
+        </div>
+        <div class="grid-item">
+            <img src="/images/grid3.png" class="img-responsive" />
+        </div>
+        <div class="grid-item">
+            <img src="/images/grid5.png" class="img-responsive" />
+        </div>
+        <div class="grid-item grid-item--width2">
+            <img src="/images/grid6.png" class="img-responsive" />
+        </div>
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+    var date = new Date();
+    date.setDate(date.getDate());
+    $('.date-picker').datepicker({
+        autoclose: true,
+        todayHighlight: true,
+        startDate: date,
+        setDate: date,
+        numberOfMonths: 2,
+    });
+    var datedepart = new Date();
+    var datearrive = new Date();
+    datedepart.setDate(date.getDate() + 2);
+    datearrive.setDate(date.getDate() + 9);
+    $("#departuredate").datepicker("setDate", datedepart);
+    $("#returndate").datepicker("setDate", datearrive);
+    $(document).ready(function () {
+
+        $('.grid').isotope({
+            itemSelector: '.grid-item',
+            percentPosition: true,
+            masonry: {
+                columnWidth: '.grid-sizer'
+            }
+        });
+
+    });
+
+</script>

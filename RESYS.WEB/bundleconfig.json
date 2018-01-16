@@ -1,0 +1,41 @@
+[
+  {
+    "outputFileName": "assets/dist/js/home.js",
+    "inputFiles": [
+      //lib
+      "Scripts/jquery.min.js",
+      "Scripts/jquery-migrate.min.js",
+      "Scripts/plugins/bootstrap-datepicker.min.js",
+      "Scripts/jquery.bxslider.min.js",
+      "Scripts/plugins/jquery.nicescroll.js",
+      "Scripts/jquery-ui.min.js",
+      "Content/resize-img/js/jquery.focuspoint.js",
+      "Scripts/plugins/bootstraps/bootstrap.min.js",
+      "Scripts/plugins/jquery.parallax.js",
+      "Scripts/plugins/isotope.pkgd.min.js",
+      "Scripts/plugins/pace.min.js",
+      "Scripts/custom.js"
+    ]
+  },
+  {
+    "outputFileName": "assets/dist/css/home.css",
+    "inputFiles": [
+      ////lib + legacy css
+      "Content/plugins/bootstraps/bootstrap.css",
+      "Content/css/material-design-iconic-font.2.css",
+      "content/css/jquery-ui.min.css",
+      "content/css/font-awesome.min.css",
+      "content/css/flexslider.min.css",
+      "Content/bxslider/jquery.bxslider.css",
+      "Content/plugins/animate.css",
+      "Content/plugins/pace-flash.css",
+      "Content/plugins/datepicker.min.css",
+      "Content/resize-img/css/focuspoint.css",
+      "Content/plugins/pace-flash.css",
+      //site css
+      "content/css/style.min-1046.css",
+      "content/css/duan.min-1046.css",
+      "content/css/style.css"
+    ]
+  }
+]

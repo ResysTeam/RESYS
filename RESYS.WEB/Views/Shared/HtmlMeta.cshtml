@@ -1,0 +1,32 @@
+﻿@{
+	var pageInfo = ViewBag.UrlPageInfo as UrlPageInfo;
+
+
+	if (pageInfo != null)
+	{
+		if (!string.IsNullOrEmpty(pageInfo.PageTitle))
+		{
+			ViewBag.PageTitle = pageInfo.PageTitle;
+		}
+
+
+		if (!string.IsNullOrEmpty(pageInfo.MetaKeyword))
+		{
+			ViewBag.MetaKeyword = pageInfo.MetaKeyword;
+		}
+		if (!string.IsNullOrEmpty(pageInfo.MetaDescription))
+		{
+			ViewBag.MetaDescription = pageInfo.MetaDescription;
+		}
+        if (!string.IsNullOrEmpty(pageInfo.MetaRobots))
+        {
+            ViewBag.MetaRobots = pageInfo.MetaRobots;
+        }
+	}
+	
+}
+<title>@ViewBag.PageTitle</title>
+<meta name="keywords" content="@ViewBag.MetaKeyword" />
+<meta name="description" content="@ViewBag.MetaDescription" />
+<meta name="robots" content="@ViewBag.MetaRobots" />
+<meta name="author" content="">

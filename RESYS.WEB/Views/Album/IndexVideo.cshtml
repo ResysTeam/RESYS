@@ -1,0 +1,349 @@
+﻿@{
+    var listvideo = ViewBag.ListVideo as List<Album>;
+    var listcompanycate = ViewBag.ListCompanyCate as List<CompanyCate>;
+    //var listimage = ViewBag.ListImage as List<Album>;
+    var tag = ViewData["Tag"];
+    var page = ViewData["Page"];
+    var total = ViewData["TotalItems"];
+    var com = ViewData["Company"] as Company;
+}
+<script type="text/javascript">
+    (function ($) {
+        $(document).ready(function () {
+
+            $('.focuspoint').focusPoint();
+        });
+    }(jQuery));
+</script>
+<div class="library">
+    <div id="library-content" class="container library-content" @("library".EditHtmlItem())>
+        <div class="titlelibrary" style="">
+            <a href="@Url.Action("IndexVideo", "Album", new{shortname="all",page=0})" > @("Thư viện".HtmlItemString("library", "title"))      </a>  
+        </div>
+        <a href="javascript:;" onclick="showcompany(true);">
+            @if (com == null)
+            {
+                <div class="selection">
+                    @("Chọn Công ty thành viên".HtmlItemString("library", "select"))
+                </div>
+            }
+            else
+            {
+                <div class="selection">
+                    @com.CompanyName
+                </div>
+            }             
+        </a>
+        <div class="select-company" style="display: none;">
+            <ul class="listcompanycate">
+                @if (listcompanycate != null)
+                {
+                    foreach (CompanyCate companycate in listcompanycate)
+                    {
+                        var listcompany = RESYS.BIZ.Services.ServiceFactory.CompanyManager.GetByCateId(companycate.CompanyCateId, Culture);
+                        <li>
+                            <strong>@companycate.CompanyCateName</strong>
+                            <ul>
+                                @if (listcompany != null)
+                                {
+                                    foreach (var company in listcompany)
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("IndexVideo", "Album", new { shortname=company.CompanyShortName,page=0 })">@company.CompanyName</a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    }
+                }
+            </ul>                     
+            <a href="javascript:;" onclick="showcompany(false);">
+                <img src="/Images/btn-close.gif"/> 
+            </a>              
+        </div>
+        <div class="col-sm-12 body">
+            <ul class="nav nav-tabs" style="border-bottom: none; margin-left: 0px;">  
+                <li class="col-sm-4 " style="padding: 0;padding-right:2px; ">
+                    <a  href="@Url.Action("Index", "Album", new { shortname = tag,page=0  })" style="">
+                        @("Tất cả".HtmlItemString("library", "all-title"))                        
+                    </a>
+                </li>
+
+                <li class="col-sm-4 active" style="padding: 0 1px;">
+                    <a  href="@Url.Action("IndexVideo", "Album",new { shortname = tag,page=0  })" style="">
+                        @("Video".HtmlItemString("library", "video-title"))  
+                    </a>
+                </li>
+                <li class="col-sm-4" style="padding: 0;padding-left: 2px">
+                    <a href="@Url.Action("IndexImage", "Album",new { shortname = tag,page=0  })" style="">
+                        @("Hình ảnh".HtmlItemString("library", "image-title"))  
+                    </a>
+                </li>
+            </ul>            
+            <div class="tab-content" >                          
+                @if (listvideo != null && listvideo.Count > 0)
+                {
+                    var count = 1;
+                    var a = count % 4;
+                    var countlist = listvideo.Count;
+                    if (countlist != 1)
+                    {
+                        foreach (Album item in listvideo)
+                        {
+                            var name = item.CompanyName.SubstringSummary(60);
+                            if (item.CompanyId == 999999999)
+                            {
+                                name = Culture == "vi-VN" ? "Tập đoàn Thành Công" : "Thanh Cong Group";
+                            }
+                            if (count == 1)
+                            {
+                                <div class="col-md-3 col-xs-6 itemimage itemvideo"  style="margin-right: 1.2%">
+                                    <a class="" href="javascript:" onclick=" LoadAlbum('@item.AlbumId','@count', '1', '', '@listvideo[1].AlbumId','@countlist','@page','@tag') ">
+                                        @{
+                                            System.Text.RegularExpressions.Regex YoutubeVideoRegex =
+                                                new System.Text.RegularExpressions.Regex(@"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                            System.Text.RegularExpressions.Match youtubeMatch = YoutubeVideoRegex.Match(item.AlbumUrl);
+                                            var id = youtubeMatch.Groups[1].Value;
+                                            if (youtubeMatch.Success)
+                                            {
+                                                 <div class="focuspoint img-video"
+                                                     data-focus-x="0"
+                                                     data-focus-y="0"
+                                                     data-image-w=""
+                                                     data-image-h="">
+                                                    <img  id="@id" src="https://i.ytimg.com/vi/@id/mqdefault.jpg" />
+                                                 </div>
+                                                <img class="background-video" src="/Images/background-video.png" />
+                                            }
+                                        }
+                                        <div class="txt" id="txt-@count" >
+                                            <h3>@name</h3>
+                                            <h2>@item.AlbumTitle.SubstringSummary(30)</h2>         
+                                        </div>
+                                    </a>
+                                </div>
+                            }
+                            else if (count == countlist)
+                            {
+                                if (a == 0)
+                                {
+                                    <div class="col-md-3 col-xs-6 itemimage itemvideo"  >
+                                        <a class="" href="javascript:" onclick=" LoadAlbum('@item.AlbumId','@count',  '@(count / 4)', @listvideo[count - 2].AlbumId, '','@countlist','@page','@tag') ">
+                                            @{
+                                                System.Text.RegularExpressions.Regex YoutubeVideoRegex =
+                                                    new System.Text.RegularExpressions.Regex(@"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                                System.Text.RegularExpressions.Match youtubeMatch = YoutubeVideoRegex.Match(item.AlbumUrl);
+                                                var id = youtubeMatch.Groups[1].Value;
+                                                if (youtubeMatch.Success)
+                                                {
+                                                    <div class="focuspoint img-video" data-focus-x="0" data-focus-y="0" data-image-w="" data-image-h="">
+                                                        <img  id="@id" src="https://i.ytimg.com/vi/@id/mqdefault.jpg" />
+                                                    </div>
+                                                    <img class="background-video" src="/Images/background-video.png" />
+                                                }
+                                            }                                             
+                                            <div class="txt" id="txt-@count">
+                                                <h3>@name</h3>
+                                                <h2>@item.AlbumTitle.SubstringSummary(30)</h2>         
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-12 hidden row-detail no-padding" id="row-@(count / 4)">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-3 col-xs-6 itemimage itemvideo" style="margin-right: 1.2%">
+                                        <a class="" href="javascript:" onclick=" LoadAlbum('@item.AlbumId','@count', '@((count - a) / 4 + 1)', '@listvideo[count - 2].AlbumId', '','@countlist','@page','@tag') ">
+                                            @{
+                                                System.Text.RegularExpressions.Regex YoutubeVideoRegex =
+                                                    new System.Text.RegularExpressions.Regex(@"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                                System.Text.RegularExpressions.Match youtubeMatch = YoutubeVideoRegex.Match(item.AlbumUrl);
+                                                var id = youtubeMatch.Groups[1].Value;
+                                                if (youtubeMatch.Success)
+                                                {
+                                                    <div class="focuspoint img-video" data-focus-x="0" data-focus-y="0" data-image-w="" data-image-h="">
+                                                        <img  id="@id" src="https://i.ytimg.com/vi/@id/mqdefault.jpg" />
+                                                    </div>
+                                                    <img class="background-video" src="/Images/background-video.png" />
+                                                }
+                                            }                                           
+                                            <div class="txt" id="txt-@count" >
+                                                <h3>@name</h3>
+                                                <h2>@item.AlbumTitle.SubstringSummary(30)</h2>         
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-12 hidden row-detail" id="row-@((count - a) / 4 + 1)">
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                if (a == 0)
+                                {
+                                    <div class="col-md-3 col-xs-6 itemimage itemvideo"  >
+                                        <a class="" href="javascript:" onclick=" LoadAlbum('@item.AlbumId','@count', '@(count / 4)', '@listvideo[count - 2].AlbumId', '@listvideo[count].AlbumId','@countlist','@page','@tag') ">
+                                            @{
+                                                System.Text.RegularExpressions.Regex YoutubeVideoRegex =
+                                                    new System.Text.RegularExpressions.Regex(@"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                                System.Text.RegularExpressions.Match youtubeMatch = YoutubeVideoRegex.Match(item.AlbumUrl);
+                                                var id = youtubeMatch.Groups[1].Value;
+                                                if (youtubeMatch.Success)
+                                                {
+                                                    <div class="focuspoint img-video" data-focus-x="0" data-focus-y="0" data-image-w="" data-image-h="">
+                                                        <img  id="@id" src="https://i.ytimg.com/vi/@id/mqdefault.jpg" />
+                                                    </div>
+                                                    <img class="background-video" src="/Images/background-video.png" />
+                                                }
+                                            }
+                                            <div class="txt" id="txt-@count">
+                                                <h3>@name</h3>
+                                                <h2>@item.AlbumTitle.SubstringSummary(30)</h2>         
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div class="col-xs-12 hidden row-detail" id="row-@(count / 4)">
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="col-md-3 col-xs-6 itemimage itemvideo" style="margin-right: 1.2%">
+                                        <a class="" href="javascript:" onclick=" LoadAlbum('@item.AlbumId','@count', '@((count - a) / 4 + 1)', '@listvideo[count - 2].AlbumId', '@listvideo[count].AlbumId','@countlist','@page','@tag') ">
+                                            @{
+                                                System.Text.RegularExpressions.Regex YoutubeVideoRegex =
+                                                    new System.Text.RegularExpressions.Regex(@"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                                System.Text.RegularExpressions.Match youtubeMatch = YoutubeVideoRegex.Match(item.AlbumUrl);
+                                                var id = youtubeMatch.Groups[1].Value;
+                                                if (youtubeMatch.Success)
+                                                {
+                                                    <div class="focuspoint img-video" data-focus-x="0" data-focus-y="0" data-image-w="" data-image-h="">
+                                                        <img  id="@id" src="https://i.ytimg.com/vi/@id/mqdefault.jpg" />
+                                                    </div>
+                                                    <img class="background-video" src="/Images/background-video.png" />
+                                                }
+                                            }
+                                            <div class="txt" id="txt-@count">
+                                                <h3>@name</h3>
+                                                <h2>@item.AlbumTitle.SubstringSummary(30)</h2>         
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                            count++;
+                            a = count % 4;
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-md-3 col-xs-6 itemimage itemvideo" >
+                            <a class="" href="javascript:" onclick=" LoadAlbum('@listvideo[0].AlbumId','@count', '1', '', '','@countlist','@page','@tag') ">
+                                @{
+                                    System.Text.RegularExpressions.Regex YoutubeVideoRegex =
+                                        new System.Text.RegularExpressions.Regex(@"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                                    System.Text.RegularExpressions.Match youtubeMatch = YoutubeVideoRegex.Match(listvideo[0].AlbumUrl);
+                                    var id = youtubeMatch.Groups[1].Value;
+                                    if (youtubeMatch.Success)
+                                    {
+                                        <div class="focuspoint img-video" data-focus-x="0" data-focus-y="0" data-image-w="" data-image-h="">
+                                                        <img  id="@id" src="https://i.ytimg.com/vi/@id/mqdefault.jpg" />
+                                                    </div>
+                                    
+                                        <img class="background-video" src="/Images/background-video.png" />
+                                    }
+                                }
+                                <div class="txt" id="txt-@count">
+                                    <h3>@listvideo[0]</h3>
+                                    <h2>@listvideo[0].AlbumTitle.SubstringSummary(30)</h2>         
+                                </div>
+                            </a>
+                        </div>
+                        <div class="col-xs-12 hidden row-detail" id="row-1">
+                        </div>
+                    }
+                }                                 
+            </div>
+        </div>
+        <div class="paper"> @Html.Partial("Pager", "newstype")</div>
+        <div class="col-sm-6 col-md-12" style="padding: 0">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>                    
+                        <a href="@Url.Action("index", "home")">
+                            <i class="ace-icon fa fa-home fa-lg home-icon"></i>
+                        </a>
+                    </li>
+                    <li class="active">@("Thư viện".HtmlItemString("navbar", "library"))</li>
+
+                </ul>
+        
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    var showcompany = function (s) {
+        $('#library-content .select-company').eq(0).slideToggle(300);
+    };
+</script>
+<script type="text/javascript">
+    function CloseAlbum(row) {
+        $('#row-' + row + '').html('');
+        $('.txt').each(function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+            }
+        });
+        $('.row-detail').each(function () {
+            if (!$(this).hasClass('hidden')) {
+                $(this).addClass('hidden');
+            }
+        });
+        $('html, body').animate({ scrollTop: (parseFloat(row) - 1) * 250 + 20 }, 600);
+    }
+</script>
+
+<script type="text/javascript">
+    function LoadAlbum(albumid, count, row, idpre, idnxt, countlist, page, tag) {
+        $('html, body').animate({ scrollTop: parseFloat(row) * 250 }, 800);
+        $('.txt').each(function () {
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active');
+            }
+        });
+        $('#txt-' + count + '').addClass('active');
+        $('.row-detail').each(function () {
+            if (!$(this).hasClass('hidden')) {
+                $(this).addClass('hidden');
+            }
+            $(this).html('');
+        });
+        $('#row-' + row + '').removeClass('hidden');
+
+        var strUrl = '@Url.Action("Detail", "Album")';
+        jQuery.ajax({
+            url: strUrl,
+            data: {
+                albumid: albumid,
+                count: count,
+                row: row,
+                idpre: idpre,
+                idnxt: idnxt,
+                countlist: countlist,
+                page: page,
+                shortname: tag,
+                show: 'video'
+            },
+            dataType: 'html',
+            type: 'get',
+            traditional: true,
+            success: function (data) {
+                $('#row-' + row + '').html('');
+                $('#row-' + row + '').html(data);
+            }
+        });
+    }
+</script>

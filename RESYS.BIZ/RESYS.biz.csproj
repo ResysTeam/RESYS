@@ -1,0 +1,153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{F9F3A290-8648-48E2-80AD-7291D6924BE0}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>RESYS.BIZ</RootNamespace>
+    <AssemblyName>RESYS.BIZ</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="idocNet.Client.Core">
+      <HintPath>..\lib\idocNet.Client.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Extensions\NewsCategoryExtensions.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
+    <Compile Include="Models\Album.cs" />
+    <Compile Include="Models\AlbumImage.cs" />
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\CompanyCate.cs" />
+    <Compile Include="Models\CompanyCateBase.cs" />
+    <Compile Include="Models\DevelopMonth.cs" />
+    <Compile Include="Models\DevelopYear.cs" />
+    <Compile Include="Models\GroupPermission.cs" />
+    <Compile Include="Models\HtmlItem.cs" />
+    <Compile Include="Models\HtmlItemField.cs" />
+    <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\Introduction.cs" />
+    <Compile Include="Models\Library.cs" />
+    <Compile Include="Models\News.cs" />
+    <Compile Include="Models\NewsCategoryBase.cs" />
+    <Compile Include="Models\NewsImage.cs" />
+    <Compile Include="Models\PotentialCustomer.cs" />
+    <Compile Include="Models\SlideBanner.cs" />
+    <Compile Include="Models\SysPermission.cs" />
+    <Compile Include="Models\SysUser.cs" />
+    <Compile Include="Models\SysUserGroup.cs" />
+    <Compile Include="Models\SysUserInGroup.cs" />
+    <Compile Include="Models\Type.cs" />
+    <Compile Include="Models\UrlPageInfo.cs" />
+    <Compile Include="Models\Video.cs" />
+    <Compile Include="Persistance\IAlbumImageProvider.cs" />
+    <Compile Include="Persistance\IAlbumProvider.cs" />
+    <Compile Include="Persistance\ICompanyCateProvider.cs" />
+    <Compile Include="Persistance\ICompanyProvider.cs" />
+    <Compile Include="Persistance\IDevelopMonthProvider.cs" />
+    <Compile Include="Persistance\IDevelopYearProvider.cs" />
+    <Compile Include="Persistance\IGroupPermissionProvider.cs" />
+    <Compile Include="Persistance\IHtmlItemFieldProvider.cs" />
+    <Compile Include="Persistance\IHtmlItemProvider.cs" />
+    <Compile Include="Persistance\IImageProvider.cs" />
+    <Compile Include="Persistance\IImportableDataProvider.cs" />
+    <Compile Include="Persistance\IIntroductionProvider.cs" />
+    <Compile Include="Persistance\ILibraryProvider.cs" />
+    <Compile Include="Persistance\INewsCategoryProvider.cs" />
+    <Compile Include="Persistance\INewsImageProvider.cs" />
+    <Compile Include="Persistance\INewsProvider.cs" />
+    <Compile Include="Persistance\IPotentialCustomerProvider.cs" />
+    <Compile Include="Persistance\ISlideBannerProvider.cs" />
+    <Compile Include="Persistance\ISysPermissionProvider.cs" />
+    <Compile Include="Persistance\ISysUserProvider.cs" />
+    <Compile Include="Persistance\IUrlPageInfoProvider.cs" />
+    <Compile Include="Persistance\IUserGroupProvider.cs" />
+    <Compile Include="Persistance\IUserInGroupProvider.cs" />
+    <Compile Include="Persistance\IVideoProvider.cs" />
+    <Compile Include="Persistance\SqlServer\AlbumImageProvider.cs" />
+    <Compile Include="Persistance\SqlServer\AlbumProvider.cs" />
+    <Compile Include="Persistance\SqlServer\CompanyCateProvider.cs" />
+    <Compile Include="Persistance\SqlServer\CompanyProvider.cs" />
+    <Compile Include="Persistance\SqlServer\DevelopMonthProvider.cs" />
+    <Compile Include="Persistance\SqlServer\DevelopYearProvider.cs" />
+    <Compile Include="Persistance\SqlServer\GroupPermissionProvider.cs" />
+    <Compile Include="Persistance\SqlServer\HtmlItemFieldProvider.cs" />
+    <Compile Include="Persistance\SqlServer\HtmlItemProvider.cs" />
+    <Compile Include="Persistance\SqlServer\ImageProvider.cs" />
+    <Compile Include="Persistance\SqlServer\IntroductionProvider.cs" />
+    <Compile Include="Persistance\SqlServer\LibraryProvider.cs" />
+    <Compile Include="Persistance\SqlServer\NewsCategoryProvider.cs" />
+    <Compile Include="Persistance\SqlServer\NewsImageProvider.cs" />
+    <Compile Include="Persistance\SqlServer\NewsProvider.cs" />
+    <Compile Include="Persistance\SqlServer\PotentialCustomerProvider.cs" />
+    <Compile Include="Persistance\SqlServer\SlideBannerProvider.cs" />
+    <Compile Include="Persistance\SqlServer\SysPermissionProvider.cs" />
+    <Compile Include="Persistance\SqlServer\SysUserProvider.cs" />
+    <Compile Include="Persistance\SqlServer\UrlPageInfoProvider.cs" />
+    <Compile Include="Persistance\SqlServer\UserGroupProvider.cs" />
+    <Compile Include="Persistance\SqlServer\UserInGroupProvider.cs" />
+    <Compile Include="Persistance\SqlServer\VideoProvider.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AlbumImageManager.cs" />
+    <Compile Include="Services\AlbumManager.cs" />
+    <Compile Include="Services\CompanyCateManager.cs" />
+    <Compile Include="Services\CompanyManager.cs" />
+    <Compile Include="Services\DevelopMonthManager.cs" />
+    <Compile Include="Services\DevelopYearManager.cs" />
+    <Compile Include="Services\GroupPermissionManager.cs" />
+    <Compile Include="Services\HtmlItemFieldManager.cs" />
+    <Compile Include="Services\HtmlItemManager.cs" />
+    <Compile Include="Services\ImageManager.cs" />
+    <Compile Include="Services\IntroductionManager.cs" />
+    <Compile Include="Services\LibraryManager.cs" />
+    <Compile Include="Services\NewsCategoryManager.cs" />
+    <Compile Include="Services\NewsImageManager.cs" />
+    <Compile Include="Services\NewsManager.cs" />
+    <Compile Include="Services\PotentialCustomerManager.cs" />
+    <Compile Include="Services\ServiceFactory.cs" />
+    <Compile Include="Services\SlideBannerManager.cs" />
+    <Compile Include="Services\SysPermissionManager.cs" />
+    <Compile Include="Services\SysUserManager.cs" />
+    <Compile Include="Services\UrlPageInfoManager.cs" />
+    <Compile Include="Services\UserGroupManager.cs" />
+    <Compile Include="Services\UserInGroupManager.cs" />
+    <Compile Include="Services\VideoManager.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

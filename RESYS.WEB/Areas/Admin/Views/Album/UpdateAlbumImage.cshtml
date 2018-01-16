@@ -1,0 +1,143 @@
+﻿@model AlbumImage
+@{
+    if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+    {
+        ViewBag.Title = "Sửa Hình ảnh - Album: " + Model.AlbumId;
+    }else
+    {
+        ViewBag.Title = "Thêm mới Hình ảnh - Album: " + Model.AlbumId;
+    }
+        
+}
+
+<div class="main-content-inner">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="@Url.Action("index", "home")">Home</a>
+            </li>
+            <li><a href="@Url.Action("SearchImage", "Album")">Danh sách Album hình ảnh</a></li>
+            <li><a href="@Url.Action("SearchAlbumImage", "Album",new { albumid = Model.AlbumId })">Danh sách Hình ảnh</a></li>
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+                <li class="active">@ViewBag.Title</li>
+            }
+            else
+            {
+                <li class="active">@ViewBag.Title</li>
+            }
+        </ul>
+        <!-- /.breadcrumb -->
+
+        
+    </div>
+
+    <div class="page-content">
+
+
+        <div class="page-header">
+                <h1>@ViewBag.Title
+
+                </h1>
+
+        </div>
+        <!-- /.page-header -->
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "manageForm", @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+                            {
+                                @Html.HiddenFor(mbox => mbox.AlbumImageId)
+                            }
+                            @Html.HiddenFor(mbox => mbox.AlbumId)
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="AlbumImageTitle">Tiêu đề:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="AlbumImageTitle" id="AlbumImageTitle" class="col-xs-12 col-sm-6" value="@Model.AlbumImageTitle" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="AlbumImageUrl">Hình Ảnh (600x400):</label>
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        @Html.TextBoxFor(model => model.AlbumImageUrl)
+                                        @Html.Partial("FileManagerButton", "AlbumImageUrl")
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="AlbumImageUrl"></label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        @if (Model.AlbumImageUrl != null)
+                                        {
+                                            <img  src="@Model.AlbumImageUrl" width="300" height="200" alt="" />
+                                        }
+                                        else
+                                        {
+                                            <img  src="~/Images/noimage.png" width="90" height="90" alt="" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="OrderNo">Thứ tự:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="number" name="OrderNo" id="OrderNo" class="col-xs-12 col-sm-1" value="@Model.OrderNo" />
+                                    </div>
+                                </div>
+                            </div>
+                           
+                            <div class="form-group">
+                                @{var check = Model.IsActive ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsActive">Trạng thái:</label>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="IsActive" type="checkbox" class="ace" value="true" @check>
+                                                        
+                                        <span class="lbl"> Ẩn/Hiện hình ảnh</span>
+                                        <input name="IsActive" type="hidden" value="false" />
+                                    </label>
+                                </div>
+                            </div>
+                            <input type="submit" id="submitContact" class="btn btn-success" value="Lưu" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>
+<script type="text/javascript">
+    $('textarea[class*=autosize]').autosize({ append: "\n" });
+    $('textarea.limited').inputlimiter({
+        remText: '%n character%s remaining...',
+        limitText: 'max allowed : %n.'
+    });
+</script>
+
+<script type="text/javascript">
+    setAdminCurrentUrl('@Url.Action("SearchImage", "Album")');
+</script>
+
+@section Scripts {
+	<script src="~/scripts/tinymce/tiny_mce.js"></script>
+
+}

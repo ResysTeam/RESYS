@@ -1,0 +1,111 @@
+﻿@{
+	ViewBag.Title = "Footer";
+}
+<div id="fb-root"></div>
+@*<div class="container footer-content">
+    <div class="footer-description">
+        <div class="col-sm-8" style="width: 74%"  @("footer".EditHtmlItem())>
+            <ul class="comm-menu">
+                <li>
+                    <a href="@Url.Action("","SiteMap")">
+                         @("Sơ đồ Website".HtmlItemString("footer", "sitemap"))
+                    </a>                   
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Introduction")">
+                         @("Giới thiệu chung".HtmlItemString("footer", "introduction"))
+                    </a>                    
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Company")">
+                        @("Đơn vị thành viên".HtmlItemString("footer", "company"))
+                    </a>                  
+                </li>
+                <li>
+                    <a href="@Url.Action("Index", "Album", new{shortname="all",page=0})" >
+                        @("Thư viện".HtmlItemString("footer", "library"))
+                    </a>                  
+                </li>
+            </ul>
+            <p class="copy">@("Copyright 2015 Thanh Cong Group".HtmlItemString("footer", "companyName"))</p>
+        </div>
+        <div class="col-sm-4" style="width: 26%;padding: 0;">
+              
+            <ul class="sns-area right" >
+                <li>
+                    <a href="https://www.facebook.com/hyundaithanhcong" target="_blank">
+                        <img src="/Images/icon-face.png" class=""  />     
+                    </a>
+                </li>
+
+                <li>
+                    <a href="https://www.youtube.com/user/HyundaiTC" target="_blank">
+                        <img src="/Images/icon-youtube.png" class=""  />
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>*@
+
+<footer @("footer".EditHtmlItem())>
+    <div class="width1140">
+        <div class="footer-row">
+            <div class="rv-branch">
+                <header>rever hq</header>
+                <p class="add">191 Trần Não, P. Bình An, Quận 2, TP. Hồ Chí Minh</p>
+            </div>
+            <div class="rv-branch">
+                <header>rever lexington</header>
+                <p class="add">LA-01.05 Lexington, 67 Mai Chí Thọ, Quận 2, TP. Hồ Chí Minh</p>
+            </div>
+            <div class="rv-branch">
+                <header>rever central park</header>
+                <p class="add">P6-SH11, Park 6, 208 Nguyễn Hữu Cảnh, P.22, Q. Bình Thạnh, TP. Hồ Chí Minh</p>
+            </div>
+            <div class="rv-branch">
+                <header>rever the park residence</header>
+                <p class="add">Khu 12, Nguyễn Hữu Thọ, P. Phước Kiển, Huyện Nhà Bè, TP. Hồ Chí Minh</p>
+            </div>
+        </div>
+        <div class="footer-row footer-nav">
+            <div class="items"><a href="/ve-chung-toi" title="Về Rever">Về Rever</a></div>
+            <div class="items"><a href="/doi-ngu">Đội ngũ</a></div>
+            <div class="items"><a href="/tuyen-dung" title="Tuyển dụng">Tuyển dụng</a></div>
+            <div class="items"><a href="https://rever.vn/quyen-rieng-tu" title="Quyền riêng tư">Quyền riêng tư</a></div>
+            <div class="items"><a href="/tin-tuc" title="Rever Blog">blog</a></div>
+            <div class="items"><a href="https://rever.vn/lien-he" title="Liên hệ">Liên hệ</a></div>
+            <div class="items"><a href="https://rever.vn/ban-nha-voi-rever" title="Đăng tin miễn phí">Đăng tin</a></div>
+            <div class="items last-items"><a href="tel:0901 777 667"><span class="font-icon fone"></span>0901 777 667</a></div>
+        </div>
+        <div class="footer-row last-row">
+            <div class="left">
+                <a class="font-icon rever-icon-r" target="_blank" title="" href="https://rever.vn/"></a> &nbsp;&nbsp;
+                Copyright © 2017 - Rever. All Rights Reserved.
+            </div>
+            <div class="right">
+                <div class="social">
+                    <a class="font-icon facebook" target="_blank" title="Facebook" href="https://www.facebook.com/rever.vn"></a>
+                    <a class="font-icon twitter" target="_blank" title="Twitter" href="https://twitter.com/Revervn"></a>
+                    <a class="font-icon in" target="_blank" title="Linkedin" href="https://www.linkedin.com/company/rever-real-estate"></a>
+                    <a class="font-icon gplus" target="_blank" title="Instagram" href="https://www.instagram.com/rever.vn/"></a>
+                    <a class="font-icon youtube" target="_blank" title="Youtube" href="https://www.youtube.com/channel/UCGqD_zho0DQyxXJ3G65NmSQ"></a>
+                </div>
+                <div class="app">
+                    <a class="rever-app-ios" target="_blank" title="Rever App Store" href="https://itunes.apple.com/vn/app/rever/id1101768201">
+                        <img alt="rever app ios" title="rever app ios" src="~/content/images/app-store@3x.png">
+                    </a>
+                    <a class="rever-app-ios" target="_blank" title="Rever Android Store" href="https://play.google.com/store/apps/details?id=com.rever.android">
+                        <img alt="rever app android" title="rever app android" src="~/content/images/google-play@3x.png">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <link rel="stylesheet" href="~/content/css/footer.min-1046.css">
+</footer>
+
+@if (UserState != null && UserState.SysUser.HasPermission("FRONT_EDIT"))
+  {
+		@Html.Partial("HtmlItemScripts")
+  }

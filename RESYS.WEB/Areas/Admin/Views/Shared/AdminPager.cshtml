@@ -1,0 +1,8 @@
+﻿@model dynamic
+
+
+<div id="dynamic-table_paginate" class="dataTables_paginate paging_simple_numbers">
+
+	@Html.Pager((int)Model.PageSize, -1 + (int)Model.PageIndex, (int)Model.ItemCount, new { }, "Trang trước", "Trang sau", "Trang đầu", "Trang cuối")
+
+</div>

@@ -1,0 +1,129 @@
+﻿@model List<SysGroup>
+@{
+	ViewBag.Title = "Danh sách nhóm người dùng";
+}
+
+<div class="main-content-inner">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<ul class="breadcrumb">
+			<li>
+				<i class="ace-icon fa fa-home home-icon"></i>
+				<a href="#">Home</a>
+			</li>
+			<li><a href="@Url.Action("Index")">Dashboard</a></li>
+			<li class="active">@ViewBag.Title</li>
+		</ul>
+		<!-- /.breadcrumb -->
+
+
+		<!-- /.nav-search -->
+	</div>
+
+	<div class="page-content">
+
+
+		<div class="page-header">
+			<h1>@ViewBag.Title
+
+			</h1>
+		</div>
+		<!-- /.page-header -->
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+				<div class="row">
+					<div class="col-xs-12">
+						@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "manageForm" }))
+	  {
+							@Html.AntiForgeryToken()
+							
+							<table id="dynamic-table" class="table table-striped table-bordered table-hover">
+								<thead>
+									<tr>
+										<th>Mã nhóm</th>
+										<th>Tên nhóm</th>
+										<th></th>
+									</tr>
+								</thead>
+
+								<tbody>
+									@if (Model != null && Model.Count > 0)
+		 {
+			 foreach (var item in Model)
+			 {
+										<tr>
+
+											<td>
+												@item.Code
+											</td>
+											<td>@item.Name</td>
+
+
+
+											<td>
+												<div class="hidden-sm hidden-xs btn-group">
+
+													<a class="btn btn-xs btn-info" href="@Url.Action("GroupEdit", "User", new { Id = item.Code })" >
+														<i class="ace-icon fa fa-pencil bigger-120"></i>
+													</a>
+
+													<a href="javascript:" class="btn btn-xs btn-danger" onclick="DeleteGroup('@item.Code','@item.Name')">
+
+														<i class="ace-icon fa fa-trash-o bigger-120"></i>
+													</a>
+
+
+												</div>
+
+
+											</td>
+										</tr>
+			 }
+		 }
+
+								</tbody>
+							</table>
+	  }
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-xs-12">
+						<a href="@Url.Action("GroupCreate")" class="btn btn-success">Tạo mới</a>
+					</div>
+				</div>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.page-content -->
+</div>
+<script type="text/javascript">
+	jQuery(function ($) {
+		//initiate dataTables plugin
+		var oTable1 =
+        $('#dynamic-table')
+        //.wrap("<div class='dataTables_borderWrap' />")   //if you are applying horizontal scrolling (sScrollX)
+        .dataTable({
+        	bAutoWidth: false,
+        	"aaSorting": [],
+
+
+        });
+
+
+
+
+	})
+	function DeleteGroup(id, title) {
+		bootbox.confirm("Xóa thông nhóm người dùng " + title, function (confirmed) {
+			if (confirmed) {
+				$('<form method="post" action="@Url.Action("GroupDelete")"><input type="hidden" name="id" value="'+id+'"/></form>').appendTo('body').submit();
+			}
+		});
+	}
+</script>
+
+<script type="text/javascript">
+	setAdminCurrentUrl('@Url.Action("Groups", "User")');
+</script>

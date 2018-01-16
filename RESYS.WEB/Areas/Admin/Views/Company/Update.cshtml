@@ -1,0 +1,262 @@
+﻿@model Company
+@{
+    if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+    {
+        ViewBag.Title = "Sửa Công ty thành viên";
+    }
+    else
+    {
+        ViewBag.Title = "Thêm mới Công ty thành viên";
+    }
+        
+}
+
+<div class="main-content-inner">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="@Url.Action("index", "home")">Home</a>
+            </li>
+            <li><a href="@Url.Action("Search", "Company")">Danh sách Công ty thành viên</a></li>
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+                <li class="active">Edit @Model.CompanyId</li>
+            }
+            else
+            {
+                <li class="active">Tạo mới Công ty thành viên</li>
+            }
+        </ul>
+        <!-- /.breadcrumb -->
+
+        
+    </div>
+
+    <div class="page-content">
+
+
+        <div class="page-header">
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+            <h1>Sửa Công ty thành viên id @Model.CompanyId
+
+            </h1>
+            }
+            else
+            {
+                <h1>Tạo mới Công ty thành viên
+
+            </h1>
+            }
+        </div>
+        <!-- /.page-header -->
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "manageForm", @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+                            {
+                            @Html.HiddenFor(mbox => mbox.CompanyId)
+                            }
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyName">Tên Công ty:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="CompanyName" id="CompanyName" class="col-xs-12 col-sm-6" value="@Model.CompanyName" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyCateId">Lĩnh vực hoạt động:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        @Html.DropDownListDefault("CompanyCateId", ViewData.Get<SelectList>("Categories"), "", "-- Tất cả --", new { @required = "required" })
+                                    </div>
+                                  
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyLogo">Ảnh Logo:</label>
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        @Html.TextBoxFor(model => model.CompanyLogo)
+                                        @Html.Partial("FileManagerButton", "CompanyLogo") 
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyLogo"></label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        @if (Model.CompanyLogo != null)
+                                        {
+                                            <img  src="@Model.CompanyLogo" width="50" height="50" alt="" />
+                                        }
+                                        else
+                                        {
+                                            <img  src="noimage.jpg" width="50" height="50" alt="" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyName">Số điện thoại:</label>
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="CompanyContact" id="CompanyContact" class="col-xs-12 col-sm-6" value="@Model.CompanyContact" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyName">Trang Web:</label>
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="CompanyWeb" id="CompanyWeb" class="col-xs-12 col-sm-6" value="@Model.CompanyWeb" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyName">Facebook:</label>
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="CompanyFace" id="CompanyFace" class="col-xs-12 col-sm-6" value="@Model.CompanyFace" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyName">Google:</label>
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="CompanyGoogle" id="CompanyGoogle" class="col-xs-12 col-sm-6" value="@Model.CompanyGoogle" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyName">Twitter:</label>
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="CompanyTwitter" id="CompanyTwitter" class="col-xs-12 col-sm-6" value="@Model.CompanyTwitter" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyName">Youtube:</label>
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="CompanyYoutube" id="CompanyYoutube" class="col-xs-12 col-sm-6" value="@Model.CompanyYoutube" />
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyBackground">Ảnh nền:</label>
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        @Html.TextBoxFor(model => model.CompanyBackground)
+                                        @Html.Partial("FileManagerButton", "CompanyBackground") 
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyBackground"></label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        @if (Model.CompanyBackground != null)
+                                        {
+                                            <img  src="@Model.CompanyBackground" width="500" height="200" alt="" />
+                                        }
+                                        else
+                                        {
+                                            <img  src="noimage.jpg" width="500" height="200" alt="" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyBanner">Giao diện banner:</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        @Html.TextAreaFor(model => model.CompanyBanner)
+                                        @Html.Partial("EditorScripts", CreateViewData(new { Name = "CompanyBanner" }))
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyAddress">Địa chỉ:</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        @Html.TextAreaFor(model => model.CompanyAddress)
+                                        @Html.Partial("EditorScripts", CreateViewData(new { Name = "CompanyAddress" }))
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="CompanyBody">Nội dung:</label>
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        @Html.TextAreaFor(model => model.CompanyBody)
+                                        @Html.Partial("EditorScripts", CreateViewData(new { Name = "CompanyBody" }))
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="OrderNo">Thứ tự:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="number" name="OrderNo" id="OrderNo" class="col-xs-12 col-sm-1" value="@Model.OrderNo" />
+                                    </div>
+                                </div>
+                            </div>
+                         
+                             <div class="form-group">
+                                 @{var check = Model.IsActive ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsActive">Trạng thái:</label>
+
+                               <div class="checkbox">
+													<label>
+														<input name="IsActive" type="checkbox" class="ace" value="true" @check>
+                                                        
+														<span class="lbl"> Ẩn/Hiện Công ty</span>
+                                                        <input name="IsActive" type="hidden" value="false" />
+													</label>
+												</div>
+                            </div>
+                            <input type="submit" class="btn btn-success" value="Lưu" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>
+<script type="text/javascript">
+    $('textarea[class*=autosize]').autosize({ append: "\n" });
+    $('textarea.limited').inputlimiter({
+        remText: '%n character%s remaining...',
+        limitText: 'max allowed : %n.'
+    });
+</script>
+
+<script type="text/javascript">
+    setAdminCurrentUrl('@Url.Action("Search", "Company")');
+</script>
+@section Scripts {
+	<script src="~/scripts/tinymce/tiny_mce.js"></script>
+
+}

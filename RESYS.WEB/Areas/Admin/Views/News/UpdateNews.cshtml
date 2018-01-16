@@ -1,0 +1,250 @@
+﻿@model News
+@{
+    if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+    {
+        ViewBag.Title = "Sửa mục tin tức";
+    }
+    else
+    {
+        ViewBag.Title = "Thêm mới tin tức";
+    }
+        
+}
+
+<div class="main-content-inner">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="@Url.Action("index", "home")">Home</a>
+            </li>
+            <li><a href="@Url.Action("SearchNews", "News")">Danh sách tin tức</a></li>
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+                <li class="active">Edit @Model.NewsId</li>
+            }
+            else
+            {
+                <li class="active">Tạo mới tin tức</li>
+            }
+        </ul>
+        <!-- /.breadcrumb -->
+
+        
+    </div>
+
+    <div class="page-content">
+
+
+        <div class="page-header">
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+            <h1>Sửa tin tức id @Model.NewsId
+
+            </h1>
+            }
+            else
+            {
+                <h1>Tạo mới tin tức
+
+            </h1>
+            }
+        </div>
+        <!-- /.page-header -->
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "manageForm", @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+                            {
+                            @Html.HiddenFor(mbox => mbox.NewsId)
+                            }
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="NewsTitle">Tiêu đề:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="NewsTitle" id="NewsTitle" class="col-xs-12 col-sm-6" value="@Model.NewsTitle" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="NewsCate">Danh mục:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        @Html.DropDownListDefault("NewsCategoryId", ViewData.Get<SelectList>("Categories"), "", "-- Tất cả --", new { @required = "required" })
+                                    </div>
+                                </div>
+                            </div>
+                            @*
+                             <div class="form-group">
+								<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="NewsCate">Danh mục:</label>
+
+								<div class="col-xs-12 col-sm-10">
+									<div class="clearfix">
+										@Html.DropDownListDefault("NewsCate", ViewData.Get<SelectList>("Categories"), "", "-- Tất cả --", new { @required = "required" })
+									</div>
+								</div>
+							</div>*@
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="NewsDescription">Mô tả:</label>
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        <textarea class="form-control limited autosize-transition" required id="NewsDescription" name="NewsDescription" maxlength="250">@Model.NewsDescription</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="HtmlPageSummary">Keyword:</label>
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        <input type="text" name="NewsKeyword" id="NewsKeyword" class="col-xs-12 col-sm-6" value="@Model.NewsKeyword"/>
+                                        @*<textarea class="form-control limited autosize-transition" required id="HtmlPageKeyword" name="HtmlPageKeyword" maxlength="150">@Model.HtmlPageKeyword</textarea>*@
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="NewsTag">Đơn vị thành viên</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        @if (Culture == "vi-VN")
+                                        {
+                                            @Html.DropDownListDefault("CompanyId", ViewData.Get<SelectList>("ListCompany"), "23", "Tập Đoàn Thành Công")
+                                        }
+                                        else
+                                        {
+                                             @Html.DropDownListDefault("CompanyId", ViewData.Get<SelectList>("ListCompany"), "2", "Thanh Cong Group")
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            @*
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="NewsTag">Tag:</label>
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        <textarea class="form-control limited autosize-transition" required id="NewsTag" name="NewsTag" maxlength="100">@Model.NewsTag</textarea>
+                                    </div>
+                                </div>
+                            </div>*@
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="HtmlPageSummary">Ảnh:</label>
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        @Html.TextBoxFor(model => model.NewsImage)
+                                        @Html.Partial("FileManagerButton", "NewsImage")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="HtmlPageSummary">Nội dung:</label>
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        @Html.TextAreaFor(model => model.NewsBody)
+                                        @Html.Partial("EditorScripts", CreateViewData(new { Name = "NewsBody" }))
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="OrderNo">Thứ tự:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="number" name="OrderNo" id="OrderNo" class="col-xs-12 col-sm-1" value="@Model.OrderNo" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+								<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="OrderNo">Ngày hiển thị:</label>
+
+								<div class="col-xs-12 col-sm-10">
+									<div class="clearfix">
+										
+										<input id="NewsPublishDate" name="NewsPublishDate" value="@Model.NewsPublishDate.ToString("yyyy-MM-dd HH:MM")" />
+									</div>
+								</div>
+							</div>
+                            <div class="form-group">
+                                @{var check = Model.IsActive ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsActive">Trạng thái:</label>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="IsActive" type="checkbox" class="ace" value="true" @check>
+
+                                        <span class="lbl">Ẩn/Hiện bài viết</span>
+                                        <input name="IsActive" type="hidden" value="false" />
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                @{var checkhot = Model.IsHotNews ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsHotNews">Hot news:</label>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="IsHotNews" type="checkbox" class="ace" value="true" @checkhot>
+
+                                        <span class="lbl">Bài viết nổi bật</span>
+                                        <input name="IsHotNews" type="hidden" value="false" />
+                                    </label>
+                                </div>
+                            </div>
+                            @*<div class="form-group">
+                                @{var checkads = Model.IsAdsNews ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsAdsNews">Ads news:</label>
+
+                                <div class="checkbox">
+                                    <label>
+                                        <input name="IsAdsNews" type="checkbox" class="ace" value="true" @checkads>
+
+                                        <span class="lbl">Bài viết quảng cáo</span>
+                                        <input name="IsAdsNews" type="hidden" value="false" />
+                                    </label>
+                                </div>
+                            </div>*@
+                            <input type="submit" class="btn btn-success" value="Lưu" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>
+<script type="text/javascript">
+    function Delete(id, title) {
+        bootbox.confirm("Are you sure to delete " + title + " ?", function (result) {
+            if (result) {
+                $("#NewsId").val(id);
+                $('#manageForm').attr('action', '@(Url.Action("Delete"))').submit();
+            }
+        });
+    }
+    $('textarea[class*=autosize]').autosize({ append: "\n" });
+    $('textarea.limited').inputlimiter({
+        remText: '%n character%s remaining...',
+        limitText: 'max allowed : %n.'
+    });
+</script>
+
+<script type="text/javascript">
+    setAdminCurrentUrl('@Url.Action("SearchNews", "News")');
+</script>
+@section Scripts {
+	<script src="~/scripts/tinymce/tiny_mce.js"></script>
+
+}

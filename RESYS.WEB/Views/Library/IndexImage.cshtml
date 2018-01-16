@@ -1,0 +1,172 @@
+﻿@{
+    var listcompanycate = ViewBag.ListCompanyCate as List<CompanyCate>;
+    var listimage = ViewBag.ListImage as List<Library>;
+    var tag = ViewData["Tag"];
+    var page = ViewData["Page"];
+    var total = ViewData["TotalItems"];
+    var com = ViewData["Company"] as Company;
+}
+<style>
+    .fancybox-opened .fancybox-title {
+        font-weight: bold;
+        text-align: center;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $('.fancybox1').fancybox();
+        $(".various1").fancybox({
+            maxWidth: 800,
+            maxHeight: 500,
+            fitToView: false,
+            width: '70%',
+            height: '70%',
+            autoSize: false,
+            closeClick: false,
+            openEffect: 'elastic',
+            closeEffect: 'none',
+            helpers: {
+                title: { type: 'inside' },
+                buttons: {}
+            }
+            
+        });
+    });
+</script>
+
+<div class="library">
+    <div id="library-content" class="container library-content" @("library".EditHtmlItem())>
+        <div class="titlelibrary" style="">
+           <a href="@Url.Action("IndexImage", "Library", new{shortname="all",page=0})" > @("Thư viện".HtmlItemString("library", "title"))      </a>  
+        </div>
+        <a href="javascript:;" onclick="showcompany(true);">
+            @if (com == null)
+                {
+                    <div class="selection">
+                        @("Chọn Công ty thành viên".HtmlItemString("library", "select"))
+                    </div>
+                }
+                else
+                {
+                     <div class="selection">
+                        @com.CompanyName
+                    </div>
+                }             
+        </a>
+        <div class="select-company" style="display: none;">
+            <ul class="listcompanycate">
+                @if (listcompanycate != null)
+                {
+                    foreach (CompanyCate companycate in listcompanycate)
+                    {
+                        var listcompany = RESYS.BIZ.Services.ServiceFactory.CompanyManager.GetByCateId(companycate.CompanyCateId, Culture);
+                        <li>
+                            <strong>@companycate.CompanyCateName</strong>
+                            <ul>
+                                @if (listcompany != null)
+                                {
+                                    foreach (var company in listcompany)
+                                    {
+                                        <li>
+                                            <a href="@Url.Action("IndexImage", "Library", new { shortname=company.CompanyShortName,page=0 })">@company.CompanyName</a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        </li>
+                    }
+                }
+            </ul>          
+            
+            <a href="javascript:;" onclick="showcompany(false);">
+                <img src="/Images/btn-close.gif"/> 
+            </a>              
+        </div>
+
+        <div class="col-sm-12 body">
+            <ul class="nav nav-tabs" style="border-bottom: none; margin-left: 0px;">  
+                <li class="col-sm-4 " style="padding: 0;padding-right:2px; ">
+                    <a  href="@Url.Action("Index", "Library", new { shortname = tag,page=0  })" style="">
+                        @("Tất cả".HtmlItemString("library", "all-title"))                        
+                    </a>
+                </li>
+
+                <li class="col-sm-4" style="padding: 0 1px;">
+                    <a  href="@Url.Action("IndexVideo", "Library",new { shortname = tag,page=0  })" style="">
+                        @("Video".HtmlItemString("library", "video-title"))  
+                    </a>
+                </li>
+                <li class="col-sm-4 active" style="padding: 0;padding-left: 2px">
+                    <a href="@Url.Action("IndexImage", "Library",new { shortname = tag,page=0  })" style="">
+                        @("Hình ảnh".HtmlItemString("library", "image-title"))  
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="tab-content" >                          
+                    @if (listimage != null)
+                    {
+                        var count = 1;
+                        foreach (Library item in listimage)
+                        {
+                            var name = item.CompanyName.SubstringSummary(35);
+                            if (item.CompanyId == 999999999)
+                            {
+                                name = Culture == "vi-VN" ? "Tập đoàn Thành Công" : "Thanh Cong Group";
+                            }
+                            
+                            if (count % 4 == 0)
+                            {
+                                    <div class="col-md-3 col-xs-6 itemimage"  >
+                                         <a class="various1 fancybox1 fancybox1.iframe" rel="fancybox1" href="@item.LibraryUrl" title="@item.LibraryDescription">
+                                                    <img class="img-responsive" src="@item.LibraryUrl" />
+                                                    <div class="txt" >
+                                                       <h3>@name</h3>
+                                                        <h2>@item.LibraryTitle.SubstringSummary(30)</h2>     
+                                                    </div>
+                                           </a>
+                                    </div>
+                            }
+                            else
+                            {
+                                    <div class="col-md-3 col-xs-6 itemimage" style="margin-right: 1.2%">
+                                         <a class="various1 fancybox1 fancybox1.iframe" rel="fancybox1" href="@item.LibraryUrl" title="@item.LibraryDescription">
+                                                    <img class="img-responsive" src="@item.LibraryUrl" />
+                                                    <div class="txt" >
+                                                        <h3>@name</h3>
+                                                         <h2>@item.LibraryTitle.SubstringSummary(30)</h2>     
+                                                    </div>
+                                           </a>
+                                    </div>
+                            }
+                            count++;
+                        }
+                    }
+                                          
+            </div>
+        </div>
+        <div class="paper"> @Html.Partial("Pager", "newstype")</div>
+        <div class="col-sm-6 col-md-12" style="padding: 0">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>                    
+                        <a href="@Url.Action("index", "home")">
+                            <i class="ace-icon fa fa-home fa-lg home-icon"></i>
+                        </a>
+                    </li>
+                    <li class="active">@("Thư viện".HtmlItemString("navbar", "library"))</li>
+
+                </ul>
+        
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    var showcompany = function (s) {
+
+        $('#library-content .select-company').eq(0).slideToggle(300);
+
+    };
+</script>

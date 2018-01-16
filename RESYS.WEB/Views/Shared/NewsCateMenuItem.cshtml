@@ -1,0 +1,53 @@
+﻿@model string
+@{
+	var cateList = ViewBag.AllNewsCategory as List<NewsCategoryBase>;
+	NewsCategory cate = null;
+	for (int i = 0; i < cateList.Count; ++i)
+	{
+		if ((cateList[i] as NewsCategory).NewsCategoryShortName == Model)
+		{
+			cate = (cateList[i] as NewsCategory);
+			break;
+		}
+	}
+
+	bool hasSub = cate!=null && cate.Children != null && cate.Children.Count > 0;
+	
+}
+@if (hasSub)
+{
+
+	<li class="dropdown ">
+		<a href="@Url.Action("List", "news", new { shortname = cate.NewsCategoryShortName })" class="dropdown-toggle" data-toggle="dropdown">@cate.NewsCategoryTitle
+		</a>
+
+		<ul class="dropdown-menu">
+
+			@foreach (var ccate in cate.Children)
+   {
+	   var item = ccate as NewsCategory;
+				<li class="">
+					<a href="@Url.Action("List", "news", new { shortname = item.NewsCategoryShortName })" >@item.NewsCategoryTitle
+		</a>
+
+				</li>
+				@*<li class="dropdown-submenu">
+					<a href="javascript:void(0);">Tin khuyến mại sub2</a>
+					<ul class="dropdown-menu">
+						<li><a href="javascript:">Tin khuyến mại sub2-1</a></li>
+
+					</ul>
+				</li>*@
+   }
+
+		</ul>
+	</li>
+}
+else if(cate!=null)
+{
+	<li>
+		<a href="@Url.Action("List", "news", new { shortname = cate.NewsCategoryShortName })" >@cate.NewsCategoryTitle
+		</a>
+
+	</li>
+}

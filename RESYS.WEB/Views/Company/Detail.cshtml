@@ -1,0 +1,105 @@
+﻿@model Album
+@{
+    Layout = null;
+    var countalbum = ViewBag.Count;
+    var countlist = ViewBag.CountList;
+    var idpre = ViewBag.IdPre;
+    var idnxt = ViewBag.IdNxt;
+    var idPreNxt = ViewBag.IdPreNxt;
+    var idPrePre = ViewBag.IdPrePre;
+    var idNxtPre = ViewBag.IdNxtPre;
+    var idNxtNxt = ViewBag.IdNxtNxt;
+    var comid = ViewBag.ComId;
+}
+@if (Model != null)
+{
+    var name = Model.CompanyName;
+    if (Model.CompanyId == 999999999)
+    {
+        name = Culture == "vi-VN" ? "Tập đoàn Thành Công" : "Thanh Cong Group";
+    }
+    if (countlist >= 2)
+    {
+        if (idpre != null)
+        {
+            <a href="#" onclick=" LoadAlbum('@idpre', '@(countalbum - 1)', '@idPrePre', '@idPreNxt','@countlist','@comid') " class="pre-album"><img src="~/Images/btn-library-gallery-pre.gif" alt=""></a>
+        }
+        if (idnxt != null)
+        {
+            <a href="#" onclick=" LoadAlbum('@idnxt', '@(countalbum + 1)', '@idNxtPre', '@idNxtNxt', '@countlist','@comid') " class="nxt-album"><img src="~/Images/btn-library-gallery-nxt.gif" alt=""></a>
+        }
+    }
+    if (Model.IsVideo)
+    {
+        <div class="item-album item-album-video col-xs-12" >
+            @{
+                var YoutubeVideoRegex =
+                    new System.Text.RegularExpressions.Regex(@"youtu(?:\.be|be\.com)/(?:.*v(?:/|=)|(?:.*/)?)([a-zA-Z0-9-_]+)", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+                System.Text.RegularExpressions.Match youtubeMatch = YoutubeVideoRegex.Match(Model.AlbumUrl);
+                var id = youtubeMatch.Groups[1].Value;
+                if (youtubeMatch.Success)
+                {
+                    <iframe src="https://www.youtube.com/v/@id?fs=1&amp;autoplay=1" ></iframe>
+                }
+            }
+            <div class="thum-area">
+                <h3>   @name</h3>
+                <p>   @Model.AlbumTitle</p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="item-album col-xs-12" >
+            <div>
+                @if (Model != null && Model.ListAlbumImage != null && Model.ListAlbumImage.Count > 0)
+                {
+                    <div class="photo">              
+                        <ul class="bxslider">                       
+                            @foreach (var image in Model.ListAlbumImage)
+                            {
+                                <li>
+                                    <img class="img-detail" src="@image.AlbumImageUrl" alt=""/>
+                                </li>
+                            }                       
+                        </ul>
+                    </div>
+
+                    <div class="thum-area">                    
+                        <h3>   @name</h3>
+                        <p>   @Model.AlbumTitle</p>                  
+                        <div class="bx-pager" id="bx-pager" style="margin-top: 50px;">
+                            @{
+                                var count = 0;
+                                foreach (var image in Model.ListAlbumImage)
+                                {
+                                    <a data-slide-index="@count" href="" >
+                                        <img class="" src="@image.AlbumImageUrl" alt=""/>
+                                        <span></span>
+                                    </a>
+                                    count++;
+                                }
+                            }
+                        </div> 
+                    </div>
+                }
+                else
+                {
+                     <img  src="~/Images/noimage.png" width="90" height="90" alt="" />
+                }
+            </div>
+        </div>
+    }
+}
+else
+{
+    <div class="item-album item-album-video col-xs-12" >
+         <img  src="~/Images/noimage.png" width="90" height="90" alt="" />
+    </div>
+} 
+<a href="javascript:" onclick="CloseAlbum()" class="btn-close"><img src="~/Images/btn-library-close.gif" alt="close"></a>
+<script>
+    $('.bxslider').bxSlider({
+        pagerCustom: '#bx-pager',
+    });
+</script>

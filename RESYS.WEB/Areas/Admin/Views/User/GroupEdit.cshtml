@@ -1,0 +1,110 @@
+﻿@model SysGroup
+@{
+    
+	bool isEdit = (!string.IsNullOrEmpty(Model.Code));
+	if (isEdit)
+	{
+		ViewBag.Title = "Nhóm người dùng: " + Model.Code;
+	}
+	else
+	{
+		ViewBag.Title = "Thêm nhóm người dùng";
+	}
+
+		
+}
+
+<div class="main-content-inner">
+	<div class="breadcrumbs" id="breadcrumbs">
+		<ul class="breadcrumb">
+			<li>
+				<i class="ace-icon fa fa-home home-icon"></i>
+				<a href="#">Home</a>
+			</li>
+			<li><a href="@Url.Action("Index", "Home")">Dashboard</a></li>
+			<li><a href="@Url.Action("Groups", "User")">Nhóm người dùng</a></li>
+			<li class="active">@ViewBag.Title</li>
+
+		</ul>
+		<!-- /.breadcrumb -->
+
+
+	</div>
+
+	<div class="page-content">
+
+
+		<div class="page-header">
+
+			<h1>@ViewBag.Title
+
+			</h1>
+
+		</div>
+		<!-- /.page-header -->
+		<div class="row">
+			<div class="col-xs-12">
+				<!-- PAGE CONTENT BEGINS -->
+				<div class="row">
+					<div class="col-xs-12">
+						@using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "manageForm", @class = "form-horizontal" }))
+	  {
+							@Html.AntiForgeryToken()
+
+							@Html.ValidationSummary(true)
+		  
+							<div class="form-group">
+								<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="HtmlPageTitle">Mã nhóm:</label>
+
+								<div class="col-xs-12 col-sm-10">
+									<div class="clearfix">
+										@Html.EditorFor(mbox => mbox.Code)
+									</div>
+								</div>
+							</div>
+							
+							<div class="form-group">
+								<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="HtmlPageTitle">Tên nhóm:</label>
+
+								<div class="col-xs-12 col-sm-10">
+									<div class="clearfix">
+										@Html.EditorFor(mbox => mbox.Name)
+									</div>
+								</div>
+							</div>
+		  
+		  
+		  
+							<div class="form-group">
+								<label class="control-label col-xs-12 col-sm-2 no-padding-right" for="HtmlPageTitle">Danh sách quyền:</label>
+
+								<div class="col-xs-12 col-sm-10">
+									<div class="clearfix">
+										@Html.Partial("GroupPermissions")
+									</div>
+								</div>
+							</div>
+		  
+		  
+							<input type="submit" class="btn btn-success" value="Lưu" />
+	  }
+					</div>
+				</div>
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+	</div>
+	<!-- /.page-content -->
+</div>
+
+
+
+<script type="text/javascript">
+	setAdminCurrentUrl('@Url.Action("Groups", "User")');
+
+	@if (isEdit)
+ {
+	 <text>$('input[name=Code]').attr('readonly', true);</text>
+ }
+</script>

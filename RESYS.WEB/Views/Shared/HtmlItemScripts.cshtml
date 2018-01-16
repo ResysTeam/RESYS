@@ -1,0 +1,52 @@
+﻿<style type="text/css">
+	.htmlitem-edit { display: none; min-width: 16px; height: 16px; line-height: 16px; padding-left: 20px; background: #ff0 url(/images/edit-icon.png)center left no-repeat; text-decoration: none; color: #000; position: absolute; top: 0; left: 0; box-shadow: 3px 3px 3px #ccc; }
+	.htmlitemeditor:hover .htmlitem-edit { display: block; z-index:99;}
+</style>
+
+
+<script src="~/scripts/tinymce/tiny_mce.js"></script>
+
+
+<script type="text/javascript">
+
+	$(function () {
+		$('[rel=htmlitemeditor]').each(function () {
+			var thiz = $(this);
+
+			thiz.addClass('htmlitemeditor');
+
+
+			var pos = thiz.css('position');
+
+			if (pos != 'absolute' && pos != 'fixed') {
+				thiz.css('position', 'relative');
+			}
+
+			var itemCode= thiz.attr('item-code');
+			var itemField= thiz.attr('item-field');
+
+			var aEdit = $('<a href="javascript:;" class="htmlitem-edit">Edit</a>').appendTo(thiz);
+			aEdit.unbind('click').bind('click', function (e) {
+
+
+				
+				var url = '@MvcHtmlString.Create( Url.Action("EditHtmlItem", "FrontAdmin", new  {code="_XXX_", field="_YYY_" , returnUrl=Request.Url.PathAndQuery}))';
+				
+				url = url.replace('_XXX_', itemCode).replace('_YYY_', itemField);
+				//var modal_id = $(this).attr('data-target');
+				$.get(url, function (data) {
+					$(data).modal();
+				});
+
+				
+				e.stopPropagation();
+
+			});
+		});
+
+
+	
+	});
+
+
+</script>

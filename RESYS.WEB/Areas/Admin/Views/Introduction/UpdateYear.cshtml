@@ -1,0 +1,154 @@
+﻿@model DevelopYear
+@{
+    if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+    {
+        ViewBag.Title = "Sửa Năm quá trình phát triển";
+    }else
+    {
+        ViewBag.Title = "Thêm mới Năm quá trình phát triển";
+    }
+        
+}
+
+<div class="main-content-inner">
+    <div class="breadcrumbs" id="breadcrumbs">
+        <ul class="breadcrumb">
+            <li>
+                <i class="ace-icon fa fa-home home-icon"></i>
+                <a href="@Url.Action("index", "home")">Home</a>
+            </li>
+            <li><a href="@Url.Action("SearchYear", "Introduction")">Danh sách Năm quá trình phát triển</a></li>
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+                <li class="active">Sửa năm: @Model.DevelopYearName</li>
+            }
+            else
+            {
+                <li class="active">Tạo mới Năm </li>
+            }
+        </ul>
+        <!-- /.breadcrumb -->
+
+        
+    </div>
+
+    <div class="page-content">
+
+
+        <div class="page-header">
+            @if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+            {
+            <h1>Sửa Năm @Model.DevelopYearName
+
+            </h1>
+            }
+            else
+            {
+                <h1>Tạo mới Năm
+
+            </h1>
+            }
+        </div>
+        <!-- /.page-header -->
+        <div class="row">
+            <div class="col-xs-12">
+                <!-- PAGE CONTENT BEGINS -->
+                <div class="row">
+                    <div class="col-xs-12">
+                        @using (Html.BeginForm(null, null, FormMethod.Post, new { @id = "manageForm", @class = "form-horizontal" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            if (ViewBag.IsEdit != null && ViewBag.IsEdit == true)
+                            {
+                            @Html.HiddenFor(mbox => mbox.DevelopYearId)
+                            }
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="DevelopYearName">Năm:</label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        <input type="text" name="DevelopYearName" id="DevelopYearName" class="col-xs-12 col-sm-6" value="@Model.DevelopYearName" required/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="DevelopYearBg">Ảnh (985x366):</label>
+
+                                <div class="col-xs-12 col-sm-6">
+                                    <div class="clearfix">
+                                        @Html.TextBoxFor(model => model.DevelopYearBg)
+                                        @Html.Partial("FileManagerButton", "DevelopYearBg")
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="OrderNo"></label>
+
+                                <div class="col-xs-12 col-sm-10">
+                                    <div class="clearfix">
+                                        @if (Model.DevelopYearBg != null)
+                                        {
+                                            <img  src="@Model.DevelopYearBg" width="538" height="200" alt="" />
+                                        }
+                                        else
+                                        {
+                                            <img  src="~/Images/noimage.png" width="90" height="90" alt="" />
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                 @{var check = Model.IsActive ? "checked" : "";}
+                                <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="IsActive">Trạng thái:</label>
+
+                               <div class="checkbox">
+													<label>
+														<input name="IsActive" type="checkbox" class="ace" value="true" @check>
+                                                        
+														<span class="lbl"> Ẩn/Hiện Năm</span>
+                                                        <input name="IsActive" type="hidden" value="false" />
+													</label>
+												</div>
+                            </div>
+                            <input type="submit" id="submitContact" class="btn btn-success" value="Lưu" />
+                        }
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.page-content -->
+</div>
+<script type="text/javascript">
+    $('textarea[class*=autosize]').autosize({ append: "\n" });
+    $('textarea.limited').inputlimiter({
+        remText: '%n character%s remaining...',
+        limitText: 'max allowed : %n.'
+    });
+</script>
+
+<script type="text/javascript">
+    setAdminCurrentUrl('@Url.Action("SearchYear", "Introduction")');
+</script>
+<script>
+   
+    $("#submitContact").click(function () {
+
+        var year = $("#DevelopYearName").val();
+        var reg = /^[0-9]+$/;
+        
+        if (reg.test(year) == false) {
+            alert("Số năm là kiểu số");
+            return false;
+        }      
+        return true;
+    });
+</script>
+
+@section Scripts {
+	<script src="~/scripts/tinymce/tiny_mce.js"></script>
+
+}

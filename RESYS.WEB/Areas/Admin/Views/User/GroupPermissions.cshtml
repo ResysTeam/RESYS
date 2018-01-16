@@ -1,0 +1,17 @@
+﻿@model SysGroup
+
+@{
+	var alist = ViewBag.AllPermissions as List<SysPermission>;
+
+	var list = (Model != null && Model.Permissions != null) ? Model.Permissions : new List<SysPermission>();
+	
+}
+<div style="padding:10px; border:solid 1px #efefef;">
+@foreach(var p in alist)
+{
+	bool ok = list.Exists(o=>o.Code==p.Code);	
+	
+	
+	<input @(ok?" checked":"") type="checkbox" id= "permission_@p.Code" name="permission_@p.Code" value="true"/> <label  for="permission_@p.Code">@p.Name &nbsp;&nbsp;<font style="color:#ccc;">[@p.Code]</font></label> <br />
+}
+	</div>

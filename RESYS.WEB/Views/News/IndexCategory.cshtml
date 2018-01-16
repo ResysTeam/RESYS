@@ -1,0 +1,172 @@
+﻿@{
+    
+    var listnews = ViewBag.ListNews as List<News>;
+    var page = ViewData["Page"];
+    var total = ViewData["TotalItems"];
+    var shortname = ViewData["ShortName"] as string;
+    var listnewscate = ViewData["ListCate"] as List<NewsCategory>;
+}
+<script type="text/javascript">   
+    $(document).ready(function () {
+        $('.focuspoint img').load(function () {
+            $(this).closest(".focuspoint").attr({
+                'data-image-w': $(this).width(),
+                'data-image-h': $(this).height()
+            });
+        });           
+        $('.focuspoint').focusPoint();					
+    });
+</script>
+<div class="newscate">
+    <div class="container newscate-content">
+        <div class="newscate-body">
+             @*<div class="titlenewscate" style="">
+               Tin tức
+            </div>*@
+            <ul class="nav nav-tabs" style="border-bottom: none; margin-left: 0px;">  
+                <li class="tab-all " style=" ">
+                    <a  href="@Url.Action("Index", "News")" style="">
+                        <img src="/Images/title-newscate.png" />            
+                    </a>
+                </li>
+             
+                @if (listnewscate != null)
+                {
+                    foreach (var itemcate in listnewscate)
+                    {
+                        if (itemcate.NewsCategoryShortName != ("tuyen-dung".HtmlItemString("navbar", "shortname-careers")))
+                        {
+                            if (itemcate.NewsCategoryShortName == shortname)
+                            {
+
+                                <li class="tab-item active">
+                                    <a  href="@Url.Action("IndexCategory", "News", new {id = itemcate.NewsCategoryId, shortname = itemcate.NewsCategoryShortName, page = 0})">
+                                        @itemcate.NewsCategoryTitle
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="tab-item ">
+                                    <a  href="@Url.Action("IndexCategory", "News", new {id = itemcate.NewsCategoryId, shortname = itemcate.NewsCategoryShortName, page = 0})">
+                                        @itemcate.NewsCategoryTitle
+                                    </a>
+                                </li>
+                            }
+                        }
+                    }
+
+                }
+            </ul>
+            <div class="listnews row">
+                @if (listnews!= null)
+                {
+                    var count = 1;
+                    foreach (News itemnews in listnews)
+                    {
+
+                        if (count == 1)
+                        {
+                            <div class="col-sm-6 col-md-6 itemnewshot" style="padding-right: 5px">
+                                <a href="@Url.Action("Detail", "News", new {category = itemnews.NewsCategoryShortName, shortname = itemnews.NewsShortName, newsid = itemnews.NewsId})">
+                                    @*<img class="img-responsive imgnews" src="@itemnews.NewsImage" alt="@itemnews.NewsTitle" />*@
+                                    <div class="focuspoint img-news-cate"
+                                         data-focus-x="0"
+                                         data-focus-y="0"
+                                         data-image-w=""
+                                         data-image-h="">
+                                        <img src="@itemnews.NewsImage" alt="@itemnews.NewsTitle.SubstringSummary(75)" />
+                                    </div>
+
+                                </a>
+                                <div class="newsbody">
+                                    <a href="@Url.Action("Detail", "News", new {category = itemnews.NewsCategoryShortName, shortname = itemnews.NewsShortName, newsid = itemnews.NewsId})">
+                                        <div class="newstitle">
+                                            @itemnews.NewsTitle.SubstringSummary(75)
+                                        </div>
+                                    </a>
+                                    <div class="datecount">@itemnews.NewsPublishDate.ToString("dd/MM/yyy hh:mm") | @itemnews.CompanyName</div>
+                                    <div class="description">@itemnews.NewsDescription.SubstringSummary(100)</div>
+                                </div>
+                            </div>
+                        }
+                        else if (count == 2)
+                        {
+                            <div class="col-sm-6 col-md-6 itemnewshot" style="padding-left: 5px">
+                                <a href="@Url.Action("Detail", "News", new {category = itemnews.NewsCategoryShortName, shortname = itemnews.NewsShortName, newsid = itemnews.NewsId})">
+                                    @*<img class="img-responsive imgnews" src="@itemnews.NewsImage" alt="@itemnews.NewsTitle" />*@
+                                    <div class="focuspoint img-news-cate"
+                                         data-focus-x="0"
+                                         data-focus-y="0"
+                                         data-image-w=""
+                                         data-image-h="">
+                                        <img src="@itemnews.NewsImage" alt="@itemnews.NewsTitle.SubstringSummary(90)" />
+                                    </div>
+                                </a>
+                                <div class="newsbody">
+                                    <a href="@Url.Action("Detail", "News", new {category = itemnews.NewsCategoryShortName, shortname = itemnews.NewsShortName, newsid = itemnews.NewsId})">
+                                        <div class="newstitle">
+                                            @itemnews.NewsTitle.SubstringSummary(75)
+                                        </div>
+                                    </a>
+                                    <div class="datecount">@itemnews.NewsPublishDate.ToString("dd/MM/yyy hh:mm") | @itemnews.CompanyName </div>
+                                    <div class="description">@itemnews.NewsDescription.SubstringSummary(100)</div>
+                                </div>
+                            </div>
+
+                        }
+                        else
+                        {
+                            <div class="col-sm-6 col-md-12 itemnews" style="">
+                                <div class="col-sm-4" style="padding: 0">
+                                    <a href="@Url.Action("Detail", "News", new {category = itemnews.NewsCategoryShortName, shortname = itemnews.NewsShortName, newsid = itemnews.NewsId})">
+                                        @*<img class="img-responsive imgnews" src="@itemnews.NewsImage" alt="@itemnews.NewsTitle" />*@
+                                        <div class="focuspoint img-news-cate-other"
+                                             data-focus-x="0"
+                                             data-focus-y="0"
+                                             data-image-w=""
+                                             data-image-h="">
+                                            <img src="@itemnews.NewsImage" alt="@itemnews.NewsTitle.SubstringSummary(90)" />
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-8" style="padding: 0">
+                                    <div class="newsbody">
+                                        <a href="@Url.Action("Detail", "News", new {category = itemnews.NewsCategoryShortName, shortname = itemnews.NewsShortName, newsid = itemnews.NewsId})">
+                                            <div class="newstitle">
+                                                @itemnews.NewsTitle.SubstringSummary(75)
+                                            </div>
+                                        </a>
+                                        <div class="datecount">@itemnews.NewsPublishDate.ToString("dd/MM/yyy hh:mm") | @itemnews.CompanyName</div>
+                                        <div class="description">@itemnews.NewsDescription.SubstringSummary(120)</div>
+                                    </div>
+                                </div>
+                            </div>
+  
+                        }
+
+                        count++;
+                    }
+
+                }
+            </div>
+        </div>
+
+        <div class="paper"> @Html.Partial("Pager", "newstype")</div>
+        <div class="col-sm-6 col-md-12" style="padding: 0" >
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>                    
+                        <a href="@Url.Action("index", "home")">
+                            <i class="ace-icon fa fa-home fa-lg home-icon"></i>
+                        </a>
+                    </li>
+                    <li >@("Tin tức".HtmlItemString("navbar", "news"))</li>
+                    @*<li class="active">@Model.NewsCategoryTitle</li>*@
+
+                </ul>
+        
+            </div>
+        </div>
+    </div>
+</div>

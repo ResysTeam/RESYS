@@ -1,0 +1,126 @@
+﻿@{
+    var listcompanycate = ViewData["ListCompanyCate"]as List<CompanyCate>;
+    var listintroduction = ViewData["ListIntroduction"] as List<Introduction>;
+    var listnewscate = ViewData["ListNewsCate"] as List<NewsCategory>;
+}
+<div class="site-map" @("sitemap".EditHtmlItem())>
+    <div class="container site-map-content">
+        <div class="titlenewscate" style="">
+            @("Sitemap".HtmlItemString("sitemap", "title"))
+        </div>
+        <div class="site-map-body ">
+            <div class="col-xs-12 no-padding" style="margin-bottom: 30px">
+                <div class="col-xs-4">
+                    <h1>
+                        <a href="@Url.Action("", "Introduction")"  target="_blank">
+                            @("Giới thiệu chung".HtmlItemString("navbar", "introduction"))
+                        </a>
+                    </h1>
+
+                    @if (listintroduction != null && listintroduction.Count>0 )
+                    {
+                        foreach (var item in listintroduction)
+                        {
+                            <h2>
+                                @if (item.IntroductionShortName != ("qua-trinh-phat-trien".HtmlItemString("navbar", "shortname-history")))
+                                {
+                                    <a href="@Url.Action("Introduction", "Introduction", new {shortname = item.IntroductionShortName, id = item.IntroductionId})" target="_blank">
+                                        @item.IntroductionName
+                                    </a>
+                                }
+                                else
+                                {
+                                    <a href="@Url.Action("Develop", "Introduction")" target="_blank">
+                                        @item.IntroductionName
+                                    </a>
+                                }
+                            </h2>
+                        }
+                    }
+                </div>
+                <div class="col-xs-4">
+                    <h1>
+                        <a href="@Url.Action("Index", "Album", new{shortname="all",page=0})" target="_blank">  @("Thư viện".HtmlItemString("navbar", "library"))</a>
+                    </h1>
+                    <h2>
+                        <a href="@Url.Action("IndexImage", "Album",new{shortname="all",page=0})" target="_blank">  @("Hình ảnh".HtmlItemString("navbar", "image"))</a>
+                    </h2>
+                    <h2>
+                        <a href="@Url.Action("IndexVideo", "Album",new{shortname="all",page=0})" target="_blank">  @("Video".HtmlItemString("navbar", "video"))</a>
+                    </h2>
+                </div>
+                <div class="col-xs-4">
+                    <h1>
+                        <a href="@Url.Action("Index", "News")" target="_blank">  @("Tin tức".HtmlItemString("navbar", "news"))</a>
+                    </h1>
+                    @if (listnewscate != null && listnewscate.Count > 0)
+                    {
+                        foreach (var item in listnewscate)
+                        {
+                            <h2> @if (item.NewsCategoryShortName != ("tuyen-dung".HtmlItemString("navbar", "shortname-careers")))
+                                 {
+                                     <a  href="@Url.Action("IndexCategory", "News", new {id = item.NewsCategoryId, shortname = item.NewsCategoryShortName, page = 0})" target="_blank">
+                                         @item.NewsCategoryTitle
+                                     </a>
+                                 }
+                                 else
+                                 {
+                                     <a href="@Url.Action("NewsCategory", "News", new { shortname = ("tuyen-dung".HtmlItemString("navbar", "shortname-careers")) })" target="_blank">
+                                         @("Tuyển dụng".HtmlItemString("navbar", "careers"))
+                                     </a>
+                                 }
+                            </h2>
+  
+                        }
+                    }
+                </div>
+            </div>
+
+            <div class="col-xs-12">
+                <h1>
+                    <a href="@Url.Action("Index", "Company")" target="blank">
+                        @("Đơn vị thành viên".HtmlItemString("navbar", "companycate"))
+                    </a>
+                </h1>
+                @if (listcompanycate != null && listcompanycate.Count > 0)
+                {
+                    foreach (var itemcate in listcompanycate)
+                    {
+                        var company = RESYS.BIZ.Services.ServiceFactory.CompanyManager.GetByCateId(itemcate.CompanyCateId, Culture);
+                        <div class="col-xs-6 no-padding-left">
+                            <h2>
+                                @itemcate.CompanyCateName
+                            </h2>
+                            @if (company != null && company.Count > 0)
+                            {
+                                foreach (var item in company)
+                                {
+                                   <h3> 
+                                    <a href="@Url.Action("Company", "Company", new { shortname = item.CompanyShortName,id=item.CompanyId })" target="_blank">                                  
+                                            -&nbsp;&nbsp;&nbsp;@item.CompanyName
+                                    </a> 
+                                       </h3>                            
+                                   }                                                                                                
+                            }                                    
+                        </div>                
+                        
+                                
+                    }
+                    
+                }
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-12 no-padding" >
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>                    
+                        <a href="@Url.Action("index", "home")">
+                            <i class="ace-icon fa fa-home fa-lg home-icon"></i>
+                        </a>
+                    </li>
+                    <li >@("Sitemap".HtmlItemString("footer", "sitemap"))</li>
+                </ul>       
+            </div>
+        </div>
+    </div> 
+</div>

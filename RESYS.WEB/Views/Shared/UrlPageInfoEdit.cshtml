@@ -1,0 +1,75 @@
+﻿<style type="text/css">
+	.tb-urlpage { width: 100%; }
+		.tb-urlpage td, .tb-urlpage th { padding: 10px; }
+			.tb-urlpage td input[type=text] { width: 300px; }
+</style>
+@{
+	var data = ViewBag.UrlPageInfo as UrlPageInfo;
+	
+	if(data==null)
+	{
+		data = new UrlPageInfo()
+		{
+
+		};
+	}
+}
+<div style="position: fixed; bottom: 0; left: 0; width: 100px; height: 30px;">
+	<a href="#modal-url-page-info" data-toggle="modal">page info
+	</a>
+</div>
+
+<div id="modal-url-page-info" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header no-padding">
+				<div class="table-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+						<span class="white">&times;</span>
+					</button>
+					Thông tin page
+				</div>
+			</div>
+
+			<div class="modal-body">
+				<form action="@Url.Action("UpdateUrlPageInfo", "FrontAdmin")" method="post">
+					<input type="hidden" name="url" value="@ViewBag.UrlPageId"/>
+					<input type="hidden" name="returnurl" value="@Request.Url.PathAndQuery"/>
+					<table class="tb-urlpage">
+						<tr>
+							<th style="width: 200px;">Page title</th>
+							<td>
+								<input type="text" name="PageTitle" value="@data.PageTitle" /></td>
+						</tr>
+						<tr>
+							<th>Meta keywords</th>
+							<td>
+								<input type="text" name="MetaKeyword" value="@data.MetaKeyword" /></td>
+						</tr>
+						<tr>
+							<th>Meta Description</th>
+							<td>
+								<input type="text" name="MetaDescription"  value="@data.MetaDescription" /></td>
+						</tr>
+                        <tr>
+							<th>Meta Robots</th>
+							<td>
+								<input type="text" name="MetaRobots"  value="@data.MetaRobots" /></td>
+						</tr>
+						<tr>
+							<th></th>
+							<td>
+								<button type="submit">Update</button>
+								<button type="reset">Default</button>
+							</td>
+						</tr>
+
+					</table>
+				</form>
+			</div>
+
+		</div>
+		<!-- /.modal-content -->
+	</div>
+	<!-- /.modal-dialog -->
+</div>

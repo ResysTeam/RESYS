@@ -1,0 +1,96 @@
+﻿
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Email from Skytour</title>
+</head>
+
+<body style="margin: 0px; font-family: Arial, Helvetica, sans-serif; font-size: 12px; color: #000000; line-height: 1.6em">
+    <div style="width: 650px; background-color: #fff; margin: auto; padding: 10px">
+        <div style="float: right; margin-right: 5px; font-size: 14px;">
+            Hotline: <b style="color: red; font-size: 16px">01239.035.689 / 01232.035.689 </b>
+            <br />
+        </div>
+        <a href="http://skytour.vn">
+            <img src="http://www.longquang.vn/images/logo.png" style="float: left;" /></a>
+        <div style="clear: both"></div>
+        <div style="width: 100%; padding: 3px; background-color: #0a543d; margin-top: 3px; font-weight: bold; color: #fff;">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td style="padding: 3px"><a style="color: #FFFFFF; text-decoration: none" href="http://longquang.vn/d/cong-ty-co-phan-quoc-te-long-quang-dat-ve-nhanh-canh-ve-tot">Giới thiệu Long Quang</a></td>
+                    <td style="padding: 3px"><a style="color: #FFFFFF; text-decoration: none" href="http://longquang.vn/d/cach-dat-ve-may-bay-tai-longquang-vn">Hướng dẫn đặt vé</a></td>
+                    <td style="padding: 3px"><a style="color: #FFFFFF; text-decoration: none" href="http://longquang.vn/danh-sach-cau-hoi">Câu hỏi thường gặp</a></td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="margin-top: 5px;">
+            Kính chào <b>{ContactName}</b><br />
+            Xin cảm ơn Quý khách hàng đã sử dụng dịch vụ của <a style="font-weight: bold; color: #000000; text-decoration: none" href="http://longquang.vn">longquang.vn</a>
+        </div>
+
+        <div style="width: 99%; height: auto; margin-top: 15px; color: #552c86; font-size: 18px; font-weight: bold; padding: 3px; border-bottom: 1px #552c86 solid">            
+            Chi tiết đơn hàng:
+        </div>
+        <div>
+            <table width="100%" border="0" cellspacing="0" cellpadding="0" style="float: left">
+                <tr>
+                    <td style="font-weight: bold; padding: 3px;">Mã đơn hàng:</td>
+                    <td ><span style="font-size: 16px; color: #036; font-weight: bold">{OrderNo}</span></td>
+                    <td style="font-weight: bold; padding: 3px;">Ngày đặt:</td>
+                    <td ><span style="font-size: 16px; color: #036; font-weight: bold">{OrderDate}</span></td>
+                </tr>
+                <tr>
+                    <td style="font-weight: bold; padding: 3px;">Trạng thái:</td>
+                    <td><strong><em>Chờ xác nhận</em></strong></td>
+                    <td style="font-weight: bold; padding: 3px;">Tổng giá:</td>
+                    <td style="font-weight: bold; padding: 3px; font-size: 18px; color: #552c86">{totalprice}đ</td>
+                </tr>
+                
+                <tr>
+                    <td colspan="4">
+                        <p style="background-color: #FFC; padding: 10px; color: red; font-weight:bold;"><span>Đây là email thông báo về yêu cầu đặt vé của quý khách chứ chưa phải xác nhận về giá và chỗ. Chúng tôi sẽ xử lý yêu cầu này và xác nhận lại với quý khách trong thời gian sớm nhất. </span></p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div style="clear: both"></div>
+
+        <div style="width: 99%; height: auto; border-bottom: 1px #552c86 solid; margin-top: 15px; color: #552c86; font-size: 18px; font-weight: bold; padding: 3px;">
+            Thông tin hành khách:
+        </div>
+        <table width="50%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>Tên hành khách</th>
+                <th>Loại hành khách</th>
+            </tr>
+            {traveller}
+        </table>
+        <div style="clear: both"></div>
+        <div style="width: 99%; height: auto; border-bottom: 1px #552c86 solid; margin-top: 15px; color: #552c86; font-size: 18px; font-weight: bold; padding: 3px;">
+            Chi tiết hành trình:
+        </div>
+
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+            <tr>
+                <th>Hãng hàng không</th>
+                <th>Mã chuyến bay</th>
+                 <th>Điểm đi</th>
+                   <th>Điểm đến</th>
+                   <th>Ngày giờ đi</th>
+            </tr>
+            {ListFlight}
+        </table>
+
+        <div style="clear: both"></div>
+        <div style="width: 99%; height: auto; border-bottom: 1px #552c86 solid; margin-top: 15px; color: #552c86; font-size: 18px; font-weight: bold; padding: 3px;">
+            Hình thức thanh toán:
+        </div>
+        {PhuongThucThanhToan}
+        
+        
+    </div>
+</body>
+</html>

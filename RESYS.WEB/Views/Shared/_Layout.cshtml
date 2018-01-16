@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        @Html.CanonicalUrl()
+        @Html.Partial("HtmlMeta")
+        <title>@ViewBag.PageTitle - Tập đoàn Thành Công</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        <link href="~/Content/plugins/bootstraps/bootstrap.min.css" rel="stylesheet" />
+        <link href="~/Content/bxslider/jquery.bxslider.css" rel="stylesheet" />
+        <link href="~/Content/fancybox/jquery.fancybox.css" rel="stylesheet" />
+        <link href="~/Content/plugins/font-awesome/font-awesome.min.css" rel="stylesheet" />
+        <link href="~/Content/plugins/animate.css" rel="stylesheet" />
+        <link href="~/Content/plugins/jquery-ui.min.css" rel="stylesheet" />
+        <link href="~/Content/plugins/pace-flash.css" rel="stylesheet" />
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open%20Sans">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro' rel='stylesheet' type='text/css'>
+        @*@Styles.Render("~/Content/themes/base/css")*@
+        @*@Styles.Render("~/Content/css")*@
+        @Scripts.Render("~/bundles/modernizr")
+        
+        <link href="~/Content/plugins/datepicker.min.css" rel="stylesheet" />
+        <link href="~/Content/custom.css" rel="stylesheet" />
+        @*@Scripts.Render("~/bundles/jquery")*@
+        <script src="~/Scripts/jquery.min.js"></script>
+        <script src="~/Scripts/jquery-migrate.min.js"></script>
+        <script src="~/Scripts/plugins/bootstrap-datepicker.min.js"></script>
+        <script src="~/Scripts/jquery.bxslider.min.js"></script>
+        <script src="~/Content/fancybox/jquery.fancybox.js"></script>
+        <script src="~/Scripts/plugins/jquery.nicescroll.js"></script>
+        <script src="~/Scripts/jquery-ui.min.js"></script>
+        <script src="~/Scripts/plugins/pace.min.js"></script>
+        <script src="~/Scripts/jquery.form-2.68.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="~/Content/resize-img/css/focuspoint.css">
+		<script type="text/javascript" src="~/Content/resize-img/js/jquery.focuspoint.js"></script>
+    </head>
+    <body style="background-color: #f0f0f0;">
+       
+        @Html.Partial("NavBar")
+        @RenderSection("featured", required: false)
+        @RenderBody()
+        @Html.Partial("Footer")
+        
+        <script src="~/Scripts/plugins/bootstraps/bootstrap.min.js"></script>
+        <script src="~/Scripts/plugins/back-to-top.js"></script>
+        <script src="~/Scripts/plugins/jquery.parallax.js"></script>
+        <script src="~/Scripts/plugins/isotope.pkgd.min.js"></script>
+            
+        <script src="~/Scripts/custom.js"></script>
+            
+        <script type="text/javascript">
+            jQuery(document).ready(function () {
+                App.init();
+                App.initParallaxBg();
+                StyleHotLine.initStyleHotLine();
+                    
+                var info = $(".infomation-custom").niceScroll({ touchbehavior: true, cursorcolor: "#6b6b6b", cursoropacitymax: 0.6, cursorwidth: 8 });
+                var nicesx = $(".boxscroll").niceScroll({ touchbehavior: true, cursorcolor: "#6b6b6b", cursoropacitymax: 0.6, cursorwidth: 8 });
+                    
+            });
+        </script>
+        @*        @RenderSection("scripts", required: false)
+            </div>*@
+
+        @if(UserState!=null&& UserState.SysUser.HasPermission("SEO"))
+        {
+            @Html.Partial("UrlPageInfoEdit")
+        }
+        @* <script type="text/javascript" src="http://icic.ewave.vn:2003/livechatclient/scripts?appid=10311"></script>*@
+    </body>
+</html>

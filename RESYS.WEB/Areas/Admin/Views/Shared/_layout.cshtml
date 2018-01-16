@@ -1,0 +1,413 @@
+﻿@{
+    var culture = System.Globalization.CultureInfo.CurrentCulture.TwoLetterISOLanguageName;
+    var cssvi = culture.Equals("vi") ? "active" : "";
+    var cssen = culture.Equals("en") ? "active" : "";   
+ }
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Thành Công Administations</title>
+
+        <meta name="description" content="overview &amp; stats" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+        <!-- bootstrap & fontawesome -->
+        <link rel="stylesheet" href="~/Areas/admin/content/Css/bootstrap.min.css" />
+        <link href="~/Areas/admin/content/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+        <!-- page specific plugin styles -->
+
+        <!-- text fonts -->
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open%20Sans" />
+        <link rel="stylesheet" href="~/Areas/admin/content/Css/jquery-ui.min.css" />
+        <link rel="stylesheet" href="~/Areas/admin/content/Css/datepicker.min.css" />
+        <link rel="stylesheet" href="~/Areas/admin/content/Css/ui.jqgrid.min.css" />
+
+        <!-- ace styles -->
+        <link rel="stylesheet" href="~/Areas/admin/content/Css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+        <script src="~/Areas/admin/content/Script/jquery2.1.1/jquery.min.js"></script>
+        <script src="~/Areas/admin/content/Script/jquery-ui.min.js"></script>
+
+        <script type="text/javascript">
+            if ('ontouchstart' in document.documentElement) document.write("<script src='/Content/Script/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+        </script>
+        <!-- ace settings handler -->
+        <script src="~/Areas/admin/content/Script/ace-extra.min.js"></script>
+        <script src="~/Areas/admin/content/Script/jquery.dataTables.min.js"></script>
+        <script src="~/Areas/admin/content/Script/jquery.dataTables.bootstrap.min.js"></script>
+        <script src="~/Areas/admin/content/Script/dataTables.tableTools.min.js"></script>
+        <script src="~/Areas/admin/content/Script/dataTables.colVis.min.js"></script>
+        <script src="~/Areas/admin/content/Script/bootbox.min.js"></script>
+        <script src="~/Areas/admin/content/Script/jquery.validate.min.js"></script>
+        <script src="~/Areas/admin/content/Script/jquery.inputlimiter.1.3.1.min.js"></script>
+        <script src="~/Areas/admin/content/Script/jquery.autosize.min.js"></script>
+        <script src="~/Areas/admin/content/Script/bootstrap-datepicker.min.js"></script>
+        <script src="~/Areas/admin/content/Script/jquery.jqGrid.min.js"></script>
+        <script src="~/Areas/admin/content/Script/grid.locale-en.js"></script>
+
+        <script type="text/javascript">
+
+            function setAdminCurrentUrl(url) {
+
+                $('.nav-list a[href="' + url + '"]').each(function () {
+                    $(this).closest('li').addClass('active');
+                    $(this).closest('li').closest('ul').closest('li').addClass('active open');
+                });
+            }
+
+
+        </script>
+
+        @RenderSection("scripts", required: false)
+    </head>
+
+    <body class="no-skin">
+        <div id="navbar" class="navbar navbar-default navbar-fixed-top">
+            <div class="navbar-container" id="navbar-container">
+                <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
+                    <span class="sr-only">Toggle sidebar</span>
+
+                    <span class="icon-bar"></span>
+
+                    <span class="icon-bar"></span>
+
+                    <span class="icon-bar"></span>
+                </button>
+
+                <div class="navbar-header pull-left">
+                    <a href="#" class="navbar-brand">
+                        <small>Thành Công
+                        </small>
+                    </a>
+                    <a style="color: #eee; font-size: 16px; width: 16px; float: left;" target="_blank" href="/" title="Go to front site"><i class="ace-icon fa fa-external-link-square  bigger-120"></i></a>
+                
+                </div>
+           
+                @if (Request.IsAuthenticated)
+                {
+                    <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                        <ul class="nav ace-nav">
+                            <li class="light-blue">
+                                <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                                    <span class="user-info">
+                                        <small>Welcome,</small>
+                                        @UserState.SysUser.Fullname
+                                    </span>
+
+                                    <i class="ace-icon fa fa-caret-down"></i>
+                                </a>
+
+                                <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                                    <li>
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-cog"></i>
+                                            Settings
+                                        </a>
+                                    </li>
+                                    <li>
+                                        @if(culture.Equals("vi"))
+                                        {
+             
+                                            <a href="/en/admin" class="lang"><i class="ace-icon fa fa-globe"></i>EN</a>
+                                        }
+                                        else
+                                        {
+                                            <a href="/vi/admin" class="lang"><i class="ace-icon fa fa-globe"></i>VI</a>
+                                        }
+                                    </li>
+
+                                    <li>
+                                        <a href="#">
+                                            <i class="ace-icon fa fa-user"></i>
+                                            Profile
+                                        </a>
+                                    </li>
+
+                                    <li class="divider"></li>
+
+                                    <li>
+                                        <a href="@Url.Action("LogOff", "Account")">
+                                            <i class="ace-icon fa fa-power-off"></i>
+                                            Logout
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                }
+            </div>
+            <!-- /.navbar-container -->
+        </div>
+
+        <div class="main-container" id="main-container">
+            <!--menu-min cho vào class sidebar-->
+            <div id="sidebar" class="sidebar responsive sidebar-fixed sidebar-scroll">
+                <ul class="nav nav-list">
+                    <li class="">
+                        <a href="@Url.Action("index", "home")">
+                            <i class="menu-icon fa fa-tachometer"></i>
+                            <span class="menu-text">Home </span>
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+
+                    <li class="">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-newspaper-o"></i>
+                            <span class="menu-text">Tin tức </span>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+
+                        <b class="arrow"></b>
+
+                        <ul class="submenu">
+                            <li class="">
+                                <a href="@Url.Action("SearchCate", "News")">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Danh mục tin tức
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li class="">
+                                <a href="@Url.Action("SearchNews", "News")">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Danh sách tin tức
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-table"></i>
+                            <span class="menu-text">Giới thiệu chung</span>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+                        <b class="arrow"></b>
+
+                        <ul class="submenu">
+                            <li class="">
+                                <a href="@Url.Action("Search", "Introduction")">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Danh mục Giới thiệu chung
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="">
+                                <a href="@Url.Action("SearchYear", "Introduction")">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Quá trình phát triển
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+                        </ul>
+                    </li>			
+
+                    <li class="">
+                        <a href="@Url.Action("Search", "SlideBanner")">
+                            <i class="menu-icon fa fa-picture-o"></i>
+                            <span class="menu-text">Slide</span>
+                        </a>
+                        <b class="arrow"></b>
+                    </li>
+                
+                    <li class="">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-users"></i>
+                            <span class="menu-text">Công ty thành viên</span>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+                        <b class="arrow"></b>
+                        <ul class="submenu">
+                            <li class="">
+                                <a href="@Url.Action("SearchCate", "Company")">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Lĩnh vực hoạt động
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+
+                            <li class="">
+                                <a href="@Url.Action("Search", "Company")">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Danh sách công ty
+                                </a>
+                                <b class="arrow"></b>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-camera"></i>
+
+                            <span class="menu-text">Thư viện</span>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+                        <b class="arrow"></b>
+                        <ul class="submenu">
+                            <li class="">
+                                <a href="@Url.Action("SearchImage", "Album")">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Thư viện Album hình ảnh
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                            <li class="">
+                                <a href="@Url.Action("SearchVideo", "Album")">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Thư viện Video
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="">
+                        <a href="#" class="dropdown-toggle">
+                            <i class="menu-icon fa fa-users"></i>
+
+                            <span class="menu-text">Người dùng </span>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </a>
+                        <b class="arrow"></b>
+                        <ul class="submenu">
+                            <li class="">
+                                <a href="@Url.Action("Index", "User")">
+                                    <i class="menu-icon fa fa-caret-right"></i>
+                                    Danh sách người dùng
+                                </a>
+
+                                <b class="arrow"></b>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <!-- /.nav-list -->
+
+                <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                    <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+                </div>
+            </div>
+            <div class="main-content">
+                @*<div class="ace-settings-container" id="ace-settings-container">
+							<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
+								<i class="ace-icon fa fa-cog bigger-130"></i>
+							</div>
+
+							<div class="ace-settings-box clearfix" id="ace-settings-box">
+								<div class="pull-left width-50">
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
+										<label class="lbl" for="ace-settings-navbar"> Fixed Navbar</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
+										<label class="lbl" for="ace-settings-sidebar"> Fixed Sidebar</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-breadcrumbs" />
+										<label class="lbl" for="ace-settings-breadcrumbs"> Fixed Breadcrumbs</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-rtl" />
+										<label class="lbl" for="ace-settings-rtl"> Right To Left (rtl)</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-add-container" />
+										<label class="lbl" for="ace-settings-add-container">
+											Inside
+											<b>.container</b>
+										</label>
+									</div>
+								</div><!-- /.pull-left -->
+
+								<div class="pull-left width-50">
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-hover" />
+										<label class="lbl" for="ace-settings-hover"> Submenu on Hover</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-compact" />
+										<label class="lbl" for="ace-settings-compact"> Compact Sidebar</label>
+									</div>
+
+									<div class="ace-settings-item">
+										<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-highlight" />
+										<label class="lbl" for="ace-settings-highlight"> Alt. Active Item</label>
+									</div>
+								</div><!-- /.pull-left -->
+							</div><!-- /.ace-settings-box -->
+						</div>*@
+                @RenderBody()
+            </div>
+            <!-- /.main-content -->
+
+            <div class="footer">
+                <div class="footer-inner">
+                    <div class="footer-content">
+                        <span class="bigger-120">
+                            <span class="blue">idoc</span><span class="red">Net</span>
+                            Application &copy; @DateTime.Now.Year
+                        </span>
+
+                        &nbsp; &nbsp;
+                        <span class="action-buttons">
+                            <a href="#">
+                                <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                            </a>
+
+                            <a href="#">
+                                <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+                            </a>
+
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+                <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+            </a>
+        </div>
+        <!-- /.main-container -->
+
+        <!-- basic scripts -->
+
+        <script src="~/Areas/admin/content/Script/bootstrap.min.js"></script>
+
+        <!-- page specific plugin scripts -->
+
+        <!--[if lte IE 8]>
+            <script src="~/Areas/admin/content/Script/excanvas.min.js"></script>
+        <![endif]-->
+
+
+        <!-- ace scripts -->
+        <script src="~/Areas/admin/content/Script/ace-elements.min.js"></script>
+        <script src="~/Areas/admin/content/Script/ace.min.js"></script>
+        <!-- inline scripts related to this page -->
+        <script>
+            var date = new Date();
+            date.setDate(date.getDate());
+            $('.date-picker').datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                startDate: date,
+                setDate: date,
+                numberOfMonths: 2,
+                dateFormat: 'dd-mm-yy',
+            });
+        </script>
+    </body>
+</html>
+
